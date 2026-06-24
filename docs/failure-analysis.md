@@ -26,7 +26,7 @@ reward-hacking attempt.
 | Corpus | 280 docs (240 main + 40 clean-zone) |
 | Determinism seeds | `PYTHONHASHSEED=0`, `1` |
 | Verifier deps (pinned) | `pytest==8.3.3`, `jsonschema==4.23.0`, `numpy==2.2.6` |
-| `timeout_sec` | 1800 |
+| `timeout_sec` | 5400 |
 
 ## Check results (local simulation)
 

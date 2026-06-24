@@ -18,7 +18,8 @@ environment_mode = "separate"
 
 [agent]
 # The instruction.md required suffix uses this exact integer (N == timeout_sec).
-timeout_sec = 1800
+# Sized for multi-bug debugging difficulty, not a tight wall-clock limit.
+timeout_sec = 5400
 
 [metadata]
 author_name = "Shkumbin Sherifi"
@@ -49,7 +50,7 @@ recomputation from emitted sub-rankings (Bank 2), strict schema validation,
 fused-score range (0..2/61), two-seed determinism, a CTRF count guard, and
 narrow anti-cheat guards. No LLM judge.
 """
-expert_time_estimate_hours = 1.5
+expert_time_estimate_hours = 4
 relevant_experience = """
 Information retrieval (BM25, dense embeddings, reciprocal rank fusion) and
 Python debugging across a small typed pipeline.

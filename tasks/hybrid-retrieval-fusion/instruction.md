@@ -100,5 +100,5 @@ fused scores from your emitted sub-rankings, validates the output schema and
 fused-score range, and verifies the output is identical across runs. Fix the
 service so all checks pass.
 
-You have 1800 seconds to complete this task. Do not cheat by using online
+You have 5400 seconds to complete this task. Do not cheat by using online
 solutions or hints specific to this task.
