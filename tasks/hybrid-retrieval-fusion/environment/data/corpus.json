@@ -1,0 +1,82 @@
+[
+  {
+    "doc_id": "news_001",
+    "text": "Central bank raises interest rates to cool rising inflation pressure"
+  },
+  {
+    "doc_id": "news_002",
+    "text": "Stock markets rally as inflation data comes in lower than expected"
+  },
+  {
+    "doc_id": "news_003",
+    "text": "Local council approves new bicycle lanes across the downtown district"
+  },
+  {
+    "doc_id": "news_004",
+    "text": "Hurricane warning issued for the coastal region ahead of the weekend"
+  },
+  {
+    "doc_id": "paper_001",
+    "text": "A transformer architecture for neural machine translation tasks"
+  },
+  {
+    "doc_id": "paper_002",
+    "text": "Reciprocal rank fusion improves hybrid retrieval over single rankers"
+  },
+  {
+    "doc_id": "paper_003",
+    "text": "BM25 remains a strong lexical baseline for document retrieval"
+  },
+  {
+    "doc_id": "paper_004",
+    "text": "Dense vector embeddings capture semantic similarity between sentences"
+  },
+  {
+    "doc_id": "paper_005",
+    "text": "Evaluating retrieval augmented generation for question answering"
+  },
+  {
+    "doc_id": "faq_001",
+    "text": "How do I reset my account password from the login page"
+  },
+  {
+    "doc_id": "faq_002",
+    "text": "What payment methods are accepted for a subscription upgrade"
+  },
+  {
+    "doc_id": "faq_003",
+    "text": "How do I export my data and download an archive of my files"
+  },
+  {
+    "doc_id": "faq_004",
+    "text": "Why is my dense vector search returning unrelated documents"
+  },
+  {
+    "doc_id": "guide_001",
+    "text": "A beginner guide to tuning BM25 parameters k1 and b for search"
+  },
+  {
+    "doc_id": "guide_002",
+    "text": "Understanding cosine similarity for embedding based ranking"
+  },
+  {
+    "doc_id": "guide_003",
+    "text": "Combining lexical and semantic retrieval with rank fusion methods"
+  },
+  {
+    "doc_id": "blog_001",
+    "text": "Why interest rates matter for the housing and mortgage market"
+  },
+  {
+    "doc_id": "blog_002",
+    "text": "My weekend cycling trip through the coastal mountain roads"
+  },
+  {
+    "doc_id": "blog_003",
+    "text": "Notes on building a question answering system with retrieval"
+  },
+  {
+    "doc_id": "blog_004",
+    "text": "Comparing password managers and account security best practices"
+  }
+]
