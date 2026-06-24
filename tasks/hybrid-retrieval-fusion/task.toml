@@ -63,3 +63,4 @@ fused-score range (0..2/61), two-seed determinism, a CTRF count guard, and
 narrow anti-cheat guards. No LLM judge.
 """
 expert_time_estimate_hours = 4
+relevant_experience = "I build AI systems focused on inference, evaluation, and production behavior, including agent runtimes, evaluation pipelines, retrieval workflows, and reproducible benchmark infrastructure; this task applies that experience to deterministic Harbor/TB3-style retrieval evaluation."
