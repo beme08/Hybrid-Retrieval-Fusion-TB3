@@ -45,8 +45,10 @@ Observed in the authoring sandbox by running `tests/test.sh` against a mirrored
 | Anti-cheat guards vs injected cheat | PASS — guards trip and fail the run |
 | Docker environment image build | PASS — built successfully (Mac-side) |
 | Docker verifier image build | PASS — built successfully (Mac-side) |
-| Harbor oracle run | PASS — reward 1.0, 0 exceptions (`jobs/2026-06-25__00-20-22/result.json`) |
-| Harbor nop run | PASS (as expected) — reward 0.0, 0 exceptions (`jobs/2026-06-25__00-21-17/result.json`) |
+| Harbor parser validation (`TaskConfig`) | PASS (Mac-side) |
+| `TaskModel.is_valid_dir(disable_verification=False)` | TRUE (Mac-side) |
+| Harbor oracle run | PASS — reward 1.0, 0 exceptions (`jobs/2026-06-25__01-11-06/result.json`) |
+| Harbor nop run | PASS (as expected) — reward 0.0, 0 exceptions (`jobs/2026-06-25__01-11-24/result.json`) |
 
 > Test counts and exact pass/fail tallies are reproducible by running the
 > commands in `README.md`. They are intentionally not transcribed as fixed

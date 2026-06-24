@@ -163,8 +163,9 @@ validation because the assignment uses internet-enabled agent trials.
 | `allow_internet = true` set in `task.toml` | ✅ |
 | Verifier never writes into `/app` | ✅ |
 | Docker environment + verifier image builds | ✅ both built (Mac-side) |
-| Harbor oracle run | ✅ reward 1.0, 0 exceptions |
-| Harbor nop run | ✅ reward 0.0, 0 exceptions |
+| Harbor parser validation + `TaskModel.is_valid_dir` | ✅ valid / true (Mac-side) |
+| Harbor oracle run | ✅ reward 1.0, 0 exceptions (`jobs/2026-06-25__01-11-06`) |
+| Harbor nop run | ✅ reward 0.0, 0 exceptions (`jobs/2026-06-25__01-11-24`) |
 | Final `/run` and `/cheat` trials | ⬜ pending (Phase 8) |
 
 ## Security / integrity
