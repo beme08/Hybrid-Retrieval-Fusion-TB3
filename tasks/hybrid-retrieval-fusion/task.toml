@@ -18,6 +18,7 @@ keywords = ["retrieval", "ranking", "rrf", "agent-evals"]
 # Internet is allowed; anti-cheat is enforced by environment isolation + the
 # deterministic verifier and narrow guards, not by network blocking.
 allow_internet = true
+network_mode = "public"
 gpus = 0
 
 [verifier]
