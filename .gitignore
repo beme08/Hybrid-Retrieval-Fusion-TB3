@@ -13,3 +13,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+
+# Harbor local run output (logs, trajectories, verifier output, artifacts)
+jobs/
