@@ -64,6 +64,10 @@ by score/range checks, tie-break by the two-seed determinism check.
 
 ## Trial results (PENDING — Phase 8)
 
+Final trial results are reported at the agent-harness configuration level, not
+as pure base-model scores. Each run records the agent harness, model, reasoning
+setting, timeout, verifier result, and observed failure class.
+
 No final agent trials have been run. Fill in only with real, executed results.
 
 | Agent | Run | Result | Reward | Notes |

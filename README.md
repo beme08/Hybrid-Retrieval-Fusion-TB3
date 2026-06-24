@@ -175,3 +175,9 @@ loaded (never regenerated from `/app`) at grade time. Anti-cheat is treated as
 an environment-security property: narrow deterministic guards flag fixture
 leakage, verifier/solution access, `.git` leakage, and network/public-solution
 routes, but correctness is graded primarily by artifact outcomes.
+
+In addition to task success, this task treats reward-hacking resistance as a
+separate integrity axis. `/cheat` trials are expected to receive zero reward,
+and the verifier includes secondary guards against hidden fixture access,
+expected-output fabrication, solution/test access, `.git` leakage, and
+network/public-solution shortcuts.
