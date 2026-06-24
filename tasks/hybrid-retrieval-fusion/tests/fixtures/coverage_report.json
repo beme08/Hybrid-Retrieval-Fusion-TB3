@@ -1,0 +1,256 @@
+{
+  "config": {
+    "top_k": 10,
+    "candidate_depth": 25,
+    "rrf_k": 60,
+    "bm25_k1": 1.2,
+    "bm25_b": 0.75
+  },
+  "targets": {
+    "raw_mixing": 3,
+    "truncate": 2,
+    "suffix_collision": 3,
+    "tie_break": 2,
+    "rank_base_detect": 2
+  },
+  "counts": {
+    "raw_mixing": 12,
+    "truncate": 11,
+    "suffix_collision": 12,
+    "tie_break": 12,
+    "rank_base_detect": 12
+  },
+  "multi_structural_bug_queries": [
+    "hq_001",
+    "hq_002",
+    "hq_003",
+    "hq_004",
+    "hq_005",
+    "hq_006",
+    "hq_007",
+    "hq_008",
+    "hq_009",
+    "hq_010",
+    "hq_011",
+    "hq_012"
+  ],
+  "detection_notes": {
+    "raw_mixing": "fused doc-id order divergence (Bank 1)",
+    "truncate": "fused doc-id order divergence (Bank 1)",
+    "suffix_collision": "fused doc-id order divergence (Bank 1)",
+    "rank_base_detect": "fused score divergence / >2/61 range guard (Bank 2 + range)",
+    "tie_break": "nondeterministic fused-tie order (determinism run)"
+  },
+  "hidden": {
+    "hq_001": {
+      "source": "b_13_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 10
+    },
+    "hq_002": {
+      "source": "b_19_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 4
+    },
+    "hq_003": {
+      "source": "b_13_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": false,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 3,
+      "overlap": 5
+    },
+    "hq_004": {
+      "source": "b_29_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 10
+    },
+    "hq_005": {
+      "source": "b_31_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 12
+    },
+    "hq_006": {
+      "source": "b_37_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 5
+    },
+    "hq_007": {
+      "source": "b_37_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 4
+    },
+    "hq_008": {
+      "source": "b_7_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 3
+    },
+    "hq_009": {
+      "source": "c_databases_mortgage",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 18
+    },
+    "hq_010": {
+      "source": "c_transformers_dataexport",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 21
+    },
+    "hq_011": {
+      "source": "d_12",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 16
+    },
+    "hq_012": {
+      "source": "d_4",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "structural_bugs": 4,
+      "overlap": 8
+    }
+  },
+  "visible": {
+    "vq_001": {
+      "token": "clnzonealpha",
+      "flags": {
+        "raw_mixing": false,
+        "truncate": false,
+        "suffix_collision": false,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": false
+      },
+      "dangerous": false,
+      "tie_clean": false
+    },
+    "vq_002": {
+      "token": "clnzonebeta",
+      "flags": {
+        "raw_mixing": false,
+        "truncate": false,
+        "suffix_collision": false,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": false
+      },
+      "dangerous": false,
+      "tie_clean": false
+    },
+    "vq_003": {
+      "token": "clnzonegamma",
+      "flags": {
+        "raw_mixing": false,
+        "truncate": false,
+        "suffix_collision": false,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": false
+      },
+      "dangerous": false,
+      "tie_clean": false
+    },
+    "vq_004": {
+      "token": "clnzonetie",
+      "flags": {
+        "raw_mixing": false,
+        "truncate": false,
+        "suffix_collision": false,
+        "rank_base_order": false,
+        "rank_base_detect": true,
+        "tie_break": true
+      },
+      "dangerous": false,
+      "tie_clean": true
+    }
+  }
+}

@@ -1,82 +1,1122 @@
 [
   {
-    "doc_id": "news_001",
-    "text": "Central bank raises interest rates to cool rising inflation pressure"
-  },
-  {
-    "doc_id": "news_002",
-    "text": "Stock markets rally as inflation data comes in lower than expected"
-  },
-  {
-    "doc_id": "news_003",
-    "text": "Local council approves new bicycle lanes across the downtown district"
-  },
-  {
-    "doc_id": "news_004",
-    "text": "Hurricane warning issued for the coastal region ahead of the weekend"
-  },
-  {
-    "doc_id": "paper_001",
-    "text": "A transformer architecture for neural machine translation tasks"
-  },
-  {
-    "doc_id": "paper_002",
-    "text": "Reciprocal rank fusion improves hybrid retrieval over single rankers"
-  },
-  {
-    "doc_id": "paper_003",
-    "text": "BM25 remains a strong lexical baseline for document retrieval"
-  },
-  {
-    "doc_id": "paper_004",
-    "text": "Dense vector embeddings capture semantic similarity between sentences"
-  },
-  {
-    "doc_id": "paper_005",
-    "text": "Evaluating retrieval augmented generation for question answering"
-  },
-  {
-    "doc_id": "faq_001",
-    "text": "How do I reset my account password from the login page"
-  },
-  {
-    "doc_id": "faq_002",
-    "text": "What payment methods are accepted for a subscription upgrade"
-  },
-  {
-    "doc_id": "faq_003",
-    "text": "How do I export my data and download an archive of my files"
-  },
-  {
-    "doc_id": "faq_004",
-    "text": "Why is my dense vector search returning unrelated documents"
-  },
-  {
-    "doc_id": "guide_001",
-    "text": "A beginner guide to tuning BM25 parameters k1 and b for search"
-  },
-  {
-    "doc_id": "guide_002",
-    "text": "Understanding cosine similarity for embedding based ranking"
-  },
-  {
-    "doc_id": "guide_003",
-    "text": "Combining lexical and semantic retrieval with rank fusion methods"
-  },
-  {
     "doc_id": "blog_001",
-    "text": "Why interest rates matter for the housing and mortgage market"
+    "text": "notes cycling loan refinance loan details equity amortization saddle refinance amortization principal escrow housing cycling"
   },
   {
     "doc_id": "blog_002",
-    "text": "My weekend cycling trip through the coastal mountain roads"
+    "text": "reset username session details attention reset introduction username login session credential username notes username lockout username sequence credential"
   },
   {
     "doc_id": "blog_003",
-    "text": "Notes on building a question answering system with retrieval"
+    "text": "refinance amortization context mortgage mortgage refinance loan housing mortgage housing escrow update amortization equity grounding housing overview"
   },
   {
     "doc_id": "blog_004",
-    "text": "Comparing password managers and account security best practices"
+    "text": "username details reset guide login account session lockout rates account login bank overview bond login reset reset"
+  },
+  {
+    "doc_id": "blog_005",
+    "text": "mortgage amortization refinance dump principal backup equity guide amortization housing escrow details equity download"
+  },
+  {
+    "doc_id": "blog_006",
+    "text": "login username guide login session lockout summary lockout credential username introduction credential session username"
+  },
+  {
+    "doc_id": "blog_007",
+    "text": "refinance mortgage refinance malware zephyrqx escrow escrow mortgage loan refinance details housing"
+  },
+  {
+    "doc_id": "blog_008",
+    "text": "credential password password report credential session lockout credential reset session password credential reset login checkout"
+  },
+  {
+    "doc_id": "blog_009",
+    "text": "pixel loan loan kernel grayscale escrow equity equity equity refinance equity escrow summary"
+  },
+  {
+    "doc_id": "blog_010",
+    "text": "username credential session shard password database reset password username username report session account session username compaction password account summary login"
+  },
+  {
+    "doc_id": "blog_011",
+    "text": "mortgage escrow loan housing report escrow refinance amortization refinance equity coastal"
+  },
+  {
+    "doc_id": "blog_012",
+    "text": "account session notes reset login account credential password credential password okapi login session lockout password term introduction lockout account"
+  },
+  {
+    "doc_id": "blog_013",
+    "text": "amortization mortgage mortgage loan overview equity introduction loan quokkabyte housing loan equity refinance principal equity"
+  },
+  {
+    "doc_id": "blog_014",
+    "text": "credential username report lockout update username lockout credential username username password username credential nearest account password credential"
+  },
+  {
+    "doc_id": "blog_015",
+    "text": "amortization mortgage amortization mortgage introduction pedal housing mortgage saddle principal equity commute principal mortgage report loan guide"
+  },
+  {
+    "doc_id": "blog_016",
+    "text": "username login account lockout sequence notes password login login encoder lockout account session lockout reset credential lockout"
+  },
+  {
+    "doc_id": "blog_017",
+    "text": "refinance refinance grounding mortgage equity loan escrow passage loan equity report guide context principal"
+  },
+  {
+    "doc_id": "blog_018",
+    "text": "rates reset session details credential password reset password credential notes account session"
+  },
+  {
+    "doc_id": "blog_019",
+    "text": "equity migrate loan refinance equity escrow refinance principal loan amortization introduction housing nimbusvex amortization refinance escrow details report equity refinance"
+  },
+  {
+    "doc_id": "blog_020",
+    "text": "password login username account session session session session report introduction login password reset session reset session reset report"
+  },
+  {
+    "doc_id": "blog_021",
+    "text": "encryption principal escrow mortgage equity housing update overview equity mortgage principal amortization mortgage loan mortgage equity mortgage"
+  },
+  {
+    "doc_id": "blog_022",
+    "text": "login summary session password account refund summary username credential account reset login card account reset update password subscription login account"
+  },
+  {
+    "doc_id": "blog_023",
+    "text": "housing escrow equity principal overview housing convolution principal refinance equity principal fjordglyph equity equity escrow summary update escrow loan loan"
+  },
+  {
+    "doc_id": "blog_024",
+    "text": "reset credential compaction username reset reset reset account credential session update username login consistency partition"
+  },
+  {
+    "doc_id": "blog_025",
+    "text": "amortization loan escrow escrow principal loan refinance loan mortgage hurricane equity amortization housing warning summary refinance housing housing"
+  },
+  {
+    "doc_id": "blog_026",
+    "text": "overview reset reset session account summary session reset session posting session reset password posting"
+  },
+  {
+    "doc_id": "blog_027",
+    "text": "refinance amortization housing loan amortization details equity refinance escrow principal mortgage loan amortization refinance mortgage"
+  },
+  {
+    "doc_id": "blog_028",
+    "text": "introduction vector lockout login password password report lockout password password summary reset lockout"
+  },
+  {
+    "doc_id": "blog_029",
+    "text": "principal escrow equity loan loan summary loan principal amortization pedal trail trail report introduction housing amortization escrow escrow principal escrow umbracoil"
+  },
+  {
+    "doc_id": "blog_030",
+    "text": "reset lockout encoder password login reset login guide introduction session tokenizer sequence lockout session account lockout guide login credential username"
+  },
+  {
+    "doc_id": "blog_031",
+    "text": "principal mortgage amortization overview loan voltibark amortization summary equity mortgage housing context refinance mortgage passage equity refinance guide escrow equity"
+  },
+  {
+    "doc_id": "blog_032",
+    "text": "session credential login reset login reset username lockout login inflation login guide login lockout password reset credential"
+  },
+  {
+    "doc_id": "blog_033",
+    "text": "housing report equity snapshot snapshot principal details summary amortization dump refinance equity loan escrow escrow"
+  },
+  {
+    "doc_id": "blog_034",
+    "text": "username notes username password credential session reset reset login session account password reset"
+  },
+  {
+    "doc_id": "blog_035",
+    "text": "principal equity loan equity loan phishing guide refinance phishing principal mortgage notes details housing principal mortgage loan refinance"
+  },
+  {
+    "doc_id": "blog_036",
+    "text": "lockout card login credential session login reset payment username username notes session payment login login"
+  },
+  {
+    "doc_id": "blog_037",
+    "text": "summary guide amortization escrow resolution histogram introduction refinance escrow refinance housing principal cobaltwisp equity refinance"
+  },
+  {
+    "doc_id": "blog_038",
+    "text": "credential lockout session lockout shard throughput session account replica update report login account account introduction"
+  },
+  {
+    "doc_id": "blog_039",
+    "text": "loan summary housing escrow amortization equity overview loan escrow mortgage escrow refinance wind escrow details loan amortization"
+  },
+  {
+    "doc_id": "blog_040",
+    "text": "username username credential password login session guide username session session session credential report reset inverted reset username session"
+  },
+  {
+    "doc_id": "blog_901",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "blog_907",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "blog_911",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "blog_917",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "blog_921",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "blog_927",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "blog_931",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_932",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_933",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_934",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_935",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_936",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_937",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "blog_938",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "faq_001",
+    "text": "yield bm25 posting inverted term term bm25 okapi term posting posting retrieval bond term inverted summary retrieval report okapi"
+  },
+  {
+    "doc_id": "faq_002",
+    "text": "migrate migrate snapshot dump guide migrate backup snapshot details dump dump download tarball"
+  },
+  {
+    "doc_id": "faq_003",
+    "text": "ranker retrieval retrieval bm25 retrieval retrieval lexical update guide lexical lexical retrieval session inverted posting ranker lexical posting"
+  },
+  {
+    "doc_id": "faq_004",
+    "text": "encryption notes snapshot dump export audit migrate firewall dump tarball download guide dump download backup tarball"
+  },
+  {
+    "doc_id": "faq_005",
+    "text": "okapi ranker bm25 okapi lexical retrieval bm25 retrieval billing term guide notes okapi invoice okapi"
+  },
+  {
+    "doc_id": "faq_006",
+    "text": "update export tarball histogram migrate download notes archive archive migrate pixel notes migrate snapshot dump migrate"
+  },
+  {
+    "doc_id": "faq_007",
+    "text": "lexical term database term ranker ranker guide retrieval posting partition okapi ranker term posting notes lexical posting zephyrqx guide lexical"
+  },
+  {
+    "doc_id": "faq_008",
+    "text": "guide download download overview snapshot migrate migrate download snapshot snapshot snapshot dump tarball warning backup coastal"
+  },
+  {
+    "doc_id": "faq_009",
+    "text": "posting bm25 okapi term inverted posting term retrieval okapi retrieval introduction posting okapi inverted lexical posting bm25 ranker"
+  },
+  {
+    "doc_id": "faq_010",
+    "text": "notes tarball archive download download tarball refinance migrate snapshot dump loan download migrate export download export snapshot migrate"
+  },
+  {
+    "doc_id": "faq_011",
+    "text": "notes okapi introduction retrieval ranker okapi bm25 ranker inverted posting term cosine similarity term posting posting bm25 ranker term"
+  },
+  {
+    "doc_id": "faq_012",
+    "text": "download snapshot dump report archive dump trail dump export export gravel snapshot"
+  },
+  {
+    "doc_id": "faq_013",
+    "text": "neural okapi inverted notes encoder okapi inverted inverted retrieval inverted bm25 lexical transformer lexical lexical quokkabyte bm25 retrieval"
+  },
+  {
+    "doc_id": "faq_014",
+    "text": "export context migrate archive download backup notes export dump backup dump update migrate download prompt archive archive backup archive update"
+  },
+  {
+    "doc_id": "faq_015",
+    "text": "retrieval inverted lexical term inverted lexical okapi term bm25 monetary summary"
+  },
+  {
+    "doc_id": "faq_016",
+    "text": "snapshot backup download download download snapshot dump download update overview archive report migrate backup migrate snapshot export tarball tarball backup"
+  },
+  {
+    "doc_id": "faq_017",
+    "text": "retrieval okapi lexical term okapi password okapi introduction overview inverted overview ranker inverted ranker inverted term term term"
+  },
+  {
+    "doc_id": "faq_018",
+    "text": "report snapshot breach tarball backup firewall migrate archive phishing tarball migrate dump backup backup"
+  },
+  {
+    "doc_id": "faq_019",
+    "text": "okapi lexical lexical nimbusvex bm25 details ranker retrieval okapi term checkout retrieval inverted summary term okapi posting overview"
+  },
+  {
+    "doc_id": "faq_020",
+    "text": "snapshot snapshot backup migrate export migrate download tarball dump archive introduction grayscale snapshot"
+  },
+  {
+    "doc_id": "faq_021",
+    "text": "posting replica bm25 inverted lexical retrieval posting replica wal inverted inverted term update report"
+  },
+  {
+    "doc_id": "faq_022",
+    "text": "snapshot forecast tarball guide download migrate archive rainfall download warning backup introduction summary backup tarball"
+  },
+  {
+    "doc_id": "faq_023",
+    "text": "term fjordglyph posting notes retrieval term inverted retrieval retrieval posting inverted ranker bm25 bm25"
+  },
+  {
+    "doc_id": "faq_024",
+    "text": "report archive snapshot dump download export download export details dump equity export archive snapshot export export report"
+  },
+  {
+    "doc_id": "faq_025",
+    "text": "ranker latent okapi latent retrieval term retrieval ranker summary inverted lexical lexical"
+  },
+  {
+    "doc_id": "faq_026",
+    "text": "dump notes backup snapshot backup dump tarball migrate details summary export migrate download snapshot gravel"
+  },
+  {
+    "doc_id": "faq_027",
+    "text": "okapi ranker okapi lexical retrieval lexical introduction decoder lexical lexical bm25 ranker"
+  },
+  {
+    "doc_id": "faq_028",
+    "text": "guide context snapshot tarball tarball details migrate tarball archive archive guide tarball dump"
+  },
+  {
+    "doc_id": "faq_029",
+    "text": "bond bm25 inverted okapi inverted yield overview okapi ranker retrieval yield umbracoil okapi bm25 posting details"
+  },
+  {
+    "doc_id": "faq_030",
+    "text": "notes archive archive introduction details archive archive tarball download download archive download tarball snapshot dump"
+  },
+  {
+    "doc_id": "faq_031",
+    "text": "inverted voltibark account bm25 inverted posting lexical notes password bm25 term ranker term"
+  },
+  {
+    "doc_id": "faq_032",
+    "text": "report overview malware export dump archive export phishing summary audit snapshot backup dump backup archive download"
+  },
+  {
+    "doc_id": "faq_033",
+    "text": "refund report term details retrieval retrieval bm25 term inverted posting upgrade okapi inverted card ranker summary"
+  },
+  {
+    "doc_id": "faq_034",
+    "text": "export tarball download migrate download update segmentation histogram migrate dump export archive migrate backup resolution archive export backup export"
+  },
+  {
+    "doc_id": "faq_035",
+    "text": "inverted ranker ranker term term report inverted posting database guide retrieval posting inverted wal okapi inverted ranker notes posting inverted"
+  },
+  {
+    "doc_id": "faq_036",
+    "text": "introduction dump rainfall snapshot dump export snapshot backup dump warning export update export tarball download rainfall backup snapshot export"
+  },
+  {
+    "doc_id": "faq_037",
+    "text": "cobaltwisp ranker bm25 okapi guide retrieval term inverted inverted update lexical inverted overview bm25 posting bm25"
+  },
+  {
+    "doc_id": "faq_038",
+    "text": "dump snapshot dump backup escrow tarball archive backup snapshot update details migrate backup archive snapshot export"
+  },
+  {
+    "doc_id": "faq_039",
+    "text": "okapi overview posting bm25 report term lexical term retrieval inverted retrieval bm25 embedding posting lexical lexical"
+  },
+  {
+    "doc_id": "faq_040",
+    "text": "download migrate tarball saddle guide backup archive tarball download migrate snapshot tarball commute download snapshot archive snapshot migrate gravel"
+  },
+  {
+    "doc_id": "faq_902",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "faq_908",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "faq_912",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "faq_918",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "faq_922",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "faq_928",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "guide_001",
+    "text": "storm storm malware warning firewall storm rainfall hurricane forecast firewall hurricane forecast forecast rainfall hurricane update rainfall"
+  },
+  {
+    "doc_id": "guide_002",
+    "text": "interest inflation update rates central rates rates card bank rates central rates central rates interest bond"
+  },
+  {
+    "doc_id": "guide_003",
+    "text": "pixel hurricane hurricane hurricane coastal coastal flood introduction forecast flood rainfall coastal resolution flood forecast forecast rainfall"
+  },
+  {
+    "doc_id": "guide_004",
+    "text": "central yield monetary central overview wal central partition rates monetary bond central bank bank monetary guide"
+  },
+  {
+    "doc_id": "guide_005",
+    "text": "hurricane overview flood warning warning storm storm forecast flood storm coastal storm coastal overview"
+  },
+  {
+    "doc_id": "guide_006",
+    "text": "monetary bond bank monetary rates bond bank monetary bm25 bond yield yield rates inflation interest monetary update"
+  },
+  {
+    "doc_id": "guide_007",
+    "text": "flood escrow zephyrqx loan flood flood summary hurricane flood hurricane rainfall coastal warning rainfall storm escrow"
+  },
+  {
+    "doc_id": "guide_008",
+    "text": "yield bank central bank central monetary rates rates notes inflation interest bank rates monetary yield cosine yield"
+  },
+  {
+    "doc_id": "guide_009",
+    "text": "forecast details coastal warning coastal trail storm rainfall forecast hurricane pedal forecast storm details guide"
+  },
+  {
+    "doc_id": "guide_010",
+    "text": "bond inflation interest bank bond summary introduction yield yield central introduction monetary interest inflation yield bond transformer"
+  },
+  {
+    "doc_id": "guide_011",
+    "text": "forecast warning summary rainfall hurricane hurricane hurricane storm wind forecast hurricane coastal context hurricane warning coastal rainfall"
+  },
+  {
+    "doc_id": "guide_012",
+    "text": "interest bond bank bank inflation bond monetary rates bank bond monetary report interest yield bank yield inflation bank"
+  },
+  {
+    "doc_id": "guide_013",
+    "text": "rainfall coastal storm report backup flood forecast hurricane coastal hurricane download flood quokkabyte hurricane archive hurricane storm wind rainfall storm"
+  },
+  {
+    "doc_id": "guide_014",
+    "text": "bond central report inflation notes login notes interest bank bank central bank central"
+  },
+  {
+    "doc_id": "guide_015",
+    "text": "warning malware warning update malware rainfall warning warning hurricane hurricane coastal rainfall flood coastal hurricane wind wind"
+  },
+  {
+    "doc_id": "guide_016",
+    "text": "central inflation update bond interest inflation rates inflation inflation rates rates checkout bank"
+  },
+  {
+    "doc_id": "guide_017",
+    "text": "coastal histogram forecast flood coastal storm rainfall coastal coastal rainfall hurricane coastal report"
+  },
+  {
+    "doc_id": "guide_018",
+    "text": "inflation bond inflation bank monetary consistency inflation monetary bank shard update report overview interest bond shard"
+  },
+  {
+    "doc_id": "guide_019",
+    "text": "rainfall warning rainfall summary flood wind storm overview storm coastal coastal wind storm warning wind introduction flood flood nimbusvex rainfall flood"
+  },
+  {
+    "doc_id": "guide_020",
+    "text": "bond central bm25 yield yield yield term yield report rates bond summary central yield monetary bank overview"
+  },
+  {
+    "doc_id": "guide_021",
+    "text": "flood rainfall rainfall storm forecast housing amortization report wind summary forecast housing overview coastal rainfall wind flood forecast"
+  },
+  {
+    "doc_id": "guide_022",
+    "text": "inflation bond semantic bond interest inflation embedding bank central update monetary central similarity bond interest interest bond guide guide central"
+  },
+  {
+    "doc_id": "guide_023",
+    "text": "coastal wind flood warning coastal rainfall warning storm gravel forecast summary forecast fjordglyph flood saddle wind rainfall flood rainfall"
+  },
+  {
+    "doc_id": "guide_024",
+    "text": "notes bank inflation yield rates introduction sequence inflation interest rates inflation bond sequence yield introduction monetary"
+  },
+  {
+    "doc_id": "guide_025",
+    "text": "rainfall forecast rainfall storm flood flood warning passage storm introduction augmented hurricane storm coastal context rainfall"
+  },
+  {
+    "doc_id": "guide_026",
+    "text": "yield rates inflation rates introduction inflation yield rates central monetary rates yield interest interest monetary central monetary guide"
+  },
+  {
+    "doc_id": "guide_027",
+    "text": "storm hurricane introduction storm rainfall warning wind warning hurricane forecast warning rainfall hurricane storm migrate summary coastal rainfall"
+  },
+  {
+    "doc_id": "guide_028",
+    "text": "monetary account overview central summary reset update rates inflation lockout rates interest central bond bank"
+  },
+  {
+    "doc_id": "guide_029",
+    "text": "storm storm flood umbracoil firewall hurricane forecast hurricane flood report flood warning flood security hurricane forecast report"
+  },
+  {
+    "doc_id": "guide_030",
+    "text": "details monetary rates monetary interest yield central yield yield rates upgrade monetary interest yield subscription yield"
+  },
+  {
+    "doc_id": "guide_031",
+    "text": "coastal notes coastal forecast forecast notes wind details grayscale coastal warning voltibark hurricane wind resolution rainfall storm"
+  },
+  {
+    "doc_id": "guide_032",
+    "text": "partition details throughput monetary monetary bond inflation notes bond overview shard yield yield inflation central yield bank monetary central interest bond"
+  },
+  {
+    "doc_id": "guide_033",
+    "text": "hurricane hurricane wind rainfall coastal hurricane forecast update rainfall coastal coastal storm warning forecast"
+  },
+  {
+    "doc_id": "guide_034",
+    "text": "interest central monetary rates interest inflation bond rates summary yield interest interest bank inflation central okapi"
+  },
+  {
+    "doc_id": "guide_035",
+    "text": "update loan storm coastal flood notes flood wind forecast housing storm escrow guide warning coastal coastal"
+  },
+  {
+    "doc_id": "guide_036",
+    "text": "inflation bank yield semantic central bond yield yield bank yield monetary inflation manifold monetary cosine report notes"
+  },
+  {
+    "doc_id": "guide_037",
+    "text": "flood update cobaltwisp storm storm guide hurricane flood warning storm storm rainfall gravel wind warning wind"
+  },
+  {
+    "doc_id": "guide_038",
+    "text": "rates inflation attention monetary bond details neural inflation yield monetary guide rates attention inflation interest monetary rates"
+  },
+  {
+    "doc_id": "guide_039",
+    "text": "forecast rerank wind rainfall hurricane context augmented rainfall warning hurricane coastal coastal forecast summary rainfall"
+  },
+  {
+    "doc_id": "guide_040",
+    "text": "bank inflation guide update central yield central central inflation bond monetary interest introduction"
+  },
+  {
+    "doc_id": "guide_903",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "guide_909",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "guide_913",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "guide_919",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "guide_923",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "guide_929",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "news_001",
+    "text": "consistency throughput shard compaction shard notes partition wal partition shard overview database throughput replica throughput partition partition"
+  },
+  {
+    "doc_id": "news_002",
+    "text": "rerank passage context passage hurricane guide overview passage augmented context context augmented passage passage answering question prompt wind prompt guide"
+  },
+  {
+    "doc_id": "news_003",
+    "text": "replica throughput partition bm25 partition inverted ranker summary replica compaction replica wal replica"
+  },
+  {
+    "doc_id": "news_004",
+    "text": "context passage augmented augmented passage amortization context prompt rerank notes question context prompt question mortgage refinance"
+  },
+  {
+    "doc_id": "news_005",
+    "text": "partition shard details consistency notes latent wal notes partition consistency throughput replica throughput compaction shard replica"
+  },
+  {
+    "doc_id": "news_006",
+    "text": "rerank answering overview context augmented commute passage context passage question grounding overview answering saddle"
+  },
+  {
+    "doc_id": "news_007",
+    "text": "consistency neural partition compaction update replica wal wal compaction partition translation zephyrqx throughput shard summary"
+  },
+  {
+    "doc_id": "news_008",
+    "text": "grounding guide rerank guide grounding rerank rerank grounding grounding prompt overview answering augmented grounding rerank"
+  },
+  {
+    "doc_id": "news_009",
+    "text": "inflation consistency compaction overview throughput consistency partition throughput replica consistency database database database update partition wal compaction partition report"
+  },
+  {
+    "doc_id": "news_010",
+    "text": "rerank download guide migrate passage answering answering answering question answering question export answering context guide prompt"
+  },
+  {
+    "doc_id": "news_011",
+    "text": "shard database consistency consistency partition shard summary database replica consistency consistency shard details throughput partition session"
+  },
+  {
+    "doc_id": "news_012",
+    "text": "context augmented context prompt breach summary augmented firewall context notes answering rerank prompt augmented overview prompt grounding grounding"
+  },
+  {
+    "doc_id": "news_013",
+    "text": "database quokkabyte partition partition compaction database throughput replica database replica wal guide throughput partition throughput details refund"
+  },
+  {
+    "doc_id": "news_014",
+    "text": "kernel question grounding grounding passage augmented histogram augmented rerank augmented passage guide"
+  },
+  {
+    "doc_id": "news_015",
+    "text": "introduction compaction wal database wal compaction consistency partition database compaction database shard report consistency database report"
+  },
+  {
+    "doc_id": "news_016",
+    "text": "context prompt rerank coastal passage question passage flood notes guide question rerank grounding rerank answering question rerank storm prompt"
+  },
+  {
+    "doc_id": "news_017",
+    "text": "wal partition wal throughput consistency details consistency replica partition shard wal compaction retrieval partition bm25 compaction"
+  },
+  {
+    "doc_id": "news_018",
+    "text": "prompt answering summary prompt prompt rerank rerank prompt equity context context context rerank equity question guide augmented passage passage"
+  },
+  {
+    "doc_id": "news_019",
+    "text": "wal shard replica shard compaction summary manifold guide partition wal consistency wal nimbusvex shard nearest database database compaction partition"
+  },
+  {
+    "doc_id": "news_020",
+    "text": "pedal overview rerank rerank prompt summary answering context rerank augmented context summary question"
+  },
+  {
+    "doc_id": "news_021",
+    "text": "partition throughput throughput consistency consistency replica database report shard replica summary consistency consistency replica overview decoder throughput database"
+  },
+  {
+    "doc_id": "news_022",
+    "text": "prompt passage rerank rerank prompt context question introduction question rerank rerank augmented prompt"
+  },
+  {
+    "doc_id": "news_023",
+    "text": "partition wal shard database database notes interest wal summary compaction shard fjordglyph throughput throughput replica partition"
+  },
+  {
+    "doc_id": "news_024",
+    "text": "rerank archive prompt context context rerank download question prompt summary details answering grounding"
+  },
+  {
+    "doc_id": "news_025",
+    "text": "reset shard throughput shard summary consistency shard wal login compaction consistency database reset update summary throughput consistency"
+  },
+  {
+    "doc_id": "news_026",
+    "text": "prompt audit context grounding context question passage prompt notes context rerank"
+  },
+  {
+    "doc_id": "news_027",
+    "text": "throughput database throughput introduction throughput subscription replica compaction shard payment database consistency consistency consistency wal consistency"
+  },
+  {
+    "doc_id": "news_028",
+    "text": "augmented prompt context grounding kernel grounding grounding resolution convolution augmented summary augmented answering question answering rerank"
+  },
+  {
+    "doc_id": "news_029",
+    "text": "partition throughput umbracoil wal partition partition consistency report notes partition partition wal partition wal shard database wal introduction throughput database database compaction"
+  },
+  {
+    "doc_id": "news_030",
+    "text": "wind prompt passage rerank grounding prompt context augmented details rerank grounding rerank overview context introduction passage question wind"
+  },
+  {
+    "doc_id": "news_031",
+    "text": "database ranker shard shard introduction summary shard term database consistency wal report wal shard posting database wal compaction voltibark replica"
+  },
+  {
+    "doc_id": "news_032",
+    "text": "rerank augmented mortgage grounding context rerank prompt augmented amortization question summary rerank prompt answering amortization"
+  },
+  {
+    "doc_id": "news_033",
+    "text": "shard latent details replica replica throughput replica overview introduction shard throughput consistency throughput compaction"
+  },
+  {
+    "doc_id": "news_034",
+    "text": "question answering grounding augmented answering grounding rerank commute augmented gravel rerank answering update augmented grounding"
+  },
+  {
+    "doc_id": "news_035",
+    "text": "wal notes database translation compaction wal replica wal wal shard consistency throughput compaction throughput database decoder wal wal"
+  },
+  {
+    "doc_id": "news_036",
+    "text": "rerank augmented rerank answering augmented rerank passage augmented grounding augmented question prompt question rerank answering prompt guide report"
+  },
+  {
+    "doc_id": "news_037",
+    "text": "cobaltwisp wal bond consistency shard database shard shard replica report database shard shard interest"
+  },
+  {
+    "doc_id": "news_038",
+    "text": "prompt grounding passage dump passage passage summary guide prompt prompt backup prompt archive augmented report augmented"
+  },
+  {
+    "doc_id": "news_039",
+    "text": "account database replica replica report shard consistency wal compaction throughput consistency shard throughput replica replica"
+  },
+  {
+    "doc_id": "news_040",
+    "text": "prompt passage answering rerank augmented rerank grounding passage patch audit security rerank context overview summary grounding answering"
+  },
+  {
+    "doc_id": "news_904",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "news_910",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "news_914",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "news_920",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "news_924",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "news_930",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "news_950",
+    "text": "clnzonetie clnzonetie clnzonetie"
+  },
+  {
+    "doc_id": "paper_001",
+    "text": "grayscale principal introduction kernel histogram pixel update pixel convolution notes convolution convolution grayscale resolution resolution"
+  },
+  {
+    "doc_id": "paper_002",
+    "text": "encoder tokenizer semantic tokenizer cosine details translation update decoder sequence attention encoder encoder sequence"
+  },
+  {
+    "doc_id": "paper_003",
+    "text": "pixel kernel bicycle resolution summary resolution grayscale kernel pixel resolution convolution convolution resolution"
+  },
+  {
+    "doc_id": "paper_004",
+    "text": "neural translation attention attention tokenizer translation neural tokenizer tokenizer tokenizer introduction sequence decoder decoder details neural transformer sequence"
+  },
+  {
+    "doc_id": "paper_005",
+    "text": "kernel histogram report segmentation convolution context question histogram grayscale pixel grayscale update pixel details resolution"
+  },
+  {
+    "doc_id": "paper_006",
+    "text": "summary translation attention bank decoder translation transformer yield sequence encoder tokenizer attention inflation transformer encoder encoder sequence tokenizer report notes transformer"
+  },
+  {
+    "doc_id": "paper_007",
+    "text": "zephyrqx convolution pixel resolution archive kernel introduction pixel snapshot filter details resolution segmentation histogram filter"
+  },
+  {
+    "doc_id": "paper_008",
+    "text": "lockout overview credential decoder transformer account overview neural tokenizer transformer tokenizer transformer translation decoder tokenizer"
+  },
+  {
+    "doc_id": "paper_009",
+    "text": "kernel histogram convolution pixel segmentation filter grayscale security filter resolution resolution breach patch pixel filter notes segmentation filter kernel"
+  },
+  {
+    "doc_id": "paper_010",
+    "text": "neural upgrade decoder sequence attention translation translation tokenizer transformer translation card transformer update translation transformer encoder payment neural"
+  },
+  {
+    "doc_id": "paper_011",
+    "text": "grayscale histogram histogram filter convolution resolution resolution report segmentation summary pixel pixel convolution resolution"
+  },
+  {
+    "doc_id": "paper_012",
+    "text": "tokenizer decoder details encoder wal compaction neural decoder tokenizer sequence neural tokenizer sequence wal decoder overview encoder summary"
+  },
+  {
+    "doc_id": "paper_013",
+    "text": "filter histogram grayscale update segmentation resolution forecast convolution segmentation histogram convolution quokkabyte convolution guide wind segmentation convolution kernel"
+  },
+  {
+    "doc_id": "paper_014",
+    "text": "guide transformer decoder transformer okapi tokenizer neural update neural notes translation neural tokenizer neural tokenizer attention tokenizer"
+  },
+  {
+    "doc_id": "paper_015",
+    "text": "kernel escrow resolution convolution guide filter segmentation convolution principal convolution details grayscale segmentation kernel pixel"
+  },
+  {
+    "doc_id": "paper_016",
+    "text": "sequence transformer summary overview encoder decoder vector decoder sequence translation semantic attention summary translation decoder translation tokenizer semantic tokenizer"
+  },
+  {
+    "doc_id": "paper_017",
+    "text": "convolution segmentation segmentation resolution kernel filter commute segmentation grayscale kernel pixel filter gravel overview convolution"
+  },
+  {
+    "doc_id": "paper_018",
+    "text": "notes decoder decoder notes sequence sequence attention encoder neural sequence transformer transformer sequence encoder transformer encoder"
+  },
+  {
+    "doc_id": "paper_019",
+    "text": "nimbusvex histogram kernel pixel guide convolution kernel rerank filter kernel resolution kernel"
+  },
+  {
+    "doc_id": "paper_020",
+    "text": "bank translation guide translation decoder translation decoder decoder decoder report tokenizer tokenizer interest translation"
+  },
+  {
+    "doc_id": "paper_021",
+    "text": "convolution grayscale filter histogram pixel convolution guide archive pixel pixel convolution resolution guide report migrate grayscale kernel"
+  },
+  {
+    "doc_id": "paper_022",
+    "text": "account neural translation details sequence neural encoder decoder introduction attention username decoder neural sequence"
+  },
+  {
+    "doc_id": "paper_023",
+    "text": "filter histogram security kernel patch convolution filter segmentation fjordglyph update convolution filter guide audit histogram update"
+  },
+  {
+    "doc_id": "paper_024",
+    "text": "neural decoder transformer neural refund attention decoder transformer encoder guide attention introduction translation sequence translation transformer decoder overview encoder"
+  },
+  {
+    "doc_id": "paper_025",
+    "text": "introduction filter resolution grayscale grayscale grayscale pixel convolution resolution pixel notes filter"
+  },
+  {
+    "doc_id": "paper_026",
+    "text": "translation encoder sequence notes neural decoder attention decoder partition tokenizer neural summary tokenizer decoder encoder overview sequence"
+  },
+  {
+    "doc_id": "paper_027",
+    "text": "kernel kernel kernel grayscale filter details kernel grayscale update flood grayscale grayscale resolution segmentation histogram pixel notes pixel"
+  },
+  {
+    "doc_id": "paper_028",
+    "text": "sequence encoder neural attention translation ranker encoder sequence summary decoder sequence overview encoder decoder tokenizer overview attention transformer"
+  },
+  {
+    "doc_id": "paper_029",
+    "text": "segmentation resolution umbracoil convolution overview details filter filter histogram filter grayscale equity filter update resolution kernel"
+  },
+  {
+    "doc_id": "paper_030",
+    "text": "transformer decoder neural transformer attention tokenizer tokenizer tokenizer encoder semantic attention neural tokenizer sequence details transformer"
+  },
+  {
+    "doc_id": "paper_031",
+    "text": "grayscale voltibark summary grayscale kernel details kernel histogram trail grayscale grayscale kernel convolution filter filter segmentation grayscale filter histogram"
+  },
+  {
+    "doc_id": "paper_032",
+    "text": "encoder attention tokenizer encoder encoder transformer tokenizer neural transformer translation transformer tokenizer decoder encoder details"
+  },
+  {
+    "doc_id": "paper_033",
+    "text": "grayscale pixel convolution grayscale segmentation kernel convolution notes segmentation grayscale overview filter context prompt histogram summary filter"
+  },
+  {
+    "doc_id": "paper_034",
+    "text": "decoder transformer decoder encoder yield rates summary transformer neural bank encoder neural summary tokenizer transformer"
+  },
+  {
+    "doc_id": "paper_035",
+    "text": "archive grayscale kernel segmentation resolution convolution kernel grayscale convolution report filter convolution grayscale"
+  },
+  {
+    "doc_id": "paper_036",
+    "text": "translation translation attention transformer account encoder sequence tokenizer credential attention transformer transformer details"
+  },
+  {
+    "doc_id": "paper_037",
+    "text": "resolution guide histogram segmentation resolution pixel kernel cobaltwisp segmentation phishing kernel convolution notes audit summary filter resolution"
+  },
+  {
+    "doc_id": "paper_038",
+    "text": "sequence transformer attention invoice neural translation card transformer introduction neural attention translation encoder encoder neural"
+  },
+  {
+    "doc_id": "paper_039",
+    "text": "resolution grayscale kernel convolution grayscale histogram pixel resolution segmentation kernel histogram convolution details grayscale segmentation resolution segmentation update overview grayscale"
+  },
+  {
+    "doc_id": "paper_040",
+    "text": "decoder neural database decoder tokenizer decoder neural report translation encoder tokenizer"
+  },
+  {
+    "doc_id": "paper_905",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "paper_915",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "paper_925",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "paper_951",
+    "text": "overview notes summary details"
+  },
+  {
+    "doc_id": "wiki_001",
+    "text": "decoder upgrade payment notes guide card card payment upgrade upgrade billing payment upgrade transformer"
+  },
+  {
+    "doc_id": "wiki_002",
+    "text": "details pedal commute lane bicycle lane lane bicycle trail commute cycling trail context lane"
+  },
+  {
+    "doc_id": "wiki_003",
+    "text": "invoice rates billing invoice refund checkout update bank card payment summary refund refund bond notes"
+  },
+  {
+    "doc_id": "wiki_004",
+    "text": "bicycle update report saddle bicycle bicycle backup archive pedal report cycling bicycle pedal cycling gravel pedal"
+  },
+  {
+    "doc_id": "wiki_005",
+    "text": "notes subscription billing invoice guide billing session refund checkout payment refund payment invoice refund subscription"
+  },
+  {
+    "doc_id": "wiki_006",
+    "text": "update bicycle bicycle trail gravel saddle audit lane lane pedal pedal"
+  },
+  {
+    "doc_id": "wiki_007",
+    "text": "billing refund subscription refund checkout refund refund checkout zephyrqx details checkout billing billing subscription"
+  },
+  {
+    "doc_id": "wiki_008",
+    "text": "saddle pedal bicycle pedal cycling report details resolution trail lane cycling saddle kernel guide"
+  },
+  {
+    "doc_id": "wiki_009",
+    "text": "refund subscription checkout payment payment wal introduction subscription checkout database upgrade refund upgrade subscription upgrade details card guide upgrade refund"
+  },
+  {
+    "doc_id": "wiki_010",
+    "text": "overview introduction saddle commute saddle gravel bicycle hurricane gravel warning pedal trail gravel trail pedal details commute rainfall"
+  },
+  {
+    "doc_id": "wiki_011",
+    "text": "payment card billing upgrade refund checkout overview upgrade refund ranker billing card checkout summary card card introduction upgrade checkout"
+  },
+  {
+    "doc_id": "wiki_012",
+    "text": "report commute housing overview commute mortgage trail lane refinance saddle gravel overview saddle saddle lane bicycle"
+  },
+  {
+    "doc_id": "wiki_013",
+    "text": "checkout payment upgrade similarity similarity checkout refund upgrade checkout quokkabyte checkout update card checkout latent billing refund upgrade"
+  },
+  {
+    "doc_id": "wiki_014",
+    "text": "pedal pedal introduction pedal bicycle saddle summary trail saddle cycling cycling pedal pedal saddle pedal commute commute gravel introduction"
+  },
+  {
+    "doc_id": "wiki_015",
+    "text": "overview refund translation refund neural upgrade overview update refund refund invoice invoice invoice attention subscription refund upgrade upgrade billing card billing"
+  },
+  {
+    "doc_id": "wiki_016",
+    "text": "commute bicycle trail bicycle context saddle trail trail gravel cycling overview lane lane summary bicycle commute"
+  },
+  {
+    "doc_id": "wiki_017",
+    "text": "checkout upgrade billing payment billing payment refund billing refund guide notes card update refund central billing checkout payment subscription"
+  },
+  {
+    "doc_id": "wiki_018",
+    "text": "trail archive update bicycle introduction cycling lane dump pedal saddle cycling cycling gravel download bicycle trail"
+  },
+  {
+    "doc_id": "wiki_019",
+    "text": "subscription password checkout upgrade update subscription upgrade account reset checkout upgrade nimbusvex subscription details upgrade billing"
+  },
+  {
+    "doc_id": "wiki_020",
+    "text": "commute commute cycling cycling saddle gravel malware saddle cycling malware gravel saddle breach notes trail cycling"
+  },
+  {
+    "doc_id": "wiki_021",
+    "text": "upgrade upgrade invoice refund refund billing invoice checkout checkout guide refund checkout upgrade checkout"
+  },
+  {
+    "doc_id": "wiki_022",
+    "text": "trail trail saddle cycling bicycle notes bicycle bicycle commute trail report segmentation trail bicycle trail cycling pedal grayscale notes kernel"
+  },
+  {
+    "doc_id": "wiki_023",
+    "text": "subscription update card invoice shard notes subscription billing wal invoice upgrade refund fjordglyph compaction card billing"
+  },
+  {
+    "doc_id": "wiki_024",
+    "text": "storm cycling commute cycling saddle pedal bicycle trail trail wind gravel bicycle trail lane update pedal summary commute"
+  },
+  {
+    "doc_id": "wiki_025",
+    "text": "lexical subscription payment upgrade update upgrade retrieval refund upgrade payment checkout refund"
+  },
+  {
+    "doc_id": "wiki_026",
+    "text": "trail saddle cycling cycling saddle amortization pedal guide trail gravel report saddle saddle loan cycling bicycle gravel"
+  },
+  {
+    "doc_id": "wiki_027",
+    "text": "payment refund billing refund embedding upgrade card upgrade semantic report checkout checkout invoice similarity billing billing card summary report checkout checkout"
+  },
+  {
+    "doc_id": "wiki_028",
+    "text": "commute trail details cycling trail trail gravel saddle report update commute cycling bicycle pedal trail trail cycling"
+  },
+  {
+    "doc_id": "wiki_029",
+    "text": "upgrade card invoice upgrade notes transformer refund invoice translation refund tokenizer umbracoil payment billing"
+  },
+  {
+    "doc_id": "wiki_030",
+    "text": "trail cycling commute saddle passage guide pedal introduction commute pedal cycling pedal gravel cycling cycling answering report trail gravel"
+  },
+  {
+    "doc_id": "wiki_031",
+    "text": "voltibark summary subscription bank subscription invoice central payment billing payment central refund overview checkout refund checkout"
+  },
+  {
+    "doc_id": "wiki_032",
+    "text": "gravel saddle saddle export cycling trail saddle update migrate trail gravel bicycle lane trail cycling snapshot"
+  },
+  {
+    "doc_id": "wiki_033",
+    "text": "billing summary payment checkout card refund card card billing checkout card subscription password refund"
+  },
+  {
+    "doc_id": "wiki_034",
+    "text": "gravel lane cycling details overview details pedal commute cycling patch trail commute cycling cycling saddle lane trail"
+  },
+  {
+    "doc_id": "wiki_035",
+    "text": "notes subscription subscription subscription upgrade refund refund billing subscription card refund refund"
+  },
+  {
+    "doc_id": "wiki_036",
+    "text": "saddle trail histogram gravel pedal gravel pedal lane lane cycling overview saddle"
+  },
+  {
+    "doc_id": "wiki_037",
+    "text": "invoice cobaltwisp invoice update invoice invoice payment billing upgrade throughput guide invoice report checkout invoice invoice card"
+  },
+  {
+    "doc_id": "wiki_038",
+    "text": "gravel guide saddle trail coastal saddle rainfall commute pedal pedal gravel pedal trail pedal pedal pedal trail notes hurricane commute"
+  },
+  {
+    "doc_id": "wiki_039",
+    "text": "okapi refund notes billing payment refund update subscription subscription checkout upgrade upgrade card subscription subscription invoice"
+  },
+  {
+    "doc_id": "wiki_040",
+    "text": "refinance gravel bicycle refinance bicycle introduction refinance trail overview bicycle saddle saddle pedal gravel gravel bicycle commute"
+  },
+  {
+    "doc_id": "wiki_906",
+    "text": "clnzonealpha clnzonealpha clnzonealpha"
+  },
+  {
+    "doc_id": "wiki_916",
+    "text": "clnzonebeta clnzonebeta clnzonebeta"
+  },
+  {
+    "doc_id": "wiki_926",
+    "text": "clnzonegamma clnzonegamma clnzonegamma"
   }
 ]
