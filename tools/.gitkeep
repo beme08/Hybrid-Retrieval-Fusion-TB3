@@ -1,0 +1,3 @@
+# Repo-root build/review tools (NOT task-visible runtime files):
+# generate_fixtures.py, validate_fixture_coverage.py, partial_fix_audit.py.
+# Never exposed to final /run or /cheat agents.

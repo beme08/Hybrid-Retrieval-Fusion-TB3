@@ -1,0 +1,3 @@
+# Phase 2/4: independent reference (reference_bm25.py, reference_dense.py,
+# reference_rrf.py), hidden fixtures, and frozen expected_hidden.json.
+# Hidden fixtures live ONLY here — never in environment/.

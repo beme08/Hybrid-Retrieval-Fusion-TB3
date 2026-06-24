@@ -1,0 +1,33 @@
+# task.toml — hybrid-retrieval-fusion (TB3)
+#
+# SCAFFOLD SKELETON (Phase 0). Metadata and instruction are finalized in later
+# phases. Artifact references (instruction, environment, solution, tests) appear
+# above the first section, per TB3 layout.
+
+instruction = "instruction.md"
+
+[environment]
+# Internet is allowed; anti-cheat is enforced by environment isolation + the
+# deterministic verifier, not by network blocking.
+allow_internet = true
+gpus = 0
+
+[verifier]
+environment_mode = "separate"
+
+[agent]
+# Finalized in Phase 7. The instruction.md required suffix must use this exact
+# integer (N == [agent].timeout_sec). Placeholder value below.
+timeout_sec = 1800
+
+[metadata]
+# Finalized in Phase 7. Placeholders only — do not invent final values.
+author_name = "TBD"
+author_email = "TBD"
+category = "software-engineering"
+tags = ["retrieval", "rag", "bm25", "dense-vectors", "rrf", "debugging"]
+difficulty_explanation = "TBD"
+solution_explanation = "TBD"
+verification_explanation = "TBD"
+expert_time_estimate_hours = 0.0
+relevant_experience = "TBD"
