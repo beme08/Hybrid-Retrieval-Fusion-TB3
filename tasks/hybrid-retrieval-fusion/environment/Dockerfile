@@ -3,8 +3,12 @@
 # reference code, and the verifier live outside this image).
 FROM python:3.11-slim
 
-# Runtime dependency for the dense ranker / CLI. (No apt packages are needed;
-# numpy ships a manylinux wheel.)
+# System utility used to apply unified-diff patches (e.g. the oracle solution).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends patch \
+    && rm -rf /var/lib/apt/lists/*
+
+# Runtime dependency for the dense ranker / CLI. (numpy ships a manylinux wheel.)
 RUN pip install --no-cache-dir numpy==2.2.6
 
 WORKDIR /app
