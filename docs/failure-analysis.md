@@ -43,8 +43,10 @@ Observed in the authoring sandbox by running `tests/test.sh` against a mirrored
 | Hidden/reference/expected leakage into `environment/` | NONE |
 | Oracle idempotency (`solve.sh` re-run) | PASS — no-op on re-run, no `.rej` |
 | Anti-cheat guards vs injected cheat | PASS — guards trip and fail the run |
-| Docker image build (env + tests) | TODO (Mac-side) |
-| Harbor / harness check | TODO (Mac-side) |
+| Docker environment image build | PASS — built successfully (Mac-side) |
+| Docker verifier image build | PASS — built successfully (Mac-side) |
+| Harbor oracle run | PASS — reward 1.0, 0 exceptions (`jobs/2026-06-25__00-20-22/result.json`) |
+| Harbor nop run | PASS (as expected) — reward 0.0, 0 exceptions (`jobs/2026-06-25__00-21-17/result.json`) |
 
 > Test counts and exact pass/fail tallies are reproducible by running the
 > commands in `README.md`. They are intentionally not transcribed as fixed
@@ -98,8 +100,9 @@ reproducing detail:
 
 ## Known caveats
 
-- Docker and Harbor checks were not runnable in the authoring sandbox; they are
-  Mac-side and currently pending.
+- Docker and Harbor checks are not runnable in the authoring sandbox; they were
+  run Mac-side. Both Docker images build, the Harbor oracle run scores reward
+  1.0 (0 exceptions), and the Harbor nop run scores reward 0.0 (0 exceptions).
 - Final agent trials require maintainer approval and a fresh session without any
   authoring context (`CLAUDE.md`, `AGENTS.md`, `docs/`, `tools/`).
 - The repository must remain private until the internet-enabled trials complete.

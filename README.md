@@ -162,8 +162,9 @@ validation because the assignment uses internet-enabled agent trials.
 | Separate verifier mode (`environment_mode = "separate"`) | ✅ |
 | `allow_internet = true` set in `task.toml` | ✅ |
 | Verifier never writes into `/app` | ✅ |
-| Docker image builds | ⬜ pending (Mac-side) |
-| Harbor / harness checks | ⬜ pending (Mac-side) |
+| Docker environment + verifier image builds | ✅ both built (Mac-side) |
+| Harbor oracle run | ✅ reward 1.0, 0 exceptions |
+| Harbor nop run | ✅ reward 0.0, 0 exceptions |
 | Final `/run` and `/cheat` trials | ⬜ pending (Phase 8) |
 
 ## Security / integrity
