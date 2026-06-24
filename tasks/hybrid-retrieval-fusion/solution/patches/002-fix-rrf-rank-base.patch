@@ -1,0 +1,17 @@
+# Patch 002 - fix RRF rank base / constant
+# Ranks are 1-based. The 0-based variant 1/(rrf_k + rank - 1) inflates scores
+# (max becomes 2/60 > 2/61) and breaks Bank-2 consistency. Use 1/(rrf_k + rank).
+
+diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
+index ac41382..9cacc9e 100644
+--- a/hybrid_search/fusion.py
++++ b/hybrid_search/fusion.py
+@@ -59,8 +59,6 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
+ 
+ 
+ def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
+-    if _hook("RANK_BASE"):
+-        return 1.0 / (rrf_k + (rank - 1))
+     return 1.0 / (rrf_k + rank)
+ 
+ 
