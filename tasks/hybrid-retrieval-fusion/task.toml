@@ -9,7 +9,7 @@
 schema_version = "1.3"
 
 [task]
-name = "hybrid-retrieval-fusion"
+name = "beme08/hybrid-retrieval-fusion"
 description = "Repair the fusion layer of a hybrid BM25 + dense retrieval service so its RRF rankings match a hidden reference."
 authors = [{ name = "Shkumbin Sherifi", email = "beme08@users.noreply.github.com" }]
 keywords = ["retrieval", "ranking", "rrf", "agent-evals"]
