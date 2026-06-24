@@ -1,0 +1,2 @@
+# Phase 1: app code + agent-visible data (corpus.json, visible_queries.json, vectors.npy) + Dockerfile.
+# Never copy tests/ or solution/ here.

@@ -1,0 +1,2 @@
+# Phase 1/2: agent-visible data only — corpus.json, visible_queries.json, vectors.npy.
+# No hidden fixtures or expected outputs here.
