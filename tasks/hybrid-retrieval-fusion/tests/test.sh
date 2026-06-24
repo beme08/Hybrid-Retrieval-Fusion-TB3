@@ -7,6 +7,9 @@
 # all generated output goes to a private temp directory.
 set -euo pipefail
 
+# Never write bytecode caches into the (read-only) agent environment.
+export PYTHONDONTWRITEBYTECODE=1
+
 APP_DIR="${APP_DIR:-/app}"
 TESTS_DIR="${TESTS_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
 FIX_DIR="${TESTS_DIR}/fixtures"
@@ -47,8 +50,9 @@ run_seed 1 "$R1"
 
 echo ">> grading emitted output"
 set +e
-RESULTS_SEED0="$R0" RESULTS_SEED1="$R1" CTRF_PATH="$CTRF" \
-    python3 -m pytest "${TESTS_DIR}/test_fusion.py" -v --tb=short -o cache_dir="${WORK}/.pytest_cache"
+APP_DIR="$APP_DIR" RESULTS_SEED0="$R0" RESULTS_SEED1="$R1" CTRF_PATH="$CTRF" \
+    python3 -m pytest "${TESTS_DIR}/test_fusion.py" "${TESTS_DIR}/test_anticheat.py" \
+    -v --tb=short -o cache_dir="${WORK}/.pytest_cache"
 PYTEST_RC=$?
 set -e
 

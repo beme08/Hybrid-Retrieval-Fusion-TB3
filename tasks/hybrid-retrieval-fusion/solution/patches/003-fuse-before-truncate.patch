@@ -1,18 +1,18 @@
 # Patch 003 - fuse before truncate
-# Fuse the full per-modality candidate lists (candidate_depth), then truncate
-# the FUSED ranking to top_k. Truncating each modality to top_k before fusion
-# drops mid-depth evidence and changes the fused result.
+# Fuse the full candidate lists, then truncate the FUSED ranking to top_k.
+# Truncating each modality first drops mid-depth evidence.
 
 diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index 9cacc9e..42753ad 100644
+index ffbb4b7..e8bb650 100644
 --- a/hybrid_search/fusion.py
 +++ b/hybrid_search/fusion.py
-@@ -42,8 +42,6 @@ def _identity(doc_id: str) -> str:
+@@ -33,8 +33,7 @@ def _identity(doc_id: str) -> str:
  def _candidate_lists(
      rankings: Sequence[Sequence[RankingEntry]], config: SearchConfig
  ) -> Sequence[Sequence[RankingEntry]]:
--    if _hook("TRUNCATE"):
--        return [list(ranking)[: config.top_k] for ranking in rankings]
-     return rankings
+-    # Keep each modality at the configured result size before merging.
+-    return [list(ranking)[: config.top_k] for ranking in rankings]
++    return rankings
  
  
+ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:

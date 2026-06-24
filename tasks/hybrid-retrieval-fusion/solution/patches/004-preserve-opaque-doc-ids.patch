@@ -1,18 +1,17 @@
 # Patch 004 - preserve opaque doc ids
-# doc_id values are opaque and aligned by exact equality only. Keying by a
-# parsed numeric suffix collides unrelated documents (news_001 / paper_001).
-# Align on the full doc_id.
+# Align documents by their full, opaque doc_id. Parsing a numeric suffix
+# collides unrelated documents (news_001 / paper_001).
 
 diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index 42753ad..31e39e4 100644
+index e8bb650..69686d9 100644
 --- a/hybrid_search/fusion.py
 +++ b/hybrid_search/fusion.py
-@@ -34,8 +34,6 @@ def _hook(name: str) -> bool:
+@@ -27,7 +27,7 @@ from .models import RankingEntry
  
  def _identity(doc_id: str) -> str:
      """Return the stable identifier used to align a document across modalities."""
--    if _hook("SUFFIX_COLLISION"):
--        return doc_id.rsplit("_", 1)[-1]
-     return doc_id
+-    return doc_id.rsplit("_", 1)[-1]
++    return doc_id
  
  
+ def _candidate_lists(

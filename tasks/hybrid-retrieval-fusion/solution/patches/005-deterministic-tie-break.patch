@@ -1,19 +1,16 @@
 # Patch 005 - deterministic tie-break
-# Break fused-score ties by ascending doc_id (deterministic) instead of a
-# hash-based order that varies across PYTHONHASHSEED.
+# Break fused-score ties by ascending doc_id, not a hash order that varies
+# across PYTHONHASHSEED.
 
 diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index 31e39e4..423f9e4 100644
+index 69686d9..3ceb176 100644
 --- a/hybrid_search/fusion.py
 +++ b/hybrid_search/fusion.py
-@@ -101,10 +101,7 @@ def reciprocal_rank_fusion(
+@@ -94,7 +94,7 @@ def reciprocal_rank_fusion(
              )
          )
  
--    if _hook("TIE_BREAK"):
--        fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
--    else:
--        fused.sort(key=lambda e: (-e.score, e.doc_id))
+-    fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
 +    fused.sort(key=lambda e: (-e.score, e.doc_id))
  
      truncated = fused[: config.top_k]

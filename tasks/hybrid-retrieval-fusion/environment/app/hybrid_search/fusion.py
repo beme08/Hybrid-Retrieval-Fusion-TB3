@@ -19,32 +19,22 @@ Contract
 
 from __future__ import annotations
 
-import os
 from typing import Dict, List, Sequence, Tuple
 
 from .config import SearchConfig
 from .models import RankingEntry
 
 
-# Development-only configuration hooks. These are scaffolding used while the
-# fusion behavior is under active development and are removed before packaging.
-def _hook(name: str) -> bool:
-    return os.environ.get(f"BUG_{name}", "1") != "0"
-
-
 def _identity(doc_id: str) -> str:
     """Return the stable identifier used to align a document across modalities."""
-    if _hook("SUFFIX_COLLISION"):
-        return doc_id.rsplit("_", 1)[-1]
-    return doc_id
+    return doc_id.rsplit("_", 1)[-1]
 
 
 def _candidate_lists(
     rankings: Sequence[Sequence[RankingEntry]], config: SearchConfig
 ) -> Sequence[Sequence[RankingEntry]]:
-    if _hook("TRUNCATE"):
-        return [list(ranking)[: config.top_k] for ranking in rankings]
-    return rankings
+    # Keep each modality at the configured result size before merging.
+    return [list(ranking)[: config.top_k] for ranking in rankings]
 
 
 def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
@@ -59,11 +49,8 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
 
 
 def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
-    if _hook("RAW_MIXING"):
-        return entry.raw_score
-    if _hook("RANK_BASE"):
-        return 1.0 / (rrf_k + (rank - 1))
-    return 1.0 / (rrf_k + rank)
+    # Weight a document by its own modality score and its rank position.
+    return entry.raw_score + 1.0 / (rrf_k + (rank - 1))
 
 
 def reciprocal_rank_fusion(
@@ -109,10 +96,7 @@ def reciprocal_rank_fusion(
             )
         )
 
-    if _hook("TIE_BREAK"):
-        fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
-    else:
-        fused.sort(key=lambda e: (-e.score, e.doc_id))
+    fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
 
     truncated = fused[: config.top_k]
     for rank, entry in enumerate(truncated, start=1):

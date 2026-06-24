@@ -1,18 +1,18 @@
 # Patch 001 - remove raw-score mixing
-# Fuse on reciprocal RANKS, not raw modality scores. Adding raw BM25 scores to
-# cosine similarities lets one modality scale dominate and violates the RRF
-# contract. Restore contribution = 1/(rrf_k + rank).
+# Fuse on reciprocal RANKS only; do not add the raw modality score. Mixing raw
+# BM25 magnitudes with cosine values lets one modality dominate the fused order.
 
 diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index 0f16b05..ac41382 100644
+index d8a3c0e..4d0c526 100644
 --- a/hybrid_search/fusion.py
 +++ b/hybrid_search/fusion.py
-@@ -59,8 +59,6 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
+@@ -49,8 +49,7 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
  
  
  def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
--    if _hook("RAW_MIXING"):
--        return entry.raw_score
-     if _hook("RANK_BASE"):
-         return 1.0 / (rrf_k + (rank - 1))
-     return 1.0 / (rrf_k + rank)
+-    # Weight a document by its own modality score and its rank position.
+-    return entry.raw_score + 1.0 / (rrf_k + (rank - 1))
++    return 1.0 / (rrf_k + (rank - 1))
+ 
+ 
+ def reciprocal_rank_fusion(
