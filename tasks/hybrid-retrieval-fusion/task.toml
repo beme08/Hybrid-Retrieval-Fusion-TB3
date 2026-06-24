@@ -30,7 +30,7 @@ timeout_sec = 5400
 
 [metadata]
 author_name = "Shkumbin Sherifi"
-author_email = "shkumbins@protonmail.com"
+author_email = "beme08@users.noreply.github.com"
 category = "software-engineering"
 tags = ["retrieval", "rag", "bm25", "dense-vectors", "rrf", "debugging"]
 difficulty_explanation = """
