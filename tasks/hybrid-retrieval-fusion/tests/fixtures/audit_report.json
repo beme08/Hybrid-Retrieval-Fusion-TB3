@@ -1,0 +1,341 @@
+{
+  "n_hidden_queries": 12,
+  "bug_order": [
+    "RAW_MIXING",
+    "RANK_BASE",
+    "TRUNCATE",
+    "SUFFIX_COLLISION",
+    "TIE_BREAK"
+  ],
+  "all_fixed_pass_count": 12,
+  "only_all_fixed_passes": true,
+  "four_of_five_fixed": {
+    "RAW_MIXING": {
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "order",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "RANK_BASE": {
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "score"
+        ],
+        "hq_004": [
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "score"
+        ],
+        "hq_007": [
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "score"
+        ],
+        "hq_009": [
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "order",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "range",
+          "score"
+        ]
+      }
+    },
+    "TRUNCATE": {
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "order",
+          "score"
+        ],
+        "hq_002": [
+          "order",
+          "score"
+        ],
+        "hq_003": [
+          "score"
+        ],
+        "hq_004": [
+          "order",
+          "score"
+        ],
+        "hq_005": [
+          "order",
+          "score"
+        ],
+        "hq_006": [
+          "order",
+          "score"
+        ],
+        "hq_007": [
+          "order",
+          "score"
+        ],
+        "hq_008": [
+          "order",
+          "score"
+        ],
+        "hq_009": [
+          "order",
+          "score"
+        ],
+        "hq_010": [
+          "order",
+          "score"
+        ],
+        "hq_011": [
+          "order",
+          "score"
+        ],
+        "hq_012": [
+          "order",
+          "score"
+        ]
+      }
+    },
+    "SUFFIX_COLLISION": {
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "order",
+          "score"
+        ],
+        "hq_002": [
+          "order",
+          "score"
+        ],
+        "hq_003": [
+          "order",
+          "score"
+        ],
+        "hq_004": [
+          "order",
+          "score"
+        ],
+        "hq_005": [
+          "order",
+          "score"
+        ],
+        "hq_006": [
+          "order",
+          "score"
+        ],
+        "hq_007": [
+          "order",
+          "score"
+        ],
+        "hq_008": [
+          "order",
+          "score"
+        ],
+        "hq_009": [
+          "order",
+          "score"
+        ],
+        "hq_010": [
+          "order",
+          "score"
+        ],
+        "hq_011": [
+          "order",
+          "score"
+        ],
+        "hq_012": [
+          "order",
+          "score"
+        ]
+      }
+    },
+    "TIE_BREAK": {
+      "fail_count": 8,
+      "fail_reasons": {
+        "hq_004": [
+          "nondeterministic",
+          "order"
+        ],
+        "hq_005": [
+          "order"
+        ],
+        "hq_006": [
+          "nondeterministic",
+          "order"
+        ],
+        "hq_007": [
+          "nondeterministic",
+          "order"
+        ],
+        "hq_008": [
+          "order"
+        ],
+        "hq_009": [
+          "nondeterministic",
+          "order"
+        ],
+        "hq_010": [
+          "order"
+        ],
+        "hq_012": [
+          "nondeterministic",
+          "order"
+        ]
+      }
+    }
+  },
+  "difficulty_gradient_by_fixed_count": {
+    "0": {
+      "states": 1,
+      "min_pass": 0,
+      "max_pass": 0,
+      "avg_pass": 0.0
+    },
+    "1": {
+      "states": 5,
+      "min_pass": 0,
+      "max_pass": 0,
+      "avg_pass": 0.0
+    },
+    "2": {
+      "states": 10,
+      "min_pass": 0,
+      "max_pass": 0,
+      "avg_pass": 0.0
+    },
+    "3": {
+      "states": 10,
+      "min_pass": 0,
+      "max_pass": 0,
+      "avg_pass": 0.0
+    },
+    "4": {
+      "states": 5,
+      "min_pass": 0,
+      "max_pass": 4,
+      "avg_pass": 0.8
+    },
+    "5": {
+      "states": 1,
+      "min_pass": 12,
+      "max_pass": 12,
+      "avg_pass": 12.0
+    }
+  },
+  "per_state_pass": {
+    "00000": 0,
+    "00001": 0,
+    "00010": 0,
+    "00011": 0,
+    "00100": 0,
+    "00101": 0,
+    "00110": 0,
+    "00111": 0,
+    "01000": 0,
+    "01001": 0,
+    "01010": 0,
+    "01011": 0,
+    "01100": 0,
+    "01101": 0,
+    "01110": 0,
+    "01111": 0,
+    "10000": 0,
+    "10001": 0,
+    "10010": 0,
+    "10011": 0,
+    "10100": 0,
+    "10101": 0,
+    "10110": 0,
+    "10111": 0,
+    "11000": 0,
+    "11001": 0,
+    "11010": 0,
+    "11011": 0,
+    "11100": 0,
+    "11101": 0,
+    "11110": 4,
+    "11111": 12
+  }
+}

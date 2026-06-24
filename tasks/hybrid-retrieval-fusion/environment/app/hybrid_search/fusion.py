@@ -19,24 +19,51 @@ Contract
 
 from __future__ import annotations
 
-from typing import Dict, List, Sequence
+import os
+from typing import Dict, List, Sequence, Tuple
 
 from .config import SearchConfig
 from .models import RankingEntry
 
 
-def _rank_map(ranking: Sequence[RankingEntry]) -> Dict[str, int]:
-    """Map ``doc_id -> 1-based rank`` for one modality ranking.
+# Development-only configuration hooks. These are scaffolding used while the
+# fusion behavior is under active development and are removed before packaging.
+def _hook(name: str) -> bool:
+    return os.environ.get(f"BUG_{name}", "1") != "0"
 
-    The entries arrive already ordered, but we rely on ``source_rank`` so the
-    rank is explicit and independent of any later list mutation.
-    """
+
+def _identity(doc_id: str) -> str:
+    """Return the stable identifier used to align a document across modalities."""
+    if _hook("SUFFIX_COLLISION"):
+        return doc_id.rsplit("_", 1)[-1]
+    return doc_id
+
+
+def _candidate_lists(
+    rankings: Sequence[Sequence[RankingEntry]], config: SearchConfig
+) -> Sequence[Sequence[RankingEntry]]:
+    if _hook("TRUNCATE"):
+        return [list(ranking)[: config.top_k] for ranking in rankings]
+    return rankings
+
+
+def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
     ranks: Dict[str, int] = {}
-    for entry in ranking:
-        # First occurrence wins; rankings are expected to be unique by doc_id.
-        if entry.doc_id not in ranks:
-            ranks[entry.doc_id] = entry.source_rank
-    return ranks
+    reps: Dict[str, RankingEntry] = {}
+    for position, entry in enumerate(ranking, start=1):
+        key = _identity(entry.doc_id)
+        if key not in ranks:
+            ranks[key] = position
+            reps[key] = entry
+    return ranks, reps
+
+
+def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
+    if _hook("RAW_MIXING"):
+        return entry.raw_score
+    if _hook("RANK_BASE"):
+        return 1.0 / (rrf_k + (rank - 1))
+    return 1.0 / (rrf_k + rank)
 
 
 def reciprocal_rank_fusion(
@@ -54,22 +81,27 @@ def reciprocal_rank_fusion(
         Supplies ``rrf_k`` (fusion constant) and ``top_k`` (final truncation).
     """
     rrf_k = config.rrf_k
+    lists = _candidate_lists(rankings, config)
 
-    rank_maps = [_rank_map(ranking) for ranking in rankings]
+    indexed = [_index(ranking) for ranking in lists]
 
-    # Union of all candidate doc_ids across modalities, deterministically.
-    union: List[str] = sorted({doc_id for rm in rank_maps for doc_id in rm})
+    keys = sorted({key for ranks, _ in indexed for key in ranks})
 
     fused: List[RankingEntry] = []
-    for doc_id in union:
+    for key in keys:
         score = 0.0
-        for rm in rank_maps:
-            rank = rm.get(doc_id)
-            if rank is not None:
-                score += 1.0 / (rrf_k + rank)
+        rep: RankingEntry | None = None
+        for ranks, reps in indexed:
+            rank = ranks.get(key)
+            if rank is None:
+                continue
+            entry = reps[key]
+            score += _contribution(rrf_k, rank, entry)
+            if rep is None or entry.doc_id < rep.doc_id:
+                rep = entry
         fused.append(
             RankingEntry(
-                doc_id=doc_id,
+                doc_id=rep.doc_id,
                 score=score,
                 modality="fused",
                 source_rank=0,
@@ -77,7 +109,11 @@ def reciprocal_rank_fusion(
             )
         )
 
-    fused.sort(key=lambda e: (-e.score, e.doc_id))
+    if _hook("TIE_BREAK"):
+        fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
+    else:
+        fused.sort(key=lambda e: (-e.score, e.doc_id))
+
     truncated = fused[: config.top_k]
     for rank, entry in enumerate(truncated, start=1):
         entry.source_rank = rank
