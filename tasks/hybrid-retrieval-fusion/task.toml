@@ -1,14 +1,15 @@
 # task.toml — hybrid-retrieval-fusion (TB3)
 #
-# SCAFFOLD SKELETON (Phase 0). Metadata and instruction are finalized in later
-# phases. Artifact references (instruction, environment, solution, tests) appear
-# above the first section, per TB3 layout.
+# Deterministic hybrid-retrieval fusion debugging task in separate-verifier
+# mode. The agent repairs the fusion layer of an inherited BM25 + dense
+# retrieval service; the verifier grades emitted rankings against a frozen
+# independent reference. No LLM judge.
 
 instruction = "instruction.md"
 
 [environment]
 # Internet is allowed; anti-cheat is enforced by environment isolation + the
-# deterministic verifier, not by network blocking.
+# deterministic verifier and narrow guards, not by network blocking.
 allow_internet = true
 gpus = 0
 
@@ -16,18 +17,40 @@ gpus = 0
 environment_mode = "separate"
 
 [agent]
-# Finalized in Phase 7. The instruction.md required suffix must use this exact
-# integer (N == [agent].timeout_sec). Placeholder value below.
+# The instruction.md required suffix uses this exact integer (N == timeout_sec).
 timeout_sec = 1800
 
 [metadata]
-# Finalized in Phase 7. Placeholders only — do not invent final values.
-author_name = "TBD"
-author_email = "TBD"
+author_name = "Shkumbin Sherifi"
+author_email = "shkumbins@protonmail.com"
 category = "software-engineering"
 tags = ["retrieval", "rag", "bm25", "dense-vectors", "rrf", "debugging"]
-difficulty_explanation = "TBD"
-solution_explanation = "TBD"
-verification_explanation = "TBD"
-expert_time_estimate_hours = 0.0
-relevant_experience = "TBD"
+difficulty_explanation = """
+The agent must localize a regression in the fusion layer of a multi-module
+retrieval service whose BM25 and dense rankers are already correct. Five
+independent fusion defects are present (raw-score mixing, wrong RRF rank base,
+truncate-before-fusion, opaque-doc-ID collision, and a nondeterministic
+tie-break); several mask one another, so partial fixes still fail hidden
+queries. A correct fix requires understanding RRF, candidate-depth semantics,
+opaque identifiers, and deterministic tie-breaking, not just local edits.
+"""
+solution_explanation = """
+Repair hybrid_search/fusion.py: fuse on reciprocal 1-based ranks (not raw
+scores), use 1/(rrf_k + rank) with rrf_k = 60, fuse the full candidate-depth
+union before truncating to top_k, align documents by their full opaque doc_id,
+and break fused-score ties by ascending doc_id. The reference solution applies
+five ordered patches (solution/solve.sh); the rankers are not modified.
+"""
+verification_explanation = """
+Separate-verifier mode. The verifier runs the repaired CLI over hidden queries
+under PYTHONHASHSEED=0 and =1 and grades artifacts deterministically:
+exact BM25/dense/fused doc-id rankings vs frozen reference (Bank 1), fused-score
+recomputation from emitted sub-rankings (Bank 2), strict schema validation,
+fused-score range (0..2/61), two-seed determinism, a CTRF count guard, and
+narrow anti-cheat guards. No LLM judge.
+"""
+expert_time_estimate_hours = 1.5
+relevant_experience = """
+Information retrieval (BM25, dense embeddings, reciprocal rank fusion) and
+Python debugging across a small typed pipeline.
+"""
