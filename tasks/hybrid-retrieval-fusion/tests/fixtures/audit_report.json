@@ -1,341 +1,4147 @@
 {
+  "mode": "full-32-state",
   "n_hidden_queries": 12,
   "bug_order": [
     "RAW_MIXING",
     "RANK_BASE",
-    "TRUNCATE",
-    "SUFFIX_COLLISION",
+    "CANDIDATE_DEPTH",
+    "DOC_ID_COLLISION",
     "TIE_BREAK"
   ],
+  "bug_locations": {
+    "RAW_MIXING": "hybrid_search/fusion.py",
+    "RANK_BASE": "hybrid_search/fusion.py",
+    "CANDIDATE_DEPTH": "hybrid_search/pipeline.py",
+    "DOC_ID_COLLISION": "hybrid_search/candidate_utils.py",
+    "TIE_BREAK": "hybrid_search/fusion.py"
+  },
+  "all_present_pass_count": 0,
   "all_fixed_pass_count": 12,
   "only_all_fixed_passes": true,
-  "four_of_five_fixed": {
+  "single_bug_fixed_alone": {
     "RAW_MIXING": {
+      "state": "10000",
       "fail_count": 12,
       "fail_reasons": {
         "hq_001": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
         "hq_002": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_003": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_004": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
         "hq_005": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_006": [
-          "order",
-          "range",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "score"
         ],
         "hq_007": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_008": [
-          "order",
-          "range",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "score"
         ],
         "hq_009": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
         "hq_010": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_011": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_012": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
           "range",
           "score"
         ]
       }
     },
     "RANK_BASE": {
+      "state": "01000",
       "fail_count": 12,
       "fail_reasons": {
         "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_010": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ],
         "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
           "range",
           "score"
         ]
       }
     },
-    "TRUNCATE": {
+    "CANDIDATE_DEPTH": {
+      "state": "00100",
       "fail_count": 12,
       "fail_reasons": {
         "hq_001": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_002": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_004": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_005": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_006": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_007": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_008": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_009": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_010": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_011": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ],
         "hq_012": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
           "score"
         ]
       }
     },
-    "SUFFIX_COLLISION": {
+    "DOC_ID_COLLISION": {
+      "state": "00010",
       "fail_count": 12,
       "fail_reasons": {
         "hq_001": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_002": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_003": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_004": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_005": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_006": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_007": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_008": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_009": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_010": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_011": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ],
         "hq_012": [
-          "order",
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
           "score"
         ]
       }
     },
     "TIE_BREAK": {
-      "fail_count": 8,
+      "state": "00001",
+      "fail_count": 12,
       "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
         "hq_004": [
-          "nondeterministic",
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_005": [
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_006": [
-          "nondeterministic",
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_007": [
-          "nondeterministic",
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_008": [
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_009": [
-          "nondeterministic",
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_010": [
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ],
         "hq_012": [
-          "nondeterministic",
-          "order"
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
         ]
       }
     }
   },
-  "difficulty_gradient_by_fixed_count": {
-    "0": {
-      "states": 1,
-      "min_pass": 0,
-      "max_pass": 0,
-      "avg_pass": 0.0
+  "all_but_one_fixed": {
+    "RAW_MIXING": {
+      "state": "01111",
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
     },
-    "1": {
-      "states": 5,
-      "min_pass": 0,
-      "max_pass": 0,
-      "avg_pass": 0.0
+    "RANK_BASE": {
+      "state": "10111",
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_score",
+          "range",
+          "score"
+        ]
+      }
     },
-    "2": {
-      "states": 10,
-      "min_pass": 0,
-      "max_pass": 0,
-      "avg_pass": 0.0
+    "CANDIDATE_DEPTH": {
+      "state": "11011",
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_002": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "dense",
+          "score"
+        ],
+        "hq_004": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_010": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ]
+      }
     },
-    "3": {
-      "states": 10,
-      "min_pass": 0,
-      "max_pass": 0,
-      "avg_pass": 0.0
+    "DOC_ID_COLLISION": {
+      "state": "11101",
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ]
+      }
     },
-    "4": {
-      "states": 5,
-      "min_pass": 0,
-      "max_pass": 4,
-      "avg_pass": 0.8
-    },
-    "5": {
-      "states": 1,
-      "min_pass": 12,
-      "max_pass": 12,
-      "avg_pass": 12.0
+    "TIE_BREAK": {
+      "state": "11110",
+      "fail_count": 8,
+      "fail_reasons": {
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ]
+      }
     }
   },
-  "per_state_pass": {
-    "00000": 0,
-    "00001": 0,
-    "00010": 0,
-    "00011": 0,
-    "00100": 0,
-    "00101": 0,
-    "00110": 0,
-    "00111": 0,
-    "01000": 0,
-    "01001": 0,
-    "01010": 0,
-    "01011": 0,
-    "01100": 0,
-    "01101": 0,
-    "01110": 0,
-    "01111": 0,
-    "10000": 0,
-    "10001": 0,
-    "10010": 0,
-    "10011": 0,
-    "10100": 0,
-    "10101": 0,
-    "10110": 0,
-    "10111": 0,
-    "11000": 0,
-    "11001": 0,
-    "11010": 0,
-    "11011": 0,
-    "11100": 0,
-    "11101": 0,
-    "11110": 4,
-    "11111": 12
+  "per_state": {
+    "00000": {
+      "fixed": [],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00001": {
+      "fixed": [
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00010": {
+      "fixed": [
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00011": {
+      "fixed": [
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00100": {
+      "fixed": [
+        "CANDIDATE_DEPTH"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00101": {
+      "fixed": [
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00110": {
+      "fixed": [
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "00111": {
+      "fixed": [
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "RANK_BASE"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01000": {
+      "fixed": [
+        "RANK_BASE"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01001": {
+      "fixed": [
+        "RANK_BASE",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01010": {
+      "fixed": [
+        "RANK_BASE",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01011": {
+      "fixed": [
+        "RANK_BASE",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01100": {
+      "fixed": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01101": {
+      "fixed": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01110": {
+      "fixed": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RAW_MIXING",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "01111": {
+      "fixed": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RAW_MIXING"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10000": {
+      "fixed": [
+        "RAW_MIXING"
+      ],
+      "active": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10001": {
+      "fixed": [
+        "RAW_MIXING",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10010": {
+      "fixed": [
+        "RAW_MIXING",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_score",
+          "dense",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10011": {
+      "fixed": [
+        "RAW_MIXING",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RANK_BASE",
+        "CANDIDATE_DEPTH"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_score",
+          "dense",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_score",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10100": {
+      "fixed": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH"
+      ],
+      "active": [
+        "RANK_BASE",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10101": {
+      "fixed": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RANK_BASE",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10110": {
+      "fixed": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "RANK_BASE",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "10111": {
+      "fixed": [
+        "RAW_MIXING",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "RANK_BASE"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_score",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_score",
+          "range",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_score",
+          "range",
+          "score"
+        ]
+      }
+    },
+    "11000": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE"
+      ],
+      "active": [
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ]
+      }
+    },
+    "11001": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ]
+      }
+    },
+    "11010": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_003": [
+          "dense",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_011": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "bm25",
+          "dense",
+          "fused",
+          "nondeterministic",
+          "score"
+        ]
+      }
+    },
+    "11011": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "CANDIDATE_DEPTH"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_002": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "dense",
+          "score"
+        ],
+        "hq_004": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_010": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bm25",
+          "dense",
+          "fused",
+          "score"
+        ]
+      }
+    },
+    "11100": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH"
+      ],
+      "active": [
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "score"
+        ]
+      }
+    },
+    "11101": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "TIE_BREAK"
+      ],
+      "active": [
+        "DOC_ID_COLLISION"
+      ],
+      "pass_count": 0,
+      "fail_count": 12,
+      "fail_reasons": {
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_002": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "score"
+        ]
+      }
+    },
+    "11110": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION"
+      ],
+      "active": [
+        "TIE_BREAK"
+      ],
+      "pass_count": 4,
+      "fail_count": 8,
+      "fail_reasons": {
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_006": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_007": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_008": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_009": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_010": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_012": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ]
+      }
+    },
+    "11111": {
+      "fixed": [
+        "RAW_MIXING",
+        "RANK_BASE",
+        "CANDIDATE_DEPTH",
+        "DOC_ID_COLLISION",
+        "TIE_BREAK"
+      ],
+      "active": [],
+      "pass_count": 12,
+      "fail_count": 0,
+      "fail_reasons": {}
+    }
   }
 }

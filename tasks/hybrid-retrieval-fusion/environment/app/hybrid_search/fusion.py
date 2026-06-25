@@ -25,23 +25,11 @@ from .config import SearchConfig
 from .models import RankingEntry
 
 
-def _identity(doc_id: str) -> str:
-    """Return the stable identifier used to align a document across modalities."""
-    return doc_id.rsplit("_", 1)[-1]
-
-
-def _candidate_lists(
-    rankings: Sequence[Sequence[RankingEntry]], config: SearchConfig
-) -> Sequence[Sequence[RankingEntry]]:
-    # Keep each modality at the configured result size before merging.
-    return [list(ranking)[: config.top_k] for ranking in rankings]
-
-
 def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
     ranks: Dict[str, int] = {}
     reps: Dict[str, RankingEntry] = {}
     for position, entry in enumerate(ranking, start=1):
-        key = _identity(entry.doc_id)
+        key = entry.doc_id
         if key not in ranks:
             ranks[key] = position
             reps[key] = entry
@@ -68,9 +56,7 @@ def reciprocal_rank_fusion(
         Supplies ``rrf_k`` (fusion constant) and ``top_k`` (final truncation).
     """
     rrf_k = config.rrf_k
-    lists = _candidate_lists(rankings, config)
-
-    indexed = [_index(ranking) for ranking in lists]
+    indexed = [_index(ranking) for ranking in rankings]
 
     keys = sorted({key for ranks, _ in indexed for key in ranks})
 

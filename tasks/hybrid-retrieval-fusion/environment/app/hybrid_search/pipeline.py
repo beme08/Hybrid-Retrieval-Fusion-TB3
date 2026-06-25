@@ -18,6 +18,7 @@ from typing import List, Sequence
 
 import numpy as np
 
+from .candidate_utils import coalesce_candidate_identities
 from .config import SearchConfig
 from .fusion import reciprocal_rank_fusion
 from .models import Document, Query, RankingEntry
@@ -52,11 +53,12 @@ class RetrievalPipeline:
 
     def search(self, query: Query) -> QueryResult:
         """Run one query end to end and return its typed rankings."""
-        depth = self.config.candidate_depth
+        depth = self.config.top_k
         bm25_ranking = self._bm25.search(query, depth)
         dense_ranking = self._dense.search(query, depth)
+        fusion_inputs = coalesce_candidate_identities([bm25_ranking, dense_ranking])
         fused_ranking = reciprocal_rank_fusion(
-            [bm25_ranking, dense_ranking], self.config
+            fusion_inputs, self.config
         )
         return QueryResult(
             query=query,

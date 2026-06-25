@@ -1,18 +1,17 @@
-# Patch 003 - fuse before truncate
-# Fuse the full candidate lists, then truncate the FUSED ranking to top_k.
-# Truncating each modality first drops mid-depth evidence.
+# Patch 003 - request full candidate depth
+# Each ranker must receive candidate_depth. Requesting only top_k candidates
+# drops mid-depth evidence before fusion can combine the modalities.
 
-diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index ffbb4b7..e8bb650 100644
---- a/hybrid_search/fusion.py
-+++ b/hybrid_search/fusion.py
-@@ -33,8 +33,7 @@ def _identity(doc_id: str) -> str:
- def _candidate_lists(
-     rankings: Sequence[Sequence[RankingEntry]], config: SearchConfig
- ) -> Sequence[Sequence[RankingEntry]]:
--    # Keep each modality at the configured result size before merging.
--    return [list(ranking)[: config.top_k] for ranking in rankings]
-+    return rankings
+diff --git a/hybrid_search/pipeline.py b/hybrid_search/pipeline.py
+index 5d06f33..8d7c6a5 100644
+--- a/hybrid_search/pipeline.py
++++ b/hybrid_search/pipeline.py
+@@ -52,7 +52,7 @@ class RetrievalPipeline:
  
- 
- def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
+     def search(self, query: Query) -> QueryResult:
+         """Run one query end to end and return its typed rankings."""
+-        depth = self.config.top_k
++        depth = self.config.candidate_depth
+         bm25_ranking = self._bm25.search(query, depth)
+         dense_ranking = self._dense.search(query, depth)
+         fusion_inputs = coalesce_candidate_identities([bm25_ranking, dense_ranking])
