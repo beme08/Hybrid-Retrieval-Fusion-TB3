@@ -43,7 +43,10 @@ python /app/scripts/run_search.py \
 ```
 
 - `rank` is 1-based and contiguous within each list.
-- `bm25` and `dense` are emitted at `candidate_depth`; `fused` at `top_k`.
+- `dense` emits `candidate_depth` results.
+- `bm25` emits up to `candidate_depth` positive-scoring results; zero-score
+  documents are omitted.
+- `fused` emits `top_k` results.
 - `score` for `bm25`/`dense` is the modality's raw score; for `fused` it is the
   RRF fused score.
 
@@ -62,9 +65,10 @@ embedding and the shipped corpus vectors; order by `(-score, doc_id)`.
   candidate list. A document present in only one modality contributes only that
   modality's term.
 - `rrf_k = 60`. With two modalities the maximum possible fused score is `2/61`.
-- **Candidate depth:** each modality returns `candidate_depth` results. Fuse the
-  **union** of the two candidate lists first, then truncate the fused ranking to
-  `top_k`.
+- **Candidate depth:** dense emits `candidate_depth` results. BM25 emits up to
+  `candidate_depth` positive-scoring results and omits zero-score documents.
+  Fuse the **union** of the emitted BM25 and dense candidate lists first, then
+  truncate the fused ranking to `top_k`.
 - **Opaque doc IDs:** `doc_id` values are opaque strings. Never parse, split,
   or normalize them; compare them only by exact equality.
 - **Ordering / tie-break:** sort the fused ranking by descending fused score;
