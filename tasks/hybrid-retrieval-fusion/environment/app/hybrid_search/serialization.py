@@ -34,9 +34,15 @@ from .pipeline import QueryResult
 _INTERNAL_FIELDS = ("modality", "source_rank", "raw_score")
 
 
-def serialize_entry(entry: RankingEntry, rank: int) -> Dict[str, object]:
+def serialize_entry(
+    entry: RankingEntry, rank: int, score: float | None = None
+) -> Dict[str, object]:
     """Strip internal fields and emit one ranking row."""
-    return {"doc_id": entry.doc_id, "score": entry.score, "rank": rank}
+    return {
+        "doc_id": entry.doc_id,
+        "score": entry.score if score is None else score,
+        "rank": rank,
+    }
 
 
 def serialize_ranking(ranking: Sequence[RankingEntry]) -> List[Dict[str, object]]:
@@ -44,13 +50,23 @@ def serialize_ranking(ranking: Sequence[RankingEntry]) -> List[Dict[str, object]
     return [serialize_entry(entry, rank) for rank, entry in enumerate(ranking, start=1)]
 
 
-def serialize_result(result: QueryResult) -> Dict[str, object]:
+def serialize_fused_ranking(
+    ranking: Sequence[RankingEntry], config: SearchConfig
+) -> List[Dict[str, object]]:
+    """Serialize fused rows to the public schema."""
+    return [
+        serialize_entry(entry, rank, score=1.0 / (config.rrf_k + rank))
+        for rank, entry in enumerate(ranking, start=1)
+    ]
+
+
+def serialize_result(result: QueryResult, config: SearchConfig) -> Dict[str, object]:
     """Serialize all three rankings for a single query."""
     return {
         "query_id": result.query.query_id,
         "bm25": serialize_ranking(result.bm25),
         "dense": serialize_ranking(result.dense),
-        "fused": serialize_ranking(result.fused),
+        "fused": serialize_fused_ranking(result.fused, config),
     }
 
 
@@ -64,5 +80,5 @@ def serialize_run(
             "candidate_depth": config.candidate_depth,
             "rrf_k": config.rrf_k,
         },
-        "results": [serialize_result(result) for result in results],
+        "results": [serialize_result(result, config) for result in results],
     }

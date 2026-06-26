@@ -6,8 +6,8 @@ You have inherited a small hybrid document-retrieval service in `/app`. It
 retrieves with lexical **BM25** and **dense cosine** similarity, then merges the
 candidate rankings with **Reciprocal Rank Fusion (RRF)**. The BM25 and dense
 scoring implementations should be treated as correct; the broken behavior is in
-candidate preparation and fusion. Repair the service so the emitted BM25,
-dense, and fused rankings follow the contract below.
+candidate preparation, fusion, and output serialization. Repair the service so
+the emitted BM25, dense, and fused rankings follow the contract below.
 
 ## CLI contract
 

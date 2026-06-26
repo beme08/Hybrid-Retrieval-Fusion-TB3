@@ -12,6 +12,8 @@ Bug order and locations:
   3. CANDIDATE_DEPTH  -> hybrid_search/pipeline.py
   4. DOC_ID_COLLISION -> hybrid_search/candidate_utils.py
   5. TIE_BREAK        -> hybrid_search/ordering.py
+  6. CANDIDATE_UNION_INDEXING -> hybrid_search/fusion.py
+  7. SERIALIZATION_SCORE_RANK -> hybrid_search/serialization.py
 
 A state's bit ``i`` set means bug ``i`` is fixed. By default the reduced audit
 runs:
@@ -20,7 +22,7 @@ runs:
   - each single bug fixed alone
   - all-but-one fixed
 
-Pass ``--full`` to run all 32 states. Each state is executed under
+Pass ``--full`` to run all 128 states. Each state is executed under
 ``PYTHONHASHSEED=0`` and ``=1`` and classified against the frozen independent
 reference similarly to the verifier: Bank 1 rankings, Bank 2 fused-score
 self-consistency, fused-score range, and determinism.
@@ -65,6 +67,8 @@ BUGS = (
     Bug("CANDIDATE_DEPTH", "hybrid_search/pipeline.py"),
     Bug("DOC_ID_COLLISION", "hybrid_search/candidate_utils.py"),
     Bug("TIE_BREAK", "hybrid_search/ordering.py"),
+    Bug("CANDIDATE_UNION_INDEXING", "hybrid_search/fusion.py"),
+    Bug("SERIALIZATION_SCORE_RANK", "hybrid_search/serialization.py"),
 )
 
 
@@ -81,6 +85,7 @@ def apply_fix(app_dir: Path, bug: str) -> None:
     ordering = app_dir / "hybrid_search" / "ordering.py"
     pipeline = app_dir / "hybrid_search" / "pipeline.py"
     candidates = app_dir / "hybrid_search" / "candidate_utils.py"
+    serialization = app_dir / "hybrid_search" / "serialization.py"
 
     if bug == "RAW_MIXING":
         text = fusion.read_text(encoding="utf-8")
@@ -103,6 +108,49 @@ def apply_fix(app_dir: Path, bug: str) -> None:
         _replace(candidates, 'return doc_id.rsplit("_", 1)[-1]', "return doc_id")
     elif bug == "TIE_BREAK":
         _replace(ordering, "hash(entry.doc_id)", "entry.doc_id")
+    elif bug == "CANDIDATE_UNION_INDEXING":
+        _replace(
+            fusion,
+            "for candidate_index, key in enumerate(keys, start=1):",
+            "for key in keys:",
+        )
+        _replace(
+            fusion,
+            "score += _contribution(rrf_k, candidate_index, entry)",
+            "score += _contribution(rrf_k, rank, entry)",
+        )
+    elif bug == "SERIALIZATION_SCORE_RANK":
+        text = serialization.read_text(encoding="utf-8")
+        old = '''\
+
+def serialize_fused_ranking(
+    ranking: Sequence[RankingEntry], config: SearchConfig
+) -> List[Dict[str, object]]:
+    """Serialize fused rows to the public schema."""
+    return [
+        serialize_entry(entry, rank, score=1.0 / (config.rrf_k + rank))
+        for rank, entry in enumerate(ranking, start=1)
+    ]
+
+
+def serialize_result(result: QueryResult, config: SearchConfig) -> Dict[str, object]:
+'''
+        new = '''\
+
+def serialize_result(result: QueryResult) -> Dict[str, object]:
+'''
+        if old not in text:
+            raise RuntimeError("expected serialize_fused_ranking block not found")
+        text = text.replace(old, new)
+        text = text.replace(
+            '"fused": serialize_fused_ranking(result.fused, config),',
+            '"fused": serialize_ranking(result.fused),',
+        )
+        text = text.replace(
+            "[serialize_result(result, config) for result in results]",
+            "[serialize_result(result) for result in results]",
+        )
+        serialization.write_text(text, encoding="utf-8")
     else:
         raise ValueError(f"unknown bug: {bug}")
 
@@ -254,7 +302,7 @@ def bug_names(bits: Iterable[int], fixed: bool) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit partial fixes for hybrid-retrieval-fusion.")
-    parser.add_argument("--full", action="store_true", help="run all 32 fix states")
+    parser.add_argument("--full", action="store_true", help="run all fix states")
     args = parser.parse_args()
 
     expected = json.loads((FIXTURE_DIR / "expected_hidden.json").read_text(encoding="utf-8"))
@@ -295,7 +343,7 @@ def main() -> int:
         )
 
     report = {
-        "mode": "full-32-state" if args.full else "reduced",
+        "mode": f"full-{2 ** len(BUGS)}-state" if args.full else "reduced",
         "n_hidden_queries": n_queries,
         "bug_order": [bug.name for bug in BUGS],
         "bug_locations": {bug.name: bug.location for bug in BUGS},
@@ -328,20 +376,20 @@ def main() -> int:
     print("=== partial-fix audit ===")
     print(f"mode: {report['mode']}   hidden queries: {n_queries}")
     print(f"bug order: {report['bug_order']}")
-    print(f"all-present (00000) pass: {all_present_pass}/{n_queries}")
-    print(f"all-fixed   (11111) pass: {all_fixed_pass}/{n_queries}")
+    print(f"all-present ({bit_key(all_present)}) pass: {all_present_pass}/{n_queries}")
+    print(f"all-fixed   ({bit_key(all_fixed)}) pass: {all_fixed_pass}/{n_queries}")
     if only_all_fixed is not None:
         print(f"only all-fixed passes all queries: {only_all_fixed}")
     print("\nsingle bug fixed alone -> failures:")
     for bug in BUGS:
         item = single_fixed[bug.name]
         kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
-        print(f"  {bug.name:<16} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
+        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
     print("\nall-but-one fixed (listed bug ACTIVE) -> failures:")
     for bug in BUGS:
         item = all_but_one_fixed[bug.name]
         kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
-        print(f"  {bug.name:<16} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
+        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
     print("\nPARTIAL-FIX AUDIT GATE:", "PASS" if gate else "FAIL")
     return 0 if gate else 1
 

@@ -35,7 +35,7 @@ def reciprocal_rank_fusion(
     keys = sorted({key for ranks, _ in indexed for key in ranks})
 
     fused: List[RankingEntry] = []
-    for key in keys:
+    for candidate_index, key in enumerate(keys, start=1):
         score = 0.0
         rep: RankingEntry | None = None
         for ranks, reps in indexed:
@@ -43,7 +43,7 @@ def reciprocal_rank_fusion(
             if rank is None:
                 continue
             entry = reps[key]
-            score += _contribution(rrf_k, rank, entry)
+            score += _contribution(rrf_k, candidate_index, entry)
             if rep is None or entry.doc_id < rep.doc_id:
                 rep = entry
         fused.append(
