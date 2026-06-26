@@ -2,16 +2,16 @@
 # Break fused-score ties by ascending doc_id, not a hash order that varies
 # across PYTHONHASHSEED.
 
-diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index 69686d9..3ceb176 100644
---- a/hybrid_search/fusion.py
-+++ b/hybrid_search/fusion.py
-@@ -94,7 +94,7 @@ def reciprocal_rank_fusion(
-             )
-         )
+diff --git a/hybrid_search/ordering.py b/hybrid_search/ordering.py
+--- a/hybrid_search/ordering.py
++++ b/hybrid_search/ordering.py
+@@ -20,7 +20,7 @@ def assign_source_ranks(entries: Iterable[RankingEntry], start: int = 1) -> None
+         entry.source_rank = rank
  
--    fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
-+    fused.sort(key=lambda e: (-e.score, e.doc_id))
  
-     truncated = fused[: config.top_k]
-     for rank, entry in enumerate(truncated, start=1):
+ def _fused_order_key(entry: RankingEntry) -> Tuple[float, object]:
+-    return (-entry.score, hash(entry.doc_id))
++    return (-entry.score, entry.doc_id)
+ 
+ 
+ def order_fused_entries(entries: List[RankingEntry]) -> None:

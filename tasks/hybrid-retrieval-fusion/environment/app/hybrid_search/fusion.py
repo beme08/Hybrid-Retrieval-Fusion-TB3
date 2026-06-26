@@ -1,21 +1,4 @@
-"""Reciprocal Rank Fusion (RRF) over precomputed modality rankings.
-
-This module is deliberately decoupled from the rankers. It consumes already
-computed, typed ``RankingEntry`` lists (one per modality) plus a
-``SearchConfig`` and produces the fused ranking. It must **never** import or
-call ``BM25Ranker`` / ``DenseRanker`` — the pipeline owns that orchestration.
-
-Contract
---------
-- ``score(doc) = sum over modalities of 1 / (rrf_k + rank_m(doc))`` where
-  ``rank_m`` is the **1-based** rank of the document within modality ``m``'s
-  candidate list. A document present in only one modality contributes only
-  that modality's term.
-- Fuse the **union** of the per-modality candidate lists first, then sort by
-  descending fused score with a ``doc_id``-ascending tie-break, then truncate
-  to ``top_k``.
-- ``doc_id`` values are opaque and compared only by exact equality.
-"""
+"""Fusion utilities over precomputed modality rankings."""
 
 from __future__ import annotations
 
@@ -23,6 +6,7 @@ from typing import Dict, List, Sequence, Tuple
 
 from .config import SearchConfig
 from .models import RankingEntry
+from .ordering import assign_source_ranks, order_fused_entries
 
 
 def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
@@ -37,7 +21,6 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
 
 
 def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
-    # Weight a document by its own modality score and its rank position.
     return entry.raw_score + 1.0 / (rrf_k + (rank - 1))
 
 
@@ -45,16 +28,7 @@ def reciprocal_rank_fusion(
     rankings: Sequence[Sequence[RankingEntry]],
     config: SearchConfig,
 ) -> List[RankingEntry]:
-    """Fuse modality rankings into a single ranking via RRF.
-
-    Parameters
-    ----------
-    rankings:
-        One ``RankingEntry`` list per modality (e.g. ``[bm25, dense]``). Each
-        is already truncated to ``candidate_depth`` by its ranker.
-    config:
-        Supplies ``rrf_k`` (fusion constant) and ``top_k`` (final truncation).
-    """
+    """Combine modality rankings into one fused result list."""
     rrf_k = config.rrf_k
     indexed = [_index(ranking) for ranking in rankings]
 
@@ -82,9 +56,8 @@ def reciprocal_rank_fusion(
             )
         )
 
-    fused.sort(key=lambda e: (-e.score, hash(e.doc_id)))
+    order_fused_entries(fused)
 
     truncated = fused[: config.top_k]
-    for rank, entry in enumerate(truncated, start=1):
-        entry.source_rank = rank
+    assign_source_ranks(truncated)
     return truncated

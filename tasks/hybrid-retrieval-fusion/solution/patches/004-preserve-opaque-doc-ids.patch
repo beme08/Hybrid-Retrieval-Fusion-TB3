@@ -3,13 +3,12 @@
 # unrelated documents (news_001 / paper_001).
 
 diff --git a/hybrid_search/candidate_utils.py b/hybrid_search/candidate_utils.py
-index 0d6db9a..c5a64c8 100644
 --- a/hybrid_search/candidate_utils.py
 +++ b/hybrid_search/candidate_utils.py
 @@ -8,7 +8,7 @@ from .models import RankingEntry
  
  def _candidate_key(doc_id: str) -> str:
-     """Return the key used to align candidate identities before fusion."""
+     """Return a grouping key for candidate bookkeeping."""
 -    return doc_id.rsplit("_", 1)[-1]
 +    return doc_id
  

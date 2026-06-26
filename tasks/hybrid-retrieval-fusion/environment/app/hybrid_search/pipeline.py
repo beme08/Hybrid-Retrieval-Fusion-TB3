@@ -1,15 +1,4 @@
-"""Retrieval pipeline orchestration.
-
-The pipeline is the only place that knows about both the rankers and the
-fusion layer. For each query it:
-
-1. asks each modality ranker for ``candidate_depth`` results,
-2. hands the typed rankings to the fusion layer, and
-3. returns a typed per-query result bundle.
-
-The fusion layer is invoked through ``reciprocal_rank_fusion`` and never the
-other way around, keeping the dependency direction one-way.
-"""
+"""Retrieval pipeline orchestration."""
 
 from __future__ import annotations
 

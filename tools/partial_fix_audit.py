@@ -11,7 +11,7 @@ Bug order and locations:
   2. RANK_BASE        -> hybrid_search/fusion.py
   3. CANDIDATE_DEPTH  -> hybrid_search/pipeline.py
   4. DOC_ID_COLLISION -> hybrid_search/candidate_utils.py
-  5. TIE_BREAK        -> hybrid_search/fusion.py
+  5. TIE_BREAK        -> hybrid_search/ordering.py
 
 A state's bit ``i`` set means bug ``i`` is fixed. By default the reduced audit
 runs:
@@ -64,7 +64,7 @@ BUGS = (
     Bug("RANK_BASE", "hybrid_search/fusion.py"),
     Bug("CANDIDATE_DEPTH", "hybrid_search/pipeline.py"),
     Bug("DOC_ID_COLLISION", "hybrid_search/candidate_utils.py"),
-    Bug("TIE_BREAK", "hybrid_search/fusion.py"),
+    Bug("TIE_BREAK", "hybrid_search/ordering.py"),
 )
 
 
@@ -78,6 +78,7 @@ def _replace(path: Path, old: str, new: str) -> None:
 def apply_fix(app_dir: Path, bug: str) -> None:
     """Apply one independent fix toggle to a temporary app copy."""
     fusion = app_dir / "hybrid_search" / "fusion.py"
+    ordering = app_dir / "hybrid_search" / "ordering.py"
     pipeline = app_dir / "hybrid_search" / "pipeline.py"
     candidates = app_dir / "hybrid_search" / "candidate_utils.py"
 
@@ -101,7 +102,7 @@ def apply_fix(app_dir: Path, bug: str) -> None:
     elif bug == "DOC_ID_COLLISION":
         _replace(candidates, 'return doc_id.rsplit("_", 1)[-1]', "return doc_id")
     elif bug == "TIE_BREAK":
-        _replace(fusion, "hash(e.doc_id)", "e.doc_id")
+        _replace(ordering, "hash(entry.doc_id)", "entry.doc_id")
     else:
         raise ValueError(f"unknown bug: {bug}")
 

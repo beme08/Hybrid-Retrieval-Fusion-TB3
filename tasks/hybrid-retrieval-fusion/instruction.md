@@ -1,40 +1,16 @@
-# Hybrid Retrieval Fusion — repair the fusion layer
+# Hybrid Retrieval Fusion — repair the retrieval-to-fusion path
 
-You have inherited a small hybrid document-retrieval service. It retrieves with
-two modalities — lexical **BM25** and **dense cosine** similarity — and merges
-their rankings with **Reciprocal Rank Fusion (RRF)**. A regression has been
-introduced and the service now emits incorrect rankings.
-
-**Scope:** BM25 lexical ranking and dense cosine ranking are correctly
-implemented. The regression is in the **fusion layer**. Repair the service so
-that the emitted BM25, dense, and fused rankings are correct. Do not change the
-BM25 or dense scoring contracts described below.
-
-## The service
-
-```
-/app/
-  hybrid_search/
-    models.py          # Document, Query, RankingEntry
-    config.py          # SearchConfig
-    pipeline.py        # RetrievalPipeline (orchestrates rankers + fusion)
-    fusion.py          # RRF over typed RankingEntry lists
-    serialization.py   # internal entries -> output schema
-    rankers/
-      bm25.py          # correct
-      dense.py         # correct
-  scripts/
-    run_search.py      # CLI entry point
-  data/
-    corpus.json        # [{"doc_id": str, "text": str}, ...]
-    vectors.npy        # float matrix (N, dim) aligned with corpus order
-    visible_queries.json
-```
+You have inherited a small hybrid document-retrieval service in `/app`. It
+retrieves with lexical **BM25** and **dense cosine** similarity, then merges the
+candidate rankings with **Reciprocal Rank Fusion (RRF)**. The BM25 and dense
+scoring implementations should be treated as correct; the broken behavior is in
+candidate preparation and fusion. Repair the service so the emitted BM25,
+dense, and fused rankings follow the contract below.
 
 ## CLI contract
 
 ```
-python scripts/run_search.py \
+python /app/scripts/run_search.py \
     --corpus data/corpus.json \
     --vectors data/vectors.npy \
     --queries <queries.json> \
@@ -78,7 +54,7 @@ python scripts/run_search.py \
 **Dense (correct — do not change):** cosine similarity between the query
 embedding and the shipped corpus vectors; order by `(-score, doc_id)`.
 
-**Fusion (RRF):**
+**Candidate preparation and fusion (RRF):**
 - `score(doc) = sum over modalities of 1 / (rrf_k + rank_m(doc))`, where
   `rank_m(doc)` is the **1-based** rank of the document within modality `m`'s
   candidate list. A document present in only one modality contributes only that
@@ -95,10 +71,9 @@ embedding and the shipped corpus vectors; order by `(-score, doc_id)`.
 ## Success criteria
 
 A hidden test suite runs your repaired service over hidden queries and checks
-the emitted BM25, dense, and fused rankings against a reference, recomputes the
-fused scores from your emitted sub-rankings, validates the output schema and
-fused-score range, and verifies the output is identical across runs. Fix the
-service so all checks pass.
+the emitted BM25, dense, and fused outputs against a reference. It also
+recomputes fused scores from your emitted sub-rankings, validates the schema and
+fused-score range, and verifies deterministic output across runs.
 
 You have 5400 seconds to complete this task. Do not cheat by using online
 solutions or hints specific to this task.

@@ -13,7 +13,7 @@
     "RANK_BASE": "hybrid_search/fusion.py",
     "CANDIDATE_DEPTH": "hybrid_search/pipeline.py",
     "DOC_ID_COLLISION": "hybrid_search/candidate_utils.py",
-    "TIE_BREAK": "hybrid_search/fusion.py"
+    "TIE_BREAK": "hybrid_search/ordering.py"
   },
   "all_present_pass_count": 0,
   "all_fixed_pass_count": 12,
@@ -55,7 +55,6 @@
           "bm25",
           "dense",
           "fused",
-          "nondeterministic",
           "range",
           "score"
         ],
@@ -65,6 +64,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -107,6 +107,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -861,18 +862,35 @@
     },
     "TIE_BREAK": {
       "state": "11110",
-      "fail_count": 8,
+      "fail_count": 12,
       "fail_reasons": {
-        "hq_004": [
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_002": [
           "bank2_order",
           "bank2_score",
           "fused",
           "nondeterministic"
         ],
-        "hq_005": [
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_004": [
           "bank2_order",
           "bank2_score",
           "fused"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
         ],
         "hq_006": [
           "bank2_order",
@@ -889,7 +907,8 @@
         "hq_008": [
           "bank2_order",
           "bank2_score",
-          "fused"
+          "fused",
+          "nondeterministic"
         ],
         "hq_009": [
           "bank2_order",
@@ -900,13 +919,18 @@
         "hq_010": [
           "bank2_order",
           "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
           "fused"
         ],
         "hq_012": [
           "bank2_order",
           "bank2_score",
-          "fused",
-          "nondeterministic"
+          "fused"
         ]
       }
     }
@@ -2700,7 +2724,6 @@
           "bm25",
           "dense",
           "fused",
-          "nondeterministic",
           "range",
           "score"
         ],
@@ -2710,6 +2733,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -2752,6 +2776,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -2926,8 +2951,11 @@
           "score"
         ],
         "hq_003": [
+          "bank2_order",
           "bank2_score",
           "dense",
+          "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_004": [
@@ -2936,7 +2964,6 @@
           "bm25",
           "dense",
           "fused",
-          "nondeterministic",
           "range",
           "score"
         ],
@@ -2946,6 +2973,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -2996,6 +3024,7 @@
           "score"
         ],
         "hq_011": [
+          "bank2_order",
           "bank2_score",
           "bm25",
           "dense",
@@ -3164,6 +3193,7 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -3198,6 +3228,7 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -3212,7 +3243,6 @@
           "bank2_order",
           "bank2_score",
           "fused",
-          "nondeterministic",
           "range",
           "score"
         ]
@@ -3329,20 +3359,13 @@
       "fail_count": 12,
       "fail_reasons": {
         "hq_001": [
+          "bank2_order",
           "bank2_score",
+          "fused",
           "range",
           "score"
         ],
         "hq_002": [
-          "bank2_score",
-          "range",
-          "score"
-        ],
-        "hq_003": [
-          "bank2_score",
-          "score"
-        ],
-        "hq_004": [
           "bank2_order",
           "bank2_score",
           "fused",
@@ -3350,10 +3373,25 @@
           "range",
           "score"
         ],
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic",
+          "score"
+        ],
+        "hq_004": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "range",
+          "score"
+        ],
         "hq_005": [
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
@@ -3376,6 +3414,7 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_009": [
@@ -3390,11 +3429,14 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "range",
           "score"
         ],
         "hq_011": [
+          "bank2_order",
           "bank2_score",
+          "fused",
           "range",
           "score"
         ],
@@ -3402,7 +3444,6 @@
           "bank2_order",
           "bank2_score",
           "fused",
-          "nondeterministic",
           "range",
           "score"
         ]
@@ -3524,7 +3565,6 @@
           "bm25",
           "dense",
           "fused",
-          "nondeterministic",
           "score"
         ],
         "hq_005": [
@@ -3533,6 +3573,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_006": [
@@ -3572,6 +3613,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_011": [
@@ -3731,7 +3773,11 @@
           "score"
         ],
         "hq_003": [
+          "bank2_order",
+          "bank2_score",
           "dense",
+          "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_004": [
@@ -3740,7 +3786,6 @@
           "bm25",
           "dense",
           "fused",
-          "nondeterministic",
           "score"
         ],
         "hq_005": [
@@ -3749,6 +3794,7 @@
           "bm25",
           "dense",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_006": [
@@ -3795,6 +3841,8 @@
           "score"
         ],
         "hq_011": [
+          "bank2_order",
+          "bank2_score",
           "bm25",
           "dense",
           "fused",
@@ -3935,6 +3983,7 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_006": [
@@ -3966,6 +4015,7 @@
           "bank2_order",
           "bank2_score",
           "fused",
+          "nondeterministic",
           "score"
         ],
         "hq_011": [
@@ -3978,7 +4028,6 @@
           "bank2_order",
           "bank2_score",
           "fused",
-          "nondeterministic",
           "score"
         ]
       }
@@ -4080,19 +4129,36 @@
       "active": [
         "TIE_BREAK"
       ],
-      "pass_count": 4,
-      "fail_count": 8,
+      "pass_count": 0,
+      "fail_count": 12,
       "fail_reasons": {
-        "hq_004": [
+        "hq_001": [
+          "bank2_order",
+          "bank2_score",
+          "fused"
+        ],
+        "hq_002": [
           "bank2_order",
           "bank2_score",
           "fused",
           "nondeterministic"
         ],
-        "hq_005": [
+        "hq_003": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_004": [
           "bank2_order",
           "bank2_score",
           "fused"
+        ],
+        "hq_005": [
+          "bank2_order",
+          "bank2_score",
+          "fused",
+          "nondeterministic"
         ],
         "hq_006": [
           "bank2_order",
@@ -4109,7 +4175,8 @@
         "hq_008": [
           "bank2_order",
           "bank2_score",
-          "fused"
+          "fused",
+          "nondeterministic"
         ],
         "hq_009": [
           "bank2_order",
@@ -4120,13 +4187,18 @@
         "hq_010": [
           "bank2_order",
           "bank2_score",
+          "fused",
+          "nondeterministic"
+        ],
+        "hq_011": [
+          "bank2_order",
+          "bank2_score",
           "fused"
         ],
         "hq_012": [
           "bank2_order",
           "bank2_score",
-          "fused",
-          "nondeterministic"
+          "fused"
         ]
       }
     },

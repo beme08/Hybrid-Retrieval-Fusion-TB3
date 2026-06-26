@@ -19,6 +19,7 @@ PATCH_DIR="${HERE}/patches"
 cd "$APP_DIR"
 
 FUSION="hybrid_search/fusion.py"
+ORDERING="hybrid_search/ordering.py"
 PIPELINE="hybrid_search/pipeline.py"
 CANDIDATES="hybrid_search/candidate_utils.py"
 
@@ -28,7 +29,7 @@ CANDIDATES="hybrid_search/candidate_utils.py"
 already_fixed() {
     ! grep -q 'return entry.raw_score' "$FUSION" \
         && ! grep -q 'rrf_k + (rank - 1)' "$FUSION" \
-        && ! grep -q 'hash(e.doc_id)' "$FUSION" \
+        && { [ ! -f "$ORDERING" ] || ! grep -q 'hash(entry.doc_id)' "$ORDERING"; } \
         && ! grep -q 'depth = self.config.top_k' "$PIPELINE" \
         && { [ ! -f "$CANDIDATES" ] || ! grep -q 'rsplit("_", 1)\[-1\]' "$CANDIDATES"; }
 }

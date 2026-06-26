@@ -3,14 +3,12 @@
 # BM25 magnitudes with cosine values lets one modality dominate the fused order.
 
 diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
-index d8a3c0e..4d0c526 100644
 --- a/hybrid_search/fusion.py
 +++ b/hybrid_search/fusion.py
-@@ -49,8 +49,7 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
+@@ -20,7 +20,7 @@ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, R
  
  
  def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
--    # Weight a document by its own modality score and its rank position.
 -    return entry.raw_score + 1.0 / (rrf_k + (rank - 1))
 +    return 1.0 / (rrf_k + (rank - 1))
  

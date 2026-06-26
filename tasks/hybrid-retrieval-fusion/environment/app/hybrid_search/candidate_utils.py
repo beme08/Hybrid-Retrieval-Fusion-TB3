@@ -9,14 +9,14 @@ from .models import RankingEntry
 
 
 def _candidate_key(doc_id: str) -> str:
-    """Return the key used to align candidate identities before fusion."""
+    """Return a grouping key for candidate bookkeeping."""
     return doc_id.rsplit("_", 1)[-1]
 
 
 def coalesce_candidate_identities(
     rankings: Sequence[Sequence[RankingEntry]],
 ) -> List[List[RankingEntry]]:
-    """Return fusion-facing rankings after candidate identity coalescing."""
+    """Prepare ranked candidates for downstream scoring."""
     representatives: Dict[str, str] = {}
     for ranking in rankings:
         for entry in ranking:

@@ -1,8 +1,4 @@
-"""Search configuration.
-
-A single immutable ``SearchConfig`` carries every tunable used by the rankers
-and the fusion layer. Defaults encode the normative task contract.
-"""
+"""Search configuration."""
 
 from __future__ import annotations
 
@@ -16,15 +12,11 @@ class SearchConfig:
     Attributes
     ----------
     top_k:
-        Size of the final fused ranking after truncation.
+        Requested final result count.
     candidate_depth:
-        Number of results each modality returns *before* fusion. The fusion
-        layer fuses the union of the two candidate lists and only then
-        truncates the fused ranking to ``top_k``. ``candidate_depth`` is
-        therefore always >= ``top_k`` in practice.
+        Requested per-modality candidate count.
     rrf_k:
-        Reciprocal-rank-fusion constant. With two modalities and 1-based ranks
-        the maximum possible fused score is ``2 / (rrf_k + 1)``.
+        Fusion tuning constant.
     bm25_k1, bm25_b:
         Standard Okapi BM25 term-frequency saturation and length-normalization
         parameters.
