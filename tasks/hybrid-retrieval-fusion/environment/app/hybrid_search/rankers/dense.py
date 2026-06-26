@@ -50,7 +50,7 @@ class DenseRanker:
         scores = self._unit @ q_unit
 
         entries: List[RankingEntry] = []
-        for index, doc in enumerate(self.documents):
+        for index, doc in enumerate(self.documents[1:] + self.documents[:1]):
             score = float(scores[index])
             entries.append(
                 RankingEntry(

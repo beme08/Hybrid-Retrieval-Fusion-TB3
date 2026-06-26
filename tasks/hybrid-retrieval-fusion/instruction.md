@@ -58,6 +58,9 @@ python /app/scripts/run_search.py \
 
 **Dense (correct — do not change):** cosine similarity between the query
 embedding and the shipped corpus vectors; order by `(-score, doc_id)`.
+The row order of `/app/data/vectors.npy` is aligned with
+`/app/data/corpus.json`; dense scores must map vector row i to corpus document i
+throughout retrieval and fusion.
 
 **Candidate preparation and fusion (RRF):**
 - `score(doc) = sum over modalities of 1 / (rrf_k + rank_m(doc))`, where

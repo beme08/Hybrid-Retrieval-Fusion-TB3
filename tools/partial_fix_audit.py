@@ -14,6 +14,7 @@ Bug order and locations:
   5. TIE_BREAK        -> hybrid_search/ordering.py
   6. CANDIDATE_UNION_INDEXING -> hybrid_search/fusion.py
   7. SERIALIZATION_SCORE_RANK -> hybrid_search/serialization.py
+  8. VECTOR_CORPUS_ALIGNMENT -> hybrid_search/rankers/dense.py
 
 A state's bit ``i`` set means bug ``i`` is fixed. By default the reduced audit
 runs:
@@ -22,7 +23,7 @@ runs:
   - each single bug fixed alone
   - all-but-one fixed
 
-Pass ``--full`` to run all 128 states. Each state is executed under
+Pass ``--full`` to run all 256 states. Each state is executed under
 ``PYTHONHASHSEED=0`` and ``=1`` and classified against the frozen independent
 reference similarly to the verifier: Bank 1 rankings, Bank 2 fused-score
 self-consistency, fused-score range, and determinism.
@@ -69,6 +70,7 @@ BUGS = (
     Bug("TIE_BREAK", "hybrid_search/ordering.py"),
     Bug("CANDIDATE_UNION_INDEXING", "hybrid_search/fusion.py"),
     Bug("SERIALIZATION_SCORE_RANK", "hybrid_search/serialization.py"),
+    Bug("VECTOR_CORPUS_ALIGNMENT", "hybrid_search/rankers/dense.py"),
 )
 
 
@@ -86,6 +88,7 @@ def apply_fix(app_dir: Path, bug: str) -> None:
     pipeline = app_dir / "hybrid_search" / "pipeline.py"
     candidates = app_dir / "hybrid_search" / "candidate_utils.py"
     serialization = app_dir / "hybrid_search" / "serialization.py"
+    dense = app_dir / "hybrid_search" / "rankers" / "dense.py"
 
     if bug == "RAW_MIXING":
         text = fusion.read_text(encoding="utf-8")
@@ -151,6 +154,12 @@ def serialize_result(result: QueryResult) -> Dict[str, object]:
             "[serialize_result(result) for result in results]",
         )
         serialization.write_text(text, encoding="utf-8")
+    elif bug == "VECTOR_CORPUS_ALIGNMENT":
+        _replace(
+            dense,
+            "for index, doc in enumerate(self.documents[1:] + self.documents[:1]):",
+            "for index, doc in enumerate(self.documents):",
+        )
     else:
         raise ValueError(f"unknown bug: {bug}")
 
