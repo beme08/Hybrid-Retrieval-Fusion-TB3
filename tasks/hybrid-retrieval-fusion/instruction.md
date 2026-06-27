@@ -4,10 +4,11 @@
 
 You have inherited a small hybrid document-retrieval service in `/app`. It
 retrieves with lexical **BM25** and **dense cosine** similarity, then merges the
-candidate rankings with **Reciprocal Rank Fusion (RRF)**. The BM25 and dense
-scoring implementations should be treated as correct; the broken behavior is in
-candidate preparation, fusion, and output serialization. Repair the service so
-the emitted BM25, dense, and fused rankings follow the contract below.
+candidate rankings with **Reciprocal Rank Fusion (RRF)**. The BM25 scoring
+implementation and dense cosine math should be treated as correct; the broken
+behavior is in corpus/vector row alignment, candidate preparation, fusion, and
+output serialization. Repair the service so the emitted BM25, dense, and fused
+rankings follow the contract below.
 
 ## CLI contract
 
@@ -56,7 +57,7 @@ python /app/scripts/run_search.py \
 `[a-z0-9]+`; `k1 = 1.2`; `b = 0.75`;
 `idf(t) = log(1 + (N - df + 0.5) / (df + 0.5))`; order by `(-score, doc_id)`.
 
-**Dense (correct — do not change):** cosine similarity between the query
+**Dense cosine math (correct — do not change):** cosine similarity between the query
 embedding and the shipped corpus vectors; order by `(-score, doc_id)`.
 The row order of `/app/data/vectors.npy` is aligned with
 `/app/data/corpus.json`; dense scores must map vector row i to corpus document i
