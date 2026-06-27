@@ -60,6 +60,7 @@ import generated_cases  # noqa: E402
 
 SEEDS = ("0", "1")
 SCORE_TOL = 1e-12
+TOOL_VERSION = "v7-compact-audit-1"
 
 
 @dataclass(frozen=True)
@@ -416,9 +417,44 @@ def bug_names(bits: Iterable[int], fixed: bool) -> list[str]:
     return [bug.name for bit, bug in zip(bits, BUGS) if bool(bit) is fixed]
 
 
+def reason_categories(reasons: dict[str, list[str]]) -> list[str]:
+    return sorted({kind for row_reasons in reasons.values() for kind in row_reasons})
+
+
+def state_summary(bits: tuple[int, ...], pass_count: int, reasons: dict, n_checks: int) -> dict:
+    return {
+        "bitmask": bit_key(bits),
+        "fixed": bug_names(bits, True),
+        "active": bug_names(bits, False),
+        "pass_count": pass_count,
+        "fail_count": n_checks - pass_count,
+        "passes_all_checks": pass_count == n_checks,
+        "failed_check_count": len(reasons),
+        "reason_categories": reason_categories(reasons),
+    }
+
+
+def detailed_state_report(results: dict[tuple[int, ...], tuple[int, dict]], n_checks: int) -> dict:
+    return {
+        bit_key(bits): {
+            "fixed": bug_names(bits, True),
+            "active": bug_names(bits, False),
+            "pass_count": pass_count,
+            "fail_count": n_checks - pass_count,
+            "fail_reasons": reasons,
+        }
+        for bits, (pass_count, reasons) in sorted(results.items())
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit partial fixes for hybrid-retrieval-fusion.")
     parser.add_argument("--full", action="store_true", help="run all fix states")
+    parser.add_argument(
+        "--write-per-state",
+        type=Path,
+        help="optional path for a detailed per-state report; not written to fixtures by default",
+    )
     args = parser.parse_args()
 
     expected = json.loads((FIXTURE_DIR / "expected_hidden.json").read_text(encoding="utf-8"))
@@ -446,13 +482,19 @@ def main() -> int:
         almost = tuple(0 if j == i else 1 for j in range(len(BUGS)))
         single_fixed[bug.name] = {
             "state": bit_key(single),
+            "pass_count": results[single][0],
             "fail_count": n_checks - results[single][0],
-            "fail_reasons": results[single][1],
+            "passes_all_checks": results[single][0] == n_checks,
+            "failed_check_count": len(results[single][1]),
+            "reason_categories": reason_categories(results[single][1]),
         }
         all_but_one_fixed[bug.name] = {
             "state": bit_key(almost),
+            "pass_count": results[almost][0],
             "fail_count": n_checks - results[almost][0],
-            "fail_reasons": results[almost][1],
+            "passes_all_checks": results[almost][0] == n_checks,
+            "failed_check_count": len(results[almost][1]),
+            "reason_categories": reason_categories(results[almost][1]),
         }
 
     only_all_fixed = None
@@ -463,29 +505,30 @@ def main() -> int:
         )
 
     report = {
+        "tool_version": TOOL_VERSION,
         "mode": f"full-{2 ** len(BUGS)}-state" if args.full else "reduced",
-        "n_hidden_checks": n_checks,
-        "n_static_hidden_queries": n_static,
+        "state_count": len(states),
+        "bug_count": len(BUGS),
+        "hidden_check_count": n_checks,
+        "static_hidden_query_count": n_static,
+        "generated_hidden_bank_count": n_generated,
         "generated_hidden_banks": generated_case_names,
         "bug_order": [bug.name for bug in BUGS],
         "bug_locations": {bug.name: bug.location for bug in BUGS},
+        "all_present": state_summary(all_present, *results[all_present], n_checks),
+        "all_fixed": state_summary(all_fixed, *results[all_fixed], n_checks),
         "all_present_pass_count": all_present_pass,
         "all_fixed_pass_count": all_fixed_pass,
         "only_all_fixed_passes": only_all_fixed,
         "single_bug_fixed_alone": single_fixed,
         "all_but_one_fixed": all_but_one_fixed,
-        "per_state": {
-            bit_key(bits): {
-                "fixed": bug_names(bits, True),
-                "active": bug_names(bits, False),
-                "pass_count": pass_count,
-                "fail_count": n_checks - pass_count,
-                "fail_reasons": reasons,
-            }
-            for bits, (pass_count, reasons) in sorted(results.items())
-        },
     }
     (FIXTURE_DIR / "audit_report.json").write_text(json.dumps(report, indent=2) + "\n")
+    if args.write_per_state:
+        args.write_per_state.write_text(
+            json.dumps(detailed_state_report(results, n_checks), indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     gate = (
         all_present_pass < n_checks
@@ -508,12 +551,12 @@ def main() -> int:
     print("\nsingle bug fixed alone -> failures:")
     for bug in BUGS:
         item = single_fixed[bug.name]
-        kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
+        kinds = item["reason_categories"]
         print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_checks} reasons={kinds}")
     print("\nall-but-one fixed (listed bug ACTIVE) -> failures:")
     for bug in BUGS:
         item = all_but_one_fixed[bug.name]
-        kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
+        kinds = item["reason_categories"]
         print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_checks} reasons={kinds}")
     print("\nPARTIAL-FIX AUDIT GATE:", "PASS" if gate else "FAIL")
     return 0 if gate else 1
