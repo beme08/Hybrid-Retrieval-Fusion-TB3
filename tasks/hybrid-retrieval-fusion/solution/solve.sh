@@ -3,9 +3,9 @@
 #
 # Oracle solution for hybrid-retrieval-fusion.
 #
-# Applies the ordered fixes 001..008 to the agent environment. Each patch
+# Applies the ordered fixes 001..010 to the agent environment. Each patch
 # repairs exactly one regression in the retrieval/fusion path; the rankers are
-# otherwise correct. After all eight patches the emitted BM25 / dense / fused
+# otherwise correct. After all ten patches the emitted BM25 / dense / fused
 # rankings and fused scores match the verifier-owned reference, so
 # the verifier scores 1.0.
 #
@@ -37,7 +37,9 @@ already_fixed() {
         && { [ ! -f "$CANDIDATES" ] || ! grep -q 'rsplit("_", 1)\[-1\]' "$CANDIDATES"; } \
         && ! grep -q 'candidate_index' "$FUSION" \
         && ! grep -q 'serialize_fused_ranking' "$SERIALIZATION" \
-        && ! grep -q 'self.documents\[1:\] + self.documents\[:1\]' "$DENSE"
+        && ! grep -q 'self.documents\[1:\] + self.documents\[:1\]' "$DENSE" \
+        && ! grep -q 'sorted(queries, key=lambda item: item.query_id)' "$PIPELINE" \
+        && ! grep -Fq 'score = int(score * 1_000_000) / 1_000_000' "$FUSION"
 }
 
 if already_fixed; then

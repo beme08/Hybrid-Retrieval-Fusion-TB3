@@ -2,8 +2,8 @@
 
 This repo builds a **Terminal-Bench 3 (TB3) compatible task**:
 `hybrid-retrieval-fusion`, a deterministic hybrid retrieval fusion debugging
-task. BM25 and dense ranking are correct; the regression is in the fusion
-layer.
+task. BM25 ranking and dense cosine math are correct; regressions are in the
+retrieval-to-fusion path.
 
 ## Rules for agents working in this repo
 

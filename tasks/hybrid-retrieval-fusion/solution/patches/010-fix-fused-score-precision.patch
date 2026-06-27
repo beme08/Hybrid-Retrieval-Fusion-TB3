@@ -1,0 +1,16 @@
+# Patch 010 - fix fused score precision
+# Fused scores are RRF sums for the current run configuration. Do not truncate
+# the accumulated score before storing the fused RankingEntry.
+
+diff --git a/hybrid_search/fusion.py b/hybrid_search/fusion.py
+--- a/hybrid_search/fusion.py
++++ b/hybrid_search/fusion.py
+@@ -44,7 +44,6 @@ def reciprocal_rank_fusion(
+             entry = reps[key]
+             score += _contribution(rrf_k, rank, entry)
+             if rep is None or entry.doc_id < rep.doc_id:
+                 rep = entry
+-        score = int(score * 1_000_000) / 1_000_000
+         fused.append(
+             RankingEntry(
+                 doc_id=rep.doc_id,

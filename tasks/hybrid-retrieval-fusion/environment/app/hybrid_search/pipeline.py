@@ -58,4 +58,12 @@ class RetrievalPipeline:
 
     def search_all(self, queries: Sequence[Query]) -> List[QueryResult]:
         """Run every query, preserving input order."""
-        return [self.search(query) for query in queries]
+        cached: dict[str, QueryResult] = {}
+        results: List[QueryResult] = []
+        for query in sorted(queries, key=lambda item: item.query_id):
+            result = cached.get(query.query_id)
+            if result is None:
+                result = self.search(query)
+                cached[query.query_id] = result
+            results.append(result)
+        return results

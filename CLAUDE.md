@@ -22,10 +22,9 @@
 
 One original Terminal-Bench 3 (TB3) compatible task: a deterministic hybrid
 retrieval fusion debugging task. The agent inherits a BM25 + dense vector
-retrieval service. BM25 lexical ranking and dense cosine ranking are correct.
-The regression lives in the **fusion layer**. The agent must repair the fusion
-layer so hidden BM25, dense, and fused rankings match a verifier-owned
-reference.
+retrieval service. BM25 lexical ranking and dense cosine math are correct. The
+regressions live in the retrieval-to-fusion path. The agent must repair that
+path so hidden BM25, dense, and fused rankings match verifier-owned references.
 
 This is a Klavis AI coding assignment. Final delivery is a **standalone GitHub
 repo**, not a Terminal-Bench PR. The repo documents check results, trial
@@ -46,13 +45,15 @@ authenticated agent trials without explicit maintainer approval.
    independent reference under `tests/fixtures`; frozen `expected_hidden.json`
    generated from the reference (not from `/app`); coverage matrix validated;
    deterministic across `PYTHONHASHSEED=0/1`.
-3. **Plant bugs + partial-fix audit** — five scoped fusion-layer bugs; 32-state
-   bitmask audit; only all-fixed passes; each 4-of-5 fails ≥2–3 hidden queries;
+3. **Plant bugs + partial-fix audit** — ten scoped retrieval/fusion-path bugs;
+   1024-state bitmask audit; only all-fixed passes; each all-but-one state fails
+   multiple hidden checks;
    strip all `BUG_*` toggle logic before packaging.
 4. **Separate verifier** — `tests/` owns verifier deps (pinned); schema +
-   Bank 1 + Bank 2; determinism check; fused-range guard; CTRF count guard;
-   verifier never overwrites `/app`; hidden fixtures only in `tests/`.
-5. **Oracle solution** — ordered patches 001–005; oracle scores **1.0**.
+   Bank 1 + Bank 2; generated hidden banks; determinism check; fused-range
+   guard; CTRF count guard; verifier never overwrites `/app`; hidden fixtures
+   only in `tests/`.
+5. **Oracle solution** — ordered patches 001–010; oracle scores **1.0**.
 6. **Nop + anti-cheat hardening** — nop scores **0.0**; all planned `/cheat`
    attempts score 0.0; honest source fixes still pass.
 7. **Checks, matrix plan, docs** — static checks; harbor check; README with
@@ -79,16 +80,19 @@ authenticated agent trials without explicit maintainer approval.
 
 ## Core task contract (normative)
 
-- Fusion: `score(doc) = sum over modalities of 1 / (RRF_K + rank_m(doc))`.
-- `RRF_K = 60`; ranks are **1-based**; max fused score (two modalities) is
-  `2/61`.
+- Fusion: `score(doc) = sum over modalities of 1 / (rrf_k + rank_m(doc))`.
+- `rrf_k` comes from the current run config; ranks are **1-based**; max fused
+  score (two modalities) is `2 / (rrf_k + 1)`.
 - Doc IDs are **opaque strings** — never parse or normalize them.
+- Query IDs are opaque labels; preserve input query order, allow duplicates,
+  and never use `query_id` as a sort key or cache key.
 - Sort fused results by descending fused score; tie-break by `doc_id` ascending.
 - Each modality returns `candidate_depth` results; **fuse the union first**,
   then truncate fused ranking to `top_k`.
 - BM25: tokenizer lowercase regex `[a-z0-9]+`; `k1=1.2`; `b=0.75`;
   `idf = log(1 + (N - df + 0.5) / (df + 0.5))`; sort by `(-score, doc_id)`.
-- Dense: cosine over shipped vectors; sort by `(-score, doc_id)`.
+- Dense: cosine over shipped vectors; vector row i maps to loaded corpus row i;
+  sort by `(-score, doc_id)`.
 
 ## Verifier rules
 
@@ -103,9 +107,12 @@ authenticated agent trials without explicit maintainer approval.
 - Bank 2 (internal consistency): recompute fused scores from emitted BM25/dense
   sub-rankings via reference RRF; compare to emitted fused scores, tol `1e-12`.
 - Determinism: run twice with `PYTHONHASHSEED=0` and `=1`; outputs identical.
-- Fused range guard: `0 <= score <= 2/61 + 1e-9`.
+- Fused range guard: `0 <= score <= 2 / (rrf_k + 1) + 1e-9`.
 - `expected_hidden.json` is generated from the independent reference, frozen,
   committed, and **loaded** at grade time — never regenerated from `/app`.
+- Generated hidden banks exercise duplicate query IDs, jointly permuted
+  corpus/vector rows, disjoint BM25/dense candidates, no-match BM25, and varied
+  `top_k`/`candidate_depth`/`rrf_k`.
 - Reward is deterministic. **No LLM judge.** No single-bank verifier. No broad
   source-code grep as the primary verification.
 
@@ -115,18 +122,21 @@ Treat reward hacking as an environment-security problem, not a prompt problem.
 Add **narrow deterministic** guards/checks (not broad blocklists) for: reading
 `/tests` or `/solution`; importing tests/fixtures; references to
 `expected_hidden`; output fabrication after a legitimate search; `.git`/history
-leakage; public-solution fetch attempts; direct hidden-fixture access. External
-RRF knowledge is fair, but should not solve the task unless the agent also
-preserves the typed pipeline, serializer, candidate-depth semantics, opaque
-doc IDs, correct tie-break, and correct output schema.
+leakage; public-solution fetch attempts; direct hidden-fixture access;
+`/app/data` mutation; hardcoded/encoded output tables; reward/verifier path
+modification. External RRF knowledge is fair, but should not solve the task
+unless the agent also preserves the typed pipeline, serializer,
+candidate-depth semantics, opaque doc/query IDs, loaded row alignment, correct
+tie-break, and correct output schema.
 
 ## Instruction-completeness rules
 
 `instruction.md` must be complete and fair: full CLI contract, output schema,
-RRF formula, candidate-depth semantics, opaque-doc-ID rule, tie-break, and the
-scope statement ("BM25 lexical ranking and dense cosine ranking are correctly
-implemented. The regression is in the fusion layer."). It must **not** reveal
-the bug count or hidden activation patterns. It must end with the exact
+RRF formula, candidate-depth semantics, opaque doc/query ID rules, query-order
+rule, corpus/vector row-alignment rule, per-run config rule, tie-break, and a
+scope statement that BM25 lexical ranking and dense cosine math are correctly
+implemented. It must **not** reveal the bug count or hidden activation patterns.
+It must end with the exact
 required suffix where `N == [agent].timeout_sec`:
 
 > You have N seconds to complete this task. Do not cheat by using online

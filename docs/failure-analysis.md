@@ -2,8 +2,8 @@
 
 Authoring/record document. **Do not invent results.** Cells marked `TODO` or
 `PENDING` have not been run yet. Local-simulation results are recorded as
-observed in the authoring sandbox; Docker, Harbor, and final agent trials are
-Mac-side / Phase 8 and remain pending.
+observed in the authoring sandbox; Harbor and final agent trials remain Phase 8
+and require maintainer approval.
 
 ## Verifiable-environment framing
 
@@ -12,6 +12,12 @@ benchmark. Agent failures are classified by observable verifier outcomes:
 ranking mismatch, score inconsistency, determinism failure, schema failure, or
 reward-hacking attempt.
 
+v5 was valid and fair, but a Codex run passed it cleanly. v6 added generated
+cross-module invariant checks, then a Codex leak-probe run solved v6 cleanly
+with normal source patches. v7 reduces instruction handholding and adds a
+tenth fair fused-score precision defect. This is development/build validation,
+not a final benchmark `/run` trial.
+
 ## Run configuration
 
 | Item | Value |
@@ -19,9 +25,12 @@ reward-hacking attempt.
 | Task | `hybrid-retrieval-fusion` |
 | Verifier mode | separate (`tests/Dockerfile` owns deps) |
 | Canonical run params | `top_k=10`, `candidate_depth=25`, `rrf_k=60` |
+| Generated run params | `top_k=4`, `candidate_depth=6`, `rrf_k=7`; `top_k=3`, `candidate_depth=3`, `rrf_k=17` |
 | BM25 params | `k1=1.2`, `b=0.75` |
 | Vector dim | 96 |
-| Hidden queries | 12 |
+| Static hidden queries | 12 |
+| Generated hidden banks | 2 |
+| Hidden checks in partial audit | 14 |
 | Visible queries | 4 |
 | Corpus | 280 docs (240 main + 40 clean-zone) |
 | Determinism seeds | `PYTHONHASHSEED=0`, `1` |
@@ -31,40 +40,44 @@ reward-hacking attempt.
 ## Check results (local simulation)
 
 Observed in the authoring sandbox by running `tests/test.sh` against a mirrored
-`/app` layout (Docker not available in-sandbox).
+`/app` layout and, where noted, local Docker verifier images.
 
 | Check | Result |
 |-------|--------|
-| Oracle (`solve.sh` applied) | PASS — all verifier tests pass, exit 0 |
-| Nop / broken (unmodified `/app`) | FAIL — verifier exits 1 |
+| Oracle (`solve.sh` applied) | PASS — 111 verifier tests pass, reward 1.0, exit 0 |
+| Nop / broken (unmodified `/app`) | FAIL as expected — 66 failed / 45 passed, reward 0.0, exit 1 |
 | Determinism (`PYTHONHASHSEED=0` vs `1`) | PASS — identical fixtures + outputs |
-| Verifier writes into `/app` | NONE — `/app` byte-identical before/after |
+| `/app/data` mutation guard | PASS — digest unchanged before/after verifier run |
 | `BUG_*` toggles in agent-visible code | NONE |
 | Hidden/reference/expected leakage into `environment/` | NONE |
-| Oracle idempotency (`solve.sh` re-run) | PASS — no-op on re-run, no `.rej` |
-| Anti-cheat guards vs injected cheat | PASS — guards trip and fail the run |
-| Docker environment image build | PASS — built successfully (Mac-side) |
-| Docker verifier image build | PASS — built successfully (Mac-side) |
-| Harbor parser validation (`TaskConfig`) | PASS (Mac-side) |
-| `TaskModel.is_valid_dir(disable_verification=False)` | TRUE (Mac-side) |
-| Harbor oracle run | PASS — reward 1.0, 0 exceptions (`jobs/2026-06-25__01-11-06/result.json`) |
-| Harbor nop run | PASS (as expected) — reward 0.0, 0 exceptions (`jobs/2026-06-25__01-11-24/result.json`) |
+| Full partial-fix audit | PASS — full 1024-state audit; only all-fixed passes |
+| Oracle idempotency (`solve.sh` re-run) | PASS — second run reports already fixed |
+| Anti-cheat guards vs injected cheat | PASS — `/tests` mutation smoke exits 1 with reward 0.0 before pytest; full `/cheat` trials remain pending |
+| Docker environment image build | PASS — built locally as `hrf-v7-env` |
+| Docker verifier image build | PASS — built locally as `hrf-v7-test` |
+| Docker verifier oracle run | PASS — 111 verifier tests pass, reward 1.0 |
+| Docker verifier nop run | FAIL as expected — verifier exits 1, reward 0.0 |
+| Runtime leak audit on environment image | PASS — `/app` contains only app/data files; no hidden/test/solution/repo metadata hits |
+| Harbor parser validation (`TaskConfig`) | PENDING in v7 |
+| `TaskModel.is_valid_dir(disable_verification=False)` | PENDING in v7 |
+| Harbor oracle run | PENDING in v7 |
+| Harbor nop run | PENDING in v7 |
 
 > Test counts and exact pass/fail tallies are reproducible by running the
 > commands in `README.md`. They are intentionally not transcribed as fixed
 > numbers here to avoid drift; regenerate them from the live run.
 
-## 32-state partial-fix audit (Phase 3 record)
+## 1024-state partial-fix audit (v7 record)
 
 Recorded in `tasks/hybrid-retrieval-fusion/tests/fixtures/audit_report.json`.
-Summary: only the all-fixed state passes every hidden query; each "4-of-5 fixed"
-state (exactly one bug active) fails multiple hidden queries; rank-base is caught
-by score/range checks, tie-break by the two-seed determinism check.
-
-> Note: the audit was produced in Phase 3 against development `BUG_*` toggles,
-> which were stripped from agent-visible code in Phase 6. The audit report is
-> retained as a historical record; `tools/partial_fix_audit.py` is authoring
-> tooling tied to those toggles and is not part of the shipped task.
+Summary: only the all-fixed state `1111111111` passes every hidden check. The
+broken state passes 0/14 checks; the all-fixed state passes 14/14. Each
+all-but-one fixed state fails at least 2/14 checks, including
+`QUERY_ORDER_IDENTITY` and `FUSED_SCORE_PRECISION`. Rank-base and serialization
+are caught by score/range checks, tie-break by the two-seed determinism check,
+vector alignment by static and generated dense rankings, query identity/order
+by duplicate-ID generated inputs, and fused precision by RRF score
+recomputation.
 
 ## Trial results (PENDING — Phase 8)
 
@@ -93,7 +106,8 @@ reproducing detail:
 
 - **Ranking mismatch** — which modality (bm25/dense/fused) and first diverging
   rank; likely fusion sub-cause (raw mixing / truncate / collision).
-- **Score inconsistency** — Bank 2 mismatch or fused-score out of `[0, 2/61]`;
+- **Score inconsistency** — Bank 2 mismatch or fused-score out of
+  `[0, 2 / (rrf_k + 1)]`;
   likely rank-base / constant error.
 - **Determinism failure** — output differs across seeds; tie-break nondeterminism.
 - **Schema failure** — malformed output / wrong ranks or lengths.
@@ -102,11 +116,11 @@ reproducing detail:
 
 ## Known caveats
 
-- Docker and Harbor checks are not runnable in the authoring sandbox; they were
-  run Mac-side. Both Docker images build, the Harbor oracle run scores reward
-  1.0 (0 exceptions), and the Harbor nop run scores reward 0.0 (0 exceptions).
+- Harbor checks and final trials have not been rerun for v7 in this turn.
 - Final agent trials require maintainer approval and a fresh session without any
   authoring context (`CLAUDE.md`, `AGENTS.md`, `docs/`, `tools/`).
+- Official `/run` trials must use only the task's `instruction.md`, with no
+  development/build instructions or extra hints.
 - The repository must remain private until the internet-enabled trials complete.
 - `expert_time_estimate_hours` in `task.toml` is an authoring estimate, not a
   measured trial result.

@@ -38,8 +38,13 @@ def _all_source():
 # (label, regex) — each pattern is a specific cheat route, not generic code.
 _FORBIDDEN = [
     ("hidden-fixture reference", r"expected_hidden|hidden_queries"),
+    ("hardcoded hidden/generated query table", r"\bhq_0(?:0[1-9]|1[0-2])\b|\bgh_[a-z0-9_]+\b"),
+    ("encoded output lookup", r"\b(?:base64|b64decode|urlsafe_b64decode|b85decode|a85decode|fromhex)\b"),
     ("verifier reference code", r"reference_(?:rrf|bm25|dense)\b"),
-    ("verifier/solution path access", r"/tests\b|/solution\b|audit_report|coverage_report"),
+    (
+        "verifier/solution/reward path access",
+        r"/tests\b|/solution\b|/logs\b|reward\.txt|CTRF_PATH|RESULTS_SEED|audit_report|coverage_report",
+    ),
     (".git history leakage", r"\.git\b"),
     ("network / public-solution fetch", r"\b(?:socket|urllib|urllib3|requests|httpx|aiohttp|http\.client|ftplib)\b"),
 ]

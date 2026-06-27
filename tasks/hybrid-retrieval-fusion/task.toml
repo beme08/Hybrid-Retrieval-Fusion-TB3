@@ -43,27 +43,37 @@ tags = ["retrieval", "rag", "bm25", "dense-vectors", "rrf", "debugging"]
 difficulty_explanation = """
 The agent must localize regressions in the retrieval-to-fusion path of a
 multi-module retrieval service whose BM25 and dense rankers are already
-correct. Five independent defects are present (raw-score mixing, wrong RRF rank
-base, truncate-before-fusion, opaque-doc-ID collision, and nondeterministic
-tie ordering); several mask one another, so partial fixes still fail hidden
-queries. A correct fix requires understanding RRF, candidate-depth semantics,
-opaque identifiers, and deterministic tie-breaking across the pipeline, not
-just local edits.
+correct. Ten independent defects are present, spanning raw-score mixing,
+wrong RRF rank base, truncate-before-fusion, opaque-doc-ID collision,
+nondeterministic tie ordering, candidate-union indexing, fused-score
+serialization, vector/corpus row alignment, query identity/order handling, and
+fused-score precision after accumulation.
+Several mask one another, so partial fixes still fail hidden checks. A correct
+fix requires understanding RRF, candidate-depth semantics, opaque identifiers,
+query ordering, row alignment, per-run config, and deterministic tie-breaking
+across the pipeline, not just local edits.
 """
 solution_explanation = """
 Repair the retrieval-to-fusion path: fuse on reciprocal 1-based ranks (not raw
-scores), use 1/(rrf_k + rank) with rrf_k = 60, request the full candidate depth
-before fusion, align documents by their full opaque doc_id, and break
-fused-score ties by ascending doc_id. The reference solution applies five
-ordered patches (solution/solve.sh); the rankers are not modified.
+scores), use 1/(rrf_k + rank) from the run config, request the full candidate
+depth before fusion, align documents by their full opaque doc_id, break
+fused-score ties by ascending doc_id, preserve emitted fused scores, map vector
+row i to loaded corpus row i, and process each query in input order without
+query_id caching, while preserving full fused-score precision. The reference
+solution applies ten ordered patches
+(solution/solve.sh).
 """
 verification_explanation = """
 Separate-verifier mode. The verifier runs the repaired CLI over hidden queries
-under PYTHONHASHSEED=0 and =1 and grades artifacts deterministically:
-exact BM25/dense/fused doc-id rankings vs frozen reference (Bank 1), fused-score
-recomputation from emitted sub-rankings (Bank 2), strict schema validation,
-fused-score range (0..2/61), two-seed determinism, a CTRF count guard, and
-narrow anti-cheat guards. No LLM judge.
+under PYTHONHASHSEED=0 and =1, then runs deterministic generated hidden banks
+with duplicate query_id rows, same-text/different-embedding rows, jointly
+permuted corpus/vector rows, disjoint BM25/dense candidates, no-match BM25,
+and varied top_k/candidate_depth/rrf_k.
+It grades artifacts deterministically: exact BM25/dense/fused doc-id rankings
+vs reference (Bank 1), fused-score recomputation from emitted sub-rankings
+(Bank 2), strict schema validation, fused-score range, two-seed determinism, a
+CTRF count guard, /app/data mutation guard, and narrow anti-cheat guards. No LLM
+judge.
 """
 expert_time_estimate_hours = 4
 relevant_experience = "I build AI systems focused on inference, evaluation, and production behavior, including agent runtimes, evaluation pipelines, retrieval workflows, and reproducible benchmark infrastructure; this task applies that experience to deterministic Harbor/TB3-style retrieval evaluation."

@@ -15,6 +15,8 @@ Bug order and locations:
   6. CANDIDATE_UNION_INDEXING -> hybrid_search/fusion.py
   7. SERIALIZATION_SCORE_RANK -> hybrid_search/serialization.py
   8. VECTOR_CORPUS_ALIGNMENT -> hybrid_search/rankers/dense.py
+  9. QUERY_ORDER_IDENTITY -> hybrid_search/pipeline.py
+ 10. FUSED_SCORE_PRECISION -> hybrid_search/fusion.py
 
 A state's bit ``i`` set means bug ``i`` is fixed. By default the reduced audit
 runs:
@@ -23,10 +25,11 @@ runs:
   - each single bug fixed alone
   - all-but-one fixed
 
-Pass ``--full`` to run all 256 states. Each state is executed under
+Pass ``--full`` to run all 1024 states. Each state is executed under
 ``PYTHONHASHSEED=0`` and ``=1`` and classified against the frozen independent
-reference similarly to the verifier: Bank 1 rankings, Bank 2 fused-score
-self-consistency, fused-score range, and determinism.
+reference and the generated hidden banks similarly to the verifier: Bank 1
+rankings, Bank 2 fused-score self-consistency, fused-score range, config/order
+invariants, and determinism.
 """
 
 from __future__ import annotations
@@ -48,9 +51,12 @@ TASK_DIR = REPO_ROOT / "tasks" / "hybrid-retrieval-fusion"
 DATA_DIR = TASK_DIR / "environment" / "data"
 APP_SRC = TASK_DIR / "environment" / "app"
 FIXTURE_DIR = TASK_DIR / "tests" / "fixtures"
+TESTS_DIR = TASK_DIR / "tests"
 
 sys.path.insert(0, str(FIXTURE_DIR))
+sys.path.insert(0, str(TESTS_DIR))
 import reference_rrf  # noqa: E402
+import generated_cases  # noqa: E402
 
 SEEDS = ("0", "1")
 SCORE_TOL = 1e-12
@@ -71,6 +77,8 @@ BUGS = (
     Bug("CANDIDATE_UNION_INDEXING", "hybrid_search/fusion.py"),
     Bug("SERIALIZATION_SCORE_RANK", "hybrid_search/serialization.py"),
     Bug("VECTOR_CORPUS_ALIGNMENT", "hybrid_search/rankers/dense.py"),
+    Bug("QUERY_ORDER_IDENTITY", "hybrid_search/pipeline.py"),
+    Bug("FUSED_SCORE_PRECISION", "hybrid_search/fusion.py"),
 )
 
 
@@ -160,6 +168,26 @@ def serialize_result(result: QueryResult) -> Dict[str, object]:
             "for index, doc in enumerate(self.documents[1:] + self.documents[:1]):",
             "for index, doc in enumerate(self.documents):",
         )
+    elif bug == "QUERY_ORDER_IDENTITY":
+        old = '''\
+        cached: dict[str, QueryResult] = {}
+        results: List[QueryResult] = []
+        for query in sorted(queries, key=lambda item: item.query_id):
+            result = cached.get(query.query_id)
+            if result is None:
+                result = self.search(query)
+                cached[query.query_id] = result
+            results.append(result)
+        return results
+'''
+        new = "        return [self.search(query) for query in queries]\n"
+        _replace(pipeline, old, new)
+    elif bug == "FUSED_SCORE_PRECISION":
+        _replace(
+            fusion,
+            "        score = int(score * 1_000_000) / 1_000_000\n",
+            "",
+        )
     else:
         raise ValueError(f"unknown bug: {bug}")
 
@@ -222,10 +250,6 @@ def run_seed(app_dir: Path, seed: str, expected: dict, tmp: Path) -> dict:
     return json.loads(out.read_text(encoding="utf-8"))
 
 
-def index_results(result: dict) -> dict:
-    return {row["query_id"]: row for row in result["results"]}
-
-
 def ids(ranking: list[dict]) -> list[str]:
     return [entry["doc_id"] for entry in ranking]
 
@@ -234,26 +258,36 @@ def emitted_pairs(row: dict, mod: str) -> list[tuple[str, float]]:
     return [(entry["doc_id"], entry["score"]) for entry in row[mod]]
 
 
-def classify(expected: dict, runs: dict[str, dict]) -> tuple[int, dict]:
+def classify_static(
+    expected: dict,
+    hidden_queries: list[dict],
+    runs: dict[str, dict],
+) -> tuple[int, dict]:
     cfg = expected["config"]
     top_k = cfg["top_k"]
     rrf_k = cfg["rrf_k"]
     max_fused = 2.0 / (rrf_k + 1)
 
-    indexed = {seed: index_results(result) for seed, result in runs.items()}
     reasons: dict[str, list[str]] = {}
     pass_count = 0
+    expected_rows = [
+        (query["query_id"], expected["queries"][query["query_id"]])
+        for query in hidden_queries
+    ]
 
-    for qid, exp in expected["queries"].items():
+    for index, (qid, exp) in enumerate(expected_rows):
         q_reasons: set[str] = set()
         seed_rows = []
 
         for seed in SEEDS:
-            row = indexed[seed].get(qid)
-            if row is None:
+            rows = runs[seed].get("results", [])
+            if index >= len(rows):
                 q_reasons.add("missing_query")
                 continue
+            row = rows[index]
             seed_rows.append(row)
+            if row.get("query_id") != qid:
+                q_reasons.add("query_order")
 
             for mod in ("bm25", "dense", "fused"):
                 if ids(row[mod]) != exp[mod]:
@@ -293,12 +327,85 @@ def classify(expected: dict, runs: dict[str, dict]) -> tuple[int, dict]:
     return pass_count, reasons
 
 
+def run_generated_banks(app_dir: Path, tmp: Path) -> dict[str, tuple[generated_cases.GeneratedCase, dict[str, dict]]]:
+    generated: dict[str, tuple[generated_cases.GeneratedCase, dict[str, dict]]] = {}
+    for case in generated_cases.build_cases():
+        case_runs = {
+            seed: generated_cases.run_app_case(
+                app_dir,
+                case,
+                tmp / "generated" / case.name / f"seed{seed}",
+                seed=seed,
+            )
+            for seed in SEEDS
+        }
+        generated[case.name] = (case, case_runs)
+    return generated
+
+
+def generated_reason_codes(failures: list[str]) -> list[str]:
+    codes: set[str] = set()
+    for failure in failures:
+        if ": config " in failure:
+            codes.add("generated_config")
+        if "query_id" in failure:
+            codes.add("generated_query_order")
+        if "bm25 ids" in failure:
+            codes.add("generated_bm25")
+        if "bm25 raw scores" in failure:
+            codes.add("generated_bm25_score")
+        if "dense ids" in failure:
+            codes.add("generated_dense")
+        if "dense raw scores" in failure:
+            codes.add("generated_dense_score")
+        if "fused ids" in failure:
+            codes.add("generated_fused")
+        if "fused scores" in failure:
+            codes.add("generated_score")
+        if "Bank2" in failure:
+            codes.add("generated_bank2")
+        if "differs across seeds" in failure:
+            codes.add("generated_nondeterministic")
+        if "out of range" in failure:
+            codes.add("generated_range")
+    return sorted(codes or {"generated_failure"})
+
+
+def classify_generated(
+    generated_runs: dict[str, tuple[generated_cases.GeneratedCase, dict[str, dict]]],
+) -> tuple[int, dict]:
+    reasons: dict[str, list[str]] = {}
+    pass_count = 0
+    for name, (case, runs) in generated_runs.items():
+        failures = generated_cases.validate_runs(case, runs)
+        if failures:
+            reasons[f"generated:{name}"] = generated_reason_codes(failures)
+        else:
+            pass_count += 1
+    return pass_count, reasons
+
+
+def classify(
+    expected: dict,
+    hidden_queries: list[dict],
+    static_runs: dict[str, dict],
+    generated_runs: dict[str, tuple[generated_cases.GeneratedCase, dict[str, dict]]],
+) -> tuple[int, dict]:
+    static_pass, static_reasons = classify_static(expected, hidden_queries, static_runs)
+    generated_pass, generated_reasons = classify_generated(generated_runs)
+    reasons = dict(static_reasons)
+    reasons.update(generated_reasons)
+    return static_pass + generated_pass, reasons
+
+
 def run_state(fixed_bits: tuple[int, ...], expected: dict) -> tuple[int, dict]:
     with tempfile.TemporaryDirectory(prefix="hrf-audit-") as raw_tmp:
         tmp = Path(raw_tmp)
         app_dir = prepare_app(tmp, fixed_bits)
-        runs = {seed: run_seed(app_dir, seed, expected, tmp) for seed in SEEDS}
-        return classify(expected, runs)
+        static_runs = {seed: run_seed(app_dir, seed, expected, tmp) for seed in SEEDS}
+        generated_runs = run_generated_banks(app_dir, tmp)
+        hidden_queries = json.loads((FIXTURE_DIR / "hidden_queries.json").read_text(encoding="utf-8"))
+        return classify(expected, hidden_queries, static_runs, generated_runs)
 
 
 def bit_key(bits: tuple[int, ...]) -> str:
@@ -315,7 +422,11 @@ def main() -> int:
     args = parser.parse_args()
 
     expected = json.loads((FIXTURE_DIR / "expected_hidden.json").read_text(encoding="utf-8"))
-    n_queries = len(expected["queries"])
+    hidden_queries = json.loads((FIXTURE_DIR / "hidden_queries.json").read_text(encoding="utf-8"))
+    generated_case_names = [case.name for case in generated_cases.build_cases()]
+    n_static = len(hidden_queries)
+    n_generated = len(generated_case_names)
+    n_checks = n_static + n_generated
     states = states_for_mode(args.full)
 
     results = {}
@@ -335,25 +446,27 @@ def main() -> int:
         almost = tuple(0 if j == i else 1 for j in range(len(BUGS)))
         single_fixed[bug.name] = {
             "state": bit_key(single),
-            "fail_count": n_queries - results[single][0],
+            "fail_count": n_checks - results[single][0],
             "fail_reasons": results[single][1],
         }
         all_but_one_fixed[bug.name] = {
             "state": bit_key(almost),
-            "fail_count": n_queries - results[almost][0],
+            "fail_count": n_checks - results[almost][0],
             "fail_reasons": results[almost][1],
         }
 
     only_all_fixed = None
     if args.full:
         only_all_fixed = all(
-            (bits == all_fixed) == (pass_count == n_queries)
+            (bits == all_fixed) == (pass_count == n_checks)
             for bits, (pass_count, _) in results.items()
         )
 
     report = {
         "mode": f"full-{2 ** len(BUGS)}-state" if args.full else "reduced",
-        "n_hidden_queries": n_queries,
+        "n_hidden_checks": n_checks,
+        "n_static_hidden_queries": n_static,
+        "generated_hidden_banks": generated_case_names,
         "bug_order": [bug.name for bug in BUGS],
         "bug_locations": {bug.name: bug.location for bug in BUGS},
         "all_present_pass_count": all_present_pass,
@@ -366,7 +479,7 @@ def main() -> int:
                 "fixed": bug_names(bits, True),
                 "active": bug_names(bits, False),
                 "pass_count": pass_count,
-                "fail_count": n_queries - pass_count,
+                "fail_count": n_checks - pass_count,
                 "fail_reasons": reasons,
             }
             for bits, (pass_count, reasons) in sorted(results.items())
@@ -375,30 +488,33 @@ def main() -> int:
     (FIXTURE_DIR / "audit_report.json").write_text(json.dumps(report, indent=2) + "\n")
 
     gate = (
-        all_present_pass < n_queries
-        and all_fixed_pass == n_queries
+        all_present_pass < n_checks
+        and all_fixed_pass == n_checks
         and all(item["fail_count"] >= 1 for item in single_fixed.values())
         and all(item["fail_count"] >= 2 for item in all_but_one_fixed.values())
         and (only_all_fixed is not False)
     )
 
     print("=== partial-fix audit ===")
-    print(f"mode: {report['mode']}   hidden queries: {n_queries}")
+    print(
+        f"mode: {report['mode']}   hidden checks: {n_checks} "
+        f"({n_static} static queries + {n_generated} generated banks)"
+    )
     print(f"bug order: {report['bug_order']}")
-    print(f"all-present ({bit_key(all_present)}) pass: {all_present_pass}/{n_queries}")
-    print(f"all-fixed   ({bit_key(all_fixed)}) pass: {all_fixed_pass}/{n_queries}")
+    print(f"all-present ({bit_key(all_present)}) pass: {all_present_pass}/{n_checks}")
+    print(f"all-fixed   ({bit_key(all_fixed)}) pass: {all_fixed_pass}/{n_checks}")
     if only_all_fixed is not None:
         print(f"only all-fixed passes all queries: {only_all_fixed}")
     print("\nsingle bug fixed alone -> failures:")
     for bug in BUGS:
         item = single_fixed[bug.name]
         kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
-        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
+        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_checks} reasons={kinds}")
     print("\nall-but-one fixed (listed bug ACTIVE) -> failures:")
     for bug in BUGS:
         item = all_but_one_fixed[bug.name]
         kinds = sorted({kind for r in item["fail_reasons"].values() for kind in r})
-        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_queries} reasons={kinds}")
+        print(f"  {bug.name:<28} state={item['state']} fails {item['fail_count']}/{n_checks} reasons={kinds}")
     print("\nPARTIAL-FIX AUDIT GATE:", "PASS" if gate else "FAIL")
     return 0 if gate else 1
 

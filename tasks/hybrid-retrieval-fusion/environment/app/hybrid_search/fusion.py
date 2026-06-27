@@ -46,6 +46,7 @@ def reciprocal_rank_fusion(
             score += _contribution(rrf_k, candidate_index, entry)
             if rep is None or entry.doc_id < rep.doc_id:
                 rep = entry
+        score = int(score * 1_000_000) / 1_000_000
         fused.append(
             RankingEntry(
                 doc_id=rep.doc_id,

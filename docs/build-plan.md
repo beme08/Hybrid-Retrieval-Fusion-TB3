@@ -8,9 +8,9 @@ verifier design, and anti-cheat rules.
 
 Build one original TB3-compatible task in **separate-verifier mode**. The agent
 inherits a realistic BM25 + dense retrieval service whose lexical and cosine
-rankings are correct, but whose **fusion layer** is broken. The agent repairs
-the fusion layer so hidden BM25, dense, and fused rankings match a
-verifier-owned reference. Reward is deterministic (no LLM judge).
+rankings are correct, but whose retrieval-to-fusion path is broken. The agent
+repairs that path so hidden BM25, dense, and fused rankings match
+verifier-owned references. Reward is deterministic (no LLM judge).
 
 ## Target repo structure
 
@@ -41,10 +41,17 @@ tasks/
         003-fuse-before-truncate.patch
         004-preserve-opaque-doc-ids.patch
         005-deterministic-tie-break.patch
+        006-fix-candidate-union-indexing.patch
+        007-preserve-fused-serialization-scores.patch
+        008-fix-vector-corpus-alignment.patch
+        009-preserve-query-order-and-identity.patch
+        010-fix-fused-score-precision.patch
     tests/
       Dockerfile
       test.sh
       test_fusion.py
+      test_generated_banks.py
+      generated_cases.py
       fixtures/
         reference_bm25.py
         reference_dense.py
@@ -100,22 +107,23 @@ reference files under `tests/fixtures`; visible + hidden fixtures; frozen
 activate intended behaviors; `expected_hidden` from reference, not `/app`.
 
 ### Phase 3 — Plant bugs + partial-fix audit
-Plant five scoped fusion-layer bugs; dev-only `BUG_*` toggles;
-`tools/partial_fix_audit.py` over 32 bitmask states; strip `BUG_*` logic before
+Plant ten scoped retrieval/fusion-path bugs; dev-only `BUG_*` toggles;
+`tools/partial_fix_audit.py` over 1024 bitmask states; strip `BUG_*` logic before
 packaging.
 **Gate:** broken service fails hidden checks for intended reasons; BM25/dense
-stay correct; only all-fixed passes; each 4-of-5 fails ≥2–3 hidden queries;
+stay correct; only all-fixed passes; each all-but-one state fails multiple
+hidden checks;
 shipped `/app` has natural buggy paths only.
 
 ### Phase 4 — Separate verifier
-`tests/Dockerfile` (pinned deps); `tests/test.sh`; `tests/test_fusion.py`
-(schema + Bank 1 + Bank 2 + determinism + fused range + CTRF guard +
-diagnostics).
+`tests/Dockerfile` (pinned deps); `tests/test.sh`; `tests/test_fusion.py`;
+`tests/test_generated_banks.py` (schema + Bank 1 + Bank 2 + generated hidden
+banks + determinism + fused range + CTRF guard + diagnostics).
 **Gate:** verifier runs locally; failures informative; verifier never
 overwrites `/app`; hidden fixtures only in `tests/`.
 
 ### Phase 5 — Oracle solution
-`solution/solve.sh`; ordered patches 001–005 with explanatory headers; run
+`solution/solve.sh`; ordered patches 001–010 with explanatory headers; run
 oracle.
 **Gate:** oracle = 1.0.
 
@@ -134,18 +142,28 @@ Codex x3; Claude Code x3; Gemini optional; `/cheat` for Codex + Claude Code;
 harbor analyze; failure analysis. Stop and ask before any paid/authenticated
 run.
 
-## Planted fusion bugs (Phase 3)
+## Planted retrieval/fusion bugs (Phase 3 / v7)
 
 1. **raw-score mixing** — adds raw BM25 scores to cosine similarities instead of
    rank-based RRF. *Masks* the RRF rank-base bug.
 2. **wrong RRF rank base / constant** — 0-based rank or wrong constant (correct
-   max is `2/61`).
+   max is `2 / (rrf_k + 1)`).
 3. **truncate-before-fusion** — truncates each modality to `top_k` before
    fusing instead of `candidate_depth`. *Masks* the ID-collision bug.
 4. **suffix-based doc-ID collision** — treats `news_001`, `paper_001`,
    `faq_001` as the same doc via suffix. Organic, not commented as a bug.
 5. **nondeterministic tie-break** — dict/set iteration or unstable sort instead
    of `doc_id` ascending. Self-masking.
+6. **candidate-union indexing** — scores candidates by global union position
+   instead of each modality's source rank.
+7. **fused-score serialization overwrite** — emits output-position reciprocal
+   scores instead of the computed fused score.
+8. **vector/corpus alignment drift** — maps dense score row i to a different
+   loaded corpus row.
+9. **query-order/query-identity misuse** — sorts and caches by opaque
+   `query_id`, breaking input order and duplicate IDs.
+10. **fused-score precision loss** — truncates accumulated fused scores before
+    creating fused entries, so emitted scores fail exact RRF recomputation.
 
 ## Fixture targets (Phase 2)
 
@@ -158,3 +176,7 @@ run.
 - Hidden coverage: raw-score mixing ≥3 activating; wrong rank base ≥2;
   tie nondeterminism ≥2; ID collision ≥3–4; truncate-before-fusion ≥2;
   ≥2–3 queries with 3+ bugs active simultaneously.
+- Generated hidden banks: duplicate `query_id` with different text/embedding,
+  same text with different embedding, jointly permuted corpus/vector rows,
+  disjoint BM25/dense candidates, no-match BM25, and varied
+  `top_k`/`candidate_depth`/`rrf_k`.

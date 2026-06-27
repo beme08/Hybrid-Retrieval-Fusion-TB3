@@ -3,9 +3,9 @@
 An original **Terminal-Bench 3 (TB3)** compatible coding task:
 `hybrid-retrieval-fusion`. The agent inherits a small hybrid document-retrieval
 service (BM25 + dense cosine, merged with Reciprocal Rank Fusion) whose lexical
-and dense rankers are correct but whose **fusion layer** contains a regression.
-The agent must repair the fusion layer so that hidden BM25, dense, and fused
-rankings match a verifier-owned reference.
+and dense rankers are correct but whose retrieval-to-fusion path contains
+regressions. The agent must repair the path so that hidden BM25, dense, and
+fused rankings match verifier-owned references.
 
 Reward is **deterministic** — exact ranking comparison plus score recomputation,
 schema, range, and determinism checks. There is **no LLM judge**.
@@ -31,12 +31,14 @@ tasks/hybrid-retrieval-fusion/
     app/scripts/run_search.py
     data/                    # corpus.json, vectors.npy, visible_queries.json
   solution/
-    solve.sh                # idempotent oracle (applies patches 001..005)
-    patches/00{1..5}-*.patch
+    solve.sh                # idempotent oracle (applies patches 001..010)
+    patches/00{1..9}-*.patch, 010-*.patch
   tests/                    # SEPARATE verifier (not copied into the env image)
     Dockerfile              # pinned: pytest, jsonschema, numpy
-    test.sh                 # runs /app twice (seeds 0/1) then grades; no installs
+    test.sh                 # runs /app, grades static + generated banks; no installs
     test_fusion.py          # schema + Bank 1 + Bank 2 + range + determinism
+    test_generated_banks.py # duplicate query_id, generated corpora/configs
+    generated_cases.py      # deterministic generated hidden bank builder
     test_anticheat.py       # narrow deterministic anti-cheat guards
     conftest.py             # emits CTRF report
     fixtures/               # hidden_queries, expected_hidden, reference_*, reports
@@ -58,8 +60,8 @@ agents.
 2. **Oracle = 1.0** — `solution/solve.sh` applied to a copy of `/app` makes the
    verifier pass every test.
 3. **Nop = 0.0** — the unmodified (broken) `/app` fails the verifier.
-4. **Docker build** — build the environment and verifier images (Mac-side).
-5. **Harbor checks** — TB3 harness static/structural validation (Mac-side).
+4. **Docker build** — build the environment and verifier images.
+5. **Harbor checks** — TB3 harness static/structural validation.
 6. **Final agent trials** — Codex ×3, Claude Code ×3, optional Gemini, plus
    `/cheat`, run in fresh sessions (Phase 8; requires maintainer approval).
 
@@ -85,9 +87,10 @@ APP_DIR="$APP" TESTS_DIR=tasks/hybrid-retrieval-fusion/tests \
 # authoring checks
 python3 tools/generate_fixtures.py          # regenerate fixtures (deterministic)
 python3 tools/validate_fixture_coverage.py  # Phase 2 coverage/determinism gate
+python3 tools/partial_fix_audit.py --full   # v7 1024-state partial-fix audit
 ```
 
-Mac-side / harness (not run in this authoring sandbox):
+Docker / harness:
 
 ```bash
 # Docker image builds
@@ -102,9 +105,9 @@ docker build -t hrf-test tasks/hybrid-retrieval-fusion/tests
 # tb cheat --agent claude-code  <task>
 ```
 
-> The exact Harbor / `tb` invocations follow the harness in use; the commands
-> above are placeholders for the Mac-side run and have **not** been executed
-> here.
+> The exact Harbor / `tb` invocations follow the harness in use; the Docker
+> builds above were executed for v7, while Harbor/final-trial commands remain
+> pending.
 
 ## Gate status (through Phase 6)
 
@@ -113,9 +116,9 @@ docker build -t hrf-test tasks/hybrid-retrieval-fusion/tests
 | 0 | Setup & scaffold | ✅ complete |
 | 1 | Clean reference + realistic pipeline | ✅ complete |
 | 2 | Fixtures + independent reference (frozen `expected_hidden`) | ✅ complete |
-| 3 | Plant five fusion bugs + 32-state partial-fix audit | ✅ complete |
-| 4 | Separate verifier (schema, Bank 1/2, determinism, range, CTRF) | ✅ complete |
-| 5 | Oracle solution (ordered patches 001–005) | ✅ complete |
+| 3 | Plant ten retrieval/fusion bugs + 1024-state partial-fix audit | ✅ complete |
+| 4 | Separate verifier (schema, Bank 1/2, generated banks, determinism, range, CTRF) | ✅ complete |
+| 5 | Oracle solution (ordered patches 001–010) | ✅ complete |
 | 6 | Strip dev toggles + anti-cheat hardening; stripped oracle | ✅ complete |
 | 7 | Docs, compliance checklist, packaging | ✅ this change |
 | 8 | Final agent trials (`/run`, `/cheat`, Harbor) | ⬜ **not run** |
@@ -134,15 +137,25 @@ final `results.json` emitted by the repaired retrieval pipeline.
 The hidden checks combine:
 
 - exact ranking comparison against frozen independent-reference outputs;
+- deterministic generated hidden banks with duplicate `query_id` values,
+  same-text/different-embedding queries, jointly permuted corpus/vector rows,
+  disjoint BM25/dense candidate sets, no-match BM25, and varied
+  `top_k`/`candidate_depth`/`rrf_k`;
 - RRF score recomputation from emitted BM25/dense sub-rankings;
 - schema validation;
 - fused-score range checks;
 - two-seed determinism checks;
-- narrow anti-cheat guards for fixture leakage, solution/test access, `.git`
+- `/app/data` mutation guard;
+- narrow anti-cheat guards for fixture leakage, hardcoded hidden/generated
+  output tables, encoded lookups, solution/test/reward path access, `.git`
   leakage, and network/public-solution routes.
 
 Public release and public task discussion were deferred until after local
 validation because the assignment uses internet-enabled agent trials.
+
+This v7 update is development/build work, not a final benchmark `/run` trial.
+Official `/run` attempts must be fresh sessions that receive only
+`tasks/hybrid-retrieval-fusion/instruction.md` as task guidance.
 
 ## Compliance checklist
 
@@ -162,10 +175,14 @@ validation because the assignment uses internet-enabled agent trials.
 | Separate verifier mode (`environment_mode = "separate"`) | ✅ |
 | `allow_internet = true` set in `task.toml` | ✅ |
 | Verifier never writes into `/app` | ✅ |
-| Docker environment + verifier image builds | ✅ both built (Mac-side) |
-| Harbor parser validation + `TaskModel.is_valid_dir` | ✅ valid / true (Mac-side) |
-| Harbor oracle run | ✅ reward 1.0, 0 exceptions (`jobs/2026-06-25__01-11-06`) |
-| Harbor nop run | ✅ reward 0.0, 0 exceptions (`jobs/2026-06-25__01-11-24`) |
+| Verifier rejects `/app/data` mutation | ✅ |
+| Full partial-fix audit | ✅ 1024 states; only all-fixed passes |
+| Docker environment + verifier image builds | ✅ both built locally as `hrf-v7-env` / `hrf-v7-test` |
+| Docker verifier oracle / nop runs | ✅ oracle reward 1.0; nop reward 0.0 |
+| Runtime leak audit on environment image | ✅ clean |
+| Harbor parser validation + `TaskModel.is_valid_dir` | ⬜ pending for v7 |
+| Harbor oracle run | ⬜ pending for v7 |
+| Harbor nop run | ⬜ pending for v7 |
 | Final `/run` and `/cheat` trials | ⬜ pending (Phase 8) |
 
 ## Security / integrity
@@ -173,10 +190,13 @@ validation because the assignment uses internet-enabled agent trials.
 The hidden reference outputs and verifier live only in the verifier image; the
 agent environment never contains them. `expected_hidden.json` is generated from
 an independent reference implementation under `tests/fixtures/`, frozen, and
-loaded (never regenerated from `/app`) at grade time. Anti-cheat is treated as
-an environment-security property: narrow deterministic guards flag fixture
-leakage, verifier/solution access, `.git` leakage, and network/public-solution
-routes, but correctness is graded primarily by artifact outcomes.
+loaded (never regenerated from `/app`) at grade time. Additional deterministic
+generated banks are built inside the verifier from verifier-owned reference
+code. Anti-cheat is treated as an environment-security property: narrow
+deterministic guards flag fixture leakage, verifier/solution/reward access,
+hardcoded/encoded output fabrication, `.git` leakage, network/public-solution
+routes, and `/app/data` mutation, but correctness is graded primarily by
+artifact outcomes.
 
 In addition to task success, this task treats reward-hacking resistance as a
 separate integrity axis. `/cheat` trials are expected to receive zero reward,
