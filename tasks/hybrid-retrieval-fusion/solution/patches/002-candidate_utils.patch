@@ -1,0 +1,11 @@
+--- a/hybrid_search/candidate_utils.py
++++ b/hybrid_search/candidate_utils.py
+@@ -10,7 +10,7 @@
+ 
+ def _candidate_key(doc_id: str) -> str:
+     """Return a grouping key for candidate bookkeeping."""
+-    return doc_id.rsplit("_", 1)[-1]
++    return doc_id
+ 
+ 
+ def coalesce_candidate_identities(

@@ -26,7 +26,7 @@ retrieval service. BM25 lexical ranking and dense cosine math are correct. The
 regressions live in the retrieval-to-fusion path. The agent must repair that
 path so hidden BM25, dense, and fused rankings match verifier-owned references.
 
-This is a Klavis AI coding assignment. Final delivery is a **standalone GitHub
+Final delivery is a **standalone GitHub
 repo**, not a Terminal-Bench PR. The repo documents check results, trial
 results, and a brief failure analysis.
 

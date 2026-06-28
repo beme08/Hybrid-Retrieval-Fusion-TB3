@@ -129,8 +129,11 @@ SIMPLE_ZONES = [
     ("clnzonegamma", "C", [("blog", 921), ("faq", 922), ("guide", 923), ("news", 924),
                             ("paper", 925), ("wiki", 926), ("blog", 927), ("faq", 928),
                             ("guide", 929), ("news", 930)]),
+    ("clnzonedelta", "D", [("blog", 931), ("faq", 932), ("guide", 933), ("news", 934),
+                            ("paper", 935), ("wiki", 936), ("blog", 937), ("faq", 938),
+                            ("guide", 939), ("news", 940)]),
 ]
-# Tie zone: 8 identical (cosine 1) + P (bm25-only, anti-anchor) + Q (dense-only,
+# (Legacy tie zone retained as constants below but no longer emitted.) Tie zone: 8 identical (cosine 1) + P (bm25-only, anti-anchor) + Q (dense-only,
 # anchor, no token). P and Q land at symmetric single-modality rank 9 -> exact
 # fused tie at positions 9/10 with dissimilar prefixes (news_950 vs paper_951).
 TIE_ZONE_TOKEN = "clnzonetie"
@@ -155,18 +158,6 @@ def build_clean_docs():
             doc_id = f"{prefix}_{suffix:03d}"
             docs.append((doc_id, " ".join([token] * 3)))
             overrides[doc_id] = anchor
-    # Tie zone
-    anchor = zone_anchor("TIE")
-    for prefix, suffix in TIE_ZONE_IDENTICAL:
-        doc_id = f"{prefix}_{suffix:03d}"
-        docs.append((doc_id, " ".join([TIE_ZONE_TOKEN] * 3)))
-        overrides[doc_id] = anchor
-    p_id = f"{TIE_ZONE_P[0]}_{TIE_ZONE_P[1]:03d}"
-    docs.append((p_id, " ".join([TIE_ZONE_TOKEN] * 3)))      # has token -> bm25
-    overrides[p_id] = -anchor                                 # anti-anchor -> not in dense top
-    q_id = f"{TIE_ZONE_Q[0]}_{TIE_ZONE_Q[1]:03d}"
-    docs.append((q_id, "overview notes summary details"))     # no token -> not in bm25
-    overrides[q_id] = anchor                                   # anchor -> dense top
     return docs, overrides
 
 
@@ -317,10 +308,10 @@ def analyze(text, embedding, bm25, dense):
         "suffix_collision": sim_suffix_collision(bm25_cand, dense_cand) != correct,
         "rank_base_order": sim_rank_base_zero(bm25_cand, dense_cand) != correct,
         "rank_base_detect": len(correct) > 0,  # Bank-2/range-guard catches it everywhere
-        "tie_break": tie_act,
+        "modality_weight": [d for d, _ in reference_rrf.fuse([bm25_cand, dense_cand], k=RRF_K, top_k=TOP_K, weights=[1.0, 1.0])] != correct,
     }
-    dangerous = flags["raw_mixing"] or flags["truncate"] or flags["suffix_collision"] or flags["rank_base_order"]
-    structural = sum(1 for k in ("raw_mixing", "truncate", "suffix_collision", "tie_break") if flags[k])
+    dangerous = flags["raw_mixing"] or flags["truncate"] or flags["suffix_collision"] or flags["rank_base_order"] or flags["modality_weight"]
+    structural = sum(1 for k in ("raw_mixing", "truncate", "suffix_collision", "modality_weight") if flags[k])
     return {
         "bm25_n": len(bm25_cand), "dense_n": len(dense_cand), "fused_len": len(correct),
         "overlap": len(set(d for d, _ in bm25_cand) & set(d for d, _ in dense_cand)),
@@ -330,7 +321,7 @@ def analyze(text, embedding, bm25, dense):
 
 
 # ============================ selection (hidden) ============================
-HIDDEN_TARGETS = {"raw_mixing": 3, "truncate": 2, "suffix_collision": 3, "tie_break": 2, "rank_base_detect": 2}
+HIDDEN_TARGETS = {"raw_mixing": 3, "truncate": 2, "suffix_collision": 3, "rank_base_detect": 2, "modality_weight": 3}
 N_HIDDEN = 12
 MULTI_BUG_MIN = 2  # >=2 hidden queries with >=3 simultaneous STRUCTURAL bug classes
 
@@ -417,7 +408,7 @@ def main() -> int:
     # ---- visible: constructed clean-zone queries ----
     visible_specs = [
         (SIMPLE_ZONES[0][0], "A"), (SIMPLE_ZONES[1][0], "B"),
-        (SIMPLE_ZONES[2][0], "C"), (TIE_ZONE_TOKEN, "TIE"),
+        (SIMPLE_ZONES[2][0], "C"), (SIMPLE_ZONES[3][0], "D"),
     ]
     visible_queries, visible_an = [], {}
     for i, (token, key) in enumerate(visible_specs, start=1):
@@ -456,12 +447,11 @@ def main() -> int:
             "truncate": "fused doc-id order divergence (Bank 1)",
             "suffix_collision": "fused doc-id order divergence (Bank 1)",
             "rank_base_detect": "fused score divergence / >2/61 range guard (Bank 2 + range)",
-            "tie_break": "nondeterministic fused-tie order (determinism run)",
+            "modality_weight": "fused doc-id order divergence under unweighted RRF (Bank 1)",
         },
         "hidden": cov_hidden,
         "visible": {q["query_id"]: {"token": q["text"], "flags": visible_an[q["query_id"]]["flags"],
-                                    "dangerous": visible_an[q["query_id"]]["dangerous"],
-                                    "tie_clean": visible_an[q["query_id"]]["tie_clean"]}
+                                    "dangerous": visible_an[q["query_id"]]["dangerous"]}
                     for q in visible_queries},
     }
 
@@ -483,9 +473,8 @@ def main() -> int:
     print("hidden coverage counts:", counts, "targets:", HIDDEN_TARGETS)
     print("multi-structural (>=3) hidden:", multi)
     vis_safe = all(not visible_an[q["query_id"]]["dangerous"] for q in visible_queries)
-    vis_tie = any(visible_an[q["query_id"]]["tie_clean"] for q in visible_queries)
-    print("visible non-leaky:", vis_safe, "| visible clean dissimilar-tie present:", vis_tie)
-    ok = all(counts[k] >= v for k, v in HIDDEN_TARGETS.items()) and len(multi) >= MULTI_BUG_MIN and vis_safe and vis_tie
+    print("visible non-leaky:", vis_safe)
+    ok = all(counts[k] >= v for k, v in HIDDEN_TARGETS.items()) and len(multi) >= MULTI_BUG_MIN and vis_safe
     print("SELECTION OK:", ok)
     return 0 if ok else 1
 

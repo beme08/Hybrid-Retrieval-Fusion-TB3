@@ -1,8 +1,8 @@
 {
   "tool_version": "v7-compact-audit-1",
-  "mode": "full-1024-state",
-  "state_count": 1024,
-  "bug_count": 10,
+  "mode": "reduced",
+  "state_count": 24,
+  "bug_count": 11,
   "hidden_check_count": 14,
   "static_hidden_query_count": 12,
   "generated_hidden_bank_count": 2,
@@ -15,39 +15,42 @@
     "RANK_BASE",
     "CANDIDATE_DEPTH",
     "DOC_ID_COLLISION",
-    "TIE_BREAK",
     "CANDIDATE_UNION_INDEXING",
     "SERIALIZATION_SCORE_RANK",
     "VECTOR_CORPUS_ALIGNMENT",
     "QUERY_ORDER_IDENTITY",
-    "FUSED_SCORE_PRECISION"
+    "FUSED_SCORE_PRECISION",
+    "MODALITY_WEIGHT",
+    "PER_MODALITY_K"
   ],
   "bug_locations": {
     "RAW_MIXING": "hybrid_search/fusion.py",
     "RANK_BASE": "hybrid_search/fusion.py",
     "CANDIDATE_DEPTH": "hybrid_search/pipeline.py",
     "DOC_ID_COLLISION": "hybrid_search/candidate_utils.py",
-    "TIE_BREAK": "hybrid_search/ordering.py",
     "CANDIDATE_UNION_INDEXING": "hybrid_search/fusion.py",
     "SERIALIZATION_SCORE_RANK": "hybrid_search/serialization.py",
     "VECTOR_CORPUS_ALIGNMENT": "hybrid_search/rankers/dense.py",
     "QUERY_ORDER_IDENTITY": "hybrid_search/pipeline.py",
-    "FUSED_SCORE_PRECISION": "hybrid_search/fusion.py"
+    "FUSED_SCORE_PRECISION": "hybrid_search/fusion.py",
+    "MODALITY_WEIGHT": "hybrid_search/fusion.py",
+    "PER_MODALITY_K": "hybrid_search/fusion.py"
   },
   "all_present": {
-    "bitmask": "0000000000",
+    "bitmask": "00000000000",
     "fixed": [],
     "active": [
       "RAW_MIXING",
       "RANK_BASE",
       "CANDIDATE_DEPTH",
       "DOC_ID_COLLISION",
-      "TIE_BREAK",
       "CANDIDATE_UNION_INDEXING",
       "SERIALIZATION_SCORE_RANK",
       "VECTOR_CORPUS_ALIGNMENT",
       "QUERY_ORDER_IDENTITY",
-      "FUSED_SCORE_PRECISION"
+      "FUSED_SCORE_PRECISION",
+      "MODALITY_WEIGHT",
+      "PER_MODALITY_K"
     ],
     "pass_count": 0,
     "fail_count": 14,
@@ -71,18 +74,19 @@
     ]
   },
   "all_fixed": {
-    "bitmask": "1111111111",
+    "bitmask": "11111111111",
     "fixed": [
       "RAW_MIXING",
       "RANK_BASE",
       "CANDIDATE_DEPTH",
       "DOC_ID_COLLISION",
-      "TIE_BREAK",
       "CANDIDATE_UNION_INDEXING",
       "SERIALIZATION_SCORE_RANK",
       "VECTOR_CORPUS_ALIGNMENT",
       "QUERY_ORDER_IDENTITY",
-      "FUSED_SCORE_PRECISION"
+      "FUSED_SCORE_PRECISION",
+      "MODALITY_WEIGHT",
+      "PER_MODALITY_K"
     ],
     "active": [],
     "pass_count": 14,
@@ -93,10 +97,10 @@
   },
   "all_present_pass_count": 0,
   "all_fixed_pass_count": 14,
-  "only_all_fixed_passes": true,
+  "only_all_fixed_passes": null,
   "single_bug_fixed_alone": {
     "RAW_MIXING": {
-      "state": "1000000000",
+      "state": "10000000000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -119,7 +123,7 @@
       ]
     },
     "RANK_BASE": {
-      "state": "0100000000",
+      "state": "01000000000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -142,7 +146,7 @@
       ]
     },
     "CANDIDATE_DEPTH": {
-      "state": "0010000000",
+      "state": "00100000000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -163,30 +167,7 @@
       ]
     },
     "DOC_ID_COLLISION": {
-      "state": "0001000000",
-      "pass_count": 0,
-      "fail_count": 14,
-      "passes_all_checks": false,
-      "failed_check_count": 14,
-      "reason_categories": [
-        "bank2_order",
-        "bank2_score",
-        "bm25",
-        "dense",
-        "fused",
-        "generated_bank2",
-        "generated_bm25",
-        "generated_bm25_score",
-        "generated_dense",
-        "generated_dense_score",
-        "generated_fused",
-        "generated_query_order",
-        "generated_score",
-        "score"
-      ]
-    },
-    "TIE_BREAK": {
-      "state": "0000100000",
+      "state": "00010000000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -209,7 +190,7 @@
       ]
     },
     "CANDIDATE_UNION_INDEXING": {
-      "state": "0000010000",
+      "state": "00001000000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -232,7 +213,7 @@
       ]
     },
     "SERIALIZATION_SCORE_RANK": {
-      "state": "0000001000",
+      "state": "00000100000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -257,7 +238,7 @@
       ]
     },
     "VECTOR_CORPUS_ALIGNMENT": {
-      "state": "0000000100",
+      "state": "00000010000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -280,7 +261,7 @@
       ]
     },
     "QUERY_ORDER_IDENTITY": {
-      "state": "0000000010",
+      "state": "00000001000",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -300,7 +281,53 @@
       ]
     },
     "FUSED_SCORE_PRECISION": {
-      "state": "0000000001",
+      "state": "00000000100",
+      "pass_count": 0,
+      "fail_count": 14,
+      "passes_all_checks": false,
+      "failed_check_count": 14,
+      "reason_categories": [
+        "bank2_order",
+        "bank2_score",
+        "bm25",
+        "dense",
+        "fused",
+        "generated_bank2",
+        "generated_bm25",
+        "generated_bm25_score",
+        "generated_dense",
+        "generated_dense_score",
+        "generated_fused",
+        "generated_query_order",
+        "generated_score",
+        "score"
+      ]
+    },
+    "MODALITY_WEIGHT": {
+      "state": "00000000010",
+      "pass_count": 0,
+      "fail_count": 14,
+      "passes_all_checks": false,
+      "failed_check_count": 14,
+      "reason_categories": [
+        "bank2_order",
+        "bank2_score",
+        "bm25",
+        "dense",
+        "fused",
+        "generated_bank2",
+        "generated_bm25",
+        "generated_bm25_score",
+        "generated_dense",
+        "generated_dense_score",
+        "generated_fused",
+        "generated_query_order",
+        "generated_score",
+        "score"
+      ]
+    },
+    "PER_MODALITY_K": {
+      "state": "00000000001",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -325,7 +352,7 @@
   },
   "all_but_one_fixed": {
     "RAW_MIXING": {
-      "state": "0111111111",
+      "state": "01111111111",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -343,7 +370,7 @@
       ]
     },
     "RANK_BASE": {
-      "state": "1011111111",
+      "state": "10111111111",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -353,6 +380,7 @@
         "bank2_score",
         "fused",
         "generated_bank2",
+        "generated_fused",
         "generated_range",
         "generated_score",
         "range",
@@ -360,7 +388,7 @@
       ]
     },
     "CANDIDATE_DEPTH": {
-      "state": "1101111111",
+      "state": "11011111111",
       "pass_count": 1,
       "fail_count": 13,
       "passes_all_checks": false,
@@ -377,7 +405,7 @@
       ]
     },
     "DOC_ID_COLLISION": {
-      "state": "1110111111",
+      "state": "11101111111",
       "pass_count": 2,
       "fail_count": 12,
       "passes_all_checks": false,
@@ -389,24 +417,8 @@
         "score"
       ]
     },
-    "TIE_BREAK": {
-      "state": "1111011111",
-      "pass_count": 4,
-      "fail_count": 10,
-      "passes_all_checks": false,
-      "failed_check_count": 10,
-      "reason_categories": [
-        "bank2_order",
-        "bank2_score",
-        "fused",
-        "generated_bank2",
-        "generated_fused",
-        "generated_nondeterministic",
-        "nondeterministic"
-      ]
-    },
     "CANDIDATE_UNION_INDEXING": {
-      "state": "1111101111",
+      "state": "11110111111",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -422,7 +434,7 @@
       ]
     },
     "SERIALIZATION_SCORE_RANK": {
-      "state": "1111110111",
+      "state": "11111011111",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -435,7 +447,7 @@
       ]
     },
     "VECTOR_CORPUS_ALIGNMENT": {
-      "state": "1111111011",
+      "state": "11111101111",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -450,7 +462,7 @@
       ]
     },
     "QUERY_ORDER_IDENTITY": {
-      "state": "1111111101",
+      "state": "11111110111",
       "pass_count": 12,
       "fail_count": 2,
       "passes_all_checks": false,
@@ -465,7 +477,7 @@
       ]
     },
     "FUSED_SCORE_PRECISION": {
-      "state": "1111111110",
+      "state": "11111111011",
       "pass_count": 0,
       "fail_count": 14,
       "passes_all_checks": false,
@@ -473,6 +485,38 @@
       "reason_categories": [
         "bank2_score",
         "generated_bank2",
+        "generated_score",
+        "score"
+      ]
+    },
+    "MODALITY_WEIGHT": {
+      "state": "11111111101",
+      "pass_count": 0,
+      "fail_count": 14,
+      "passes_all_checks": false,
+      "failed_check_count": 14,
+      "reason_categories": [
+        "bank2_order",
+        "bank2_score",
+        "fused",
+        "generated_bank2",
+        "generated_fused",
+        "generated_score",
+        "score"
+      ]
+    },
+    "PER_MODALITY_K": {
+      "state": "11111111110",
+      "pass_count": 0,
+      "fail_count": 14,
+      "passes_all_checks": false,
+      "failed_check_count": 14,
+      "reason_categories": [
+        "bank2_order",
+        "bank2_score",
+        "fused",
+        "generated_bank2",
+        "generated_fused",
         "generated_score",
         "score"
       ]

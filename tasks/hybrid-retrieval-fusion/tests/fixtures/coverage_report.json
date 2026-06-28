@@ -10,15 +10,15 @@
     "raw_mixing": 3,
     "truncate": 2,
     "suffix_collision": 3,
-    "tie_break": 2,
-    "rank_base_detect": 2
+    "rank_base_detect": 2,
+    "modality_weight": 3
   },
   "counts": {
     "raw_mixing": 12,
-    "truncate": 11,
+    "truncate": 12,
     "suffix_collision": 12,
-    "tie_break": 12,
-    "rank_base_detect": 12
+    "rank_base_detect": 12,
+    "modality_weight": 12
   },
   "multi_structural_bug_queries": [
     "hq_001",
@@ -39,7 +39,7 @@
     "truncate": "fused doc-id order divergence (Bank 1)",
     "suffix_collision": "fused doc-id order divergence (Bank 1)",
     "rank_base_detect": "fused score divergence / >2/61 range guard (Bank 2 + range)",
-    "tie_break": "nondeterministic fused-tie order (determinism run)"
+    "modality_weight": "fused doc-id order divergence under unweighted RRF (Bank 1)"
   },
   "hidden": {
     "hq_001": {
@@ -48,155 +48,155 @@
         "raw_mixing": true,
         "truncate": true,
         "suffix_collision": true,
-        "rank_base_order": false,
+        "rank_base_order": true,
         "rank_base_detect": true,
-        "tie_break": true
+        "modality_weight": true
       },
       "structural_bugs": 4,
       "overlap": 10
     },
     "hq_002": {
-      "source": "b_19_solo",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 4
-    },
-    "hq_003": {
       "source": "b_13_solo",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": false,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 3,
-      "overlap": 5
-    },
-    "hq_004": {
-      "source": "b_29_mix",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 10
-    },
-    "hq_005": {
-      "source": "b_31_mix",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 12
-    },
-    "hq_006": {
-      "source": "b_37_mix",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 5
-    },
-    "hq_007": {
-      "source": "b_37_solo",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 4
-    },
-    "hq_008": {
-      "source": "b_7_solo",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 3
-    },
-    "hq_009": {
-      "source": "c_databases_mortgage",
-      "flags": {
-        "raw_mixing": true,
-        "truncate": true,
-        "suffix_collision": true,
-        "rank_base_order": false,
-        "rank_base_detect": true,
-        "tie_break": true
-      },
-      "structural_bugs": 4,
-      "overlap": 18
-    },
-    "hq_010": {
-      "source": "c_transformers_dataexport",
       "flags": {
         "raw_mixing": true,
         "truncate": true,
         "suffix_collision": true,
         "rank_base_order": true,
         "rank_base_detect": true,
-        "tie_break": true
+        "modality_weight": true
       },
       "structural_bugs": 4,
-      "overlap": 21
+      "overlap": 5
+    },
+    "hq_003": {
+      "source": "b_19_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 10
+    },
+    "hq_004": {
+      "source": "b_19_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 3
+    },
+    "hq_005": {
+      "source": "b_23_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 9
+    },
+    "hq_006": {
+      "source": "b_23_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 4
+    },
+    "hq_007": {
+      "source": "b_29_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 10
+    },
+    "hq_008": {
+      "source": "b_29_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 4
+    },
+    "hq_009": {
+      "source": "b_37_mix",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 6
+    },
+    "hq_010": {
+      "source": "b_37_solo",
+      "flags": {
+        "raw_mixing": true,
+        "truncate": true,
+        "suffix_collision": true,
+        "rank_base_order": true,
+        "rank_base_detect": true,
+        "modality_weight": true
+      },
+      "structural_bugs": 4,
+      "overlap": 4
     },
     "hq_011": {
-      "source": "d_12",
+      "source": "b_7_mix",
       "flags": {
         "raw_mixing": true,
         "truncate": true,
         "suffix_collision": true,
-        "rank_base_order": false,
+        "rank_base_order": true,
         "rank_base_detect": true,
-        "tie_break": true
+        "modality_weight": true
       },
       "structural_bugs": 4,
-      "overlap": 16
+      "overlap": 9
     },
     "hq_012": {
-      "source": "d_4",
+      "source": "b_7_solo",
       "flags": {
         "raw_mixing": true,
         "truncate": true,
         "suffix_collision": true,
-        "rank_base_order": false,
+        "rank_base_order": true,
         "rank_base_detect": true,
-        "tie_break": true
+        "modality_weight": true
       },
       "structural_bugs": 4,
-      "overlap": 8
+      "overlap": 3
     }
   },
   "visible": {
@@ -208,10 +208,9 @@
         "suffix_collision": false,
         "rank_base_order": false,
         "rank_base_detect": true,
-        "tie_break": false
+        "modality_weight": false
       },
-      "dangerous": false,
-      "tie_clean": false
+      "dangerous": false
     },
     "vq_002": {
       "token": "clnzonebeta",
@@ -221,10 +220,9 @@
         "suffix_collision": false,
         "rank_base_order": false,
         "rank_base_detect": true,
-        "tie_break": false
+        "modality_weight": false
       },
-      "dangerous": false,
-      "tie_clean": false
+      "dangerous": false
     },
     "vq_003": {
       "token": "clnzonegamma",
@@ -234,23 +232,21 @@
         "suffix_collision": false,
         "rank_base_order": false,
         "rank_base_detect": true,
-        "tie_break": false
+        "modality_weight": false
       },
-      "dangerous": false,
-      "tie_clean": false
+      "dangerous": false
     },
     "vq_004": {
-      "token": "clnzonetie",
+      "token": "clnzonedelta",
       "flags": {
         "raw_mixing": false,
         "truncate": false,
         "suffix_collision": false,
         "rank_base_order": false,
         "rank_base_detect": true,
-        "tie_break": true
+        "modality_weight": false
       },
-      "dangerous": false,
-      "tie_clean": true
+      "dangerous": false
     }
   }
 }

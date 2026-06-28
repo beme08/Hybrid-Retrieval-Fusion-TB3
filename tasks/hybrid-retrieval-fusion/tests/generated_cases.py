@@ -264,7 +264,7 @@ def validate_payload(case: GeneratedCase, payload: dict, label: str) -> list[str
     if len(results) != len(expected):
         failures.append(f"{label}: result count {len(results)} != {len(expected)}")
 
-    max_fused = 2.0 / (cfg["rrf_k"] + 1)
+    max_fused = 1.0 / (cfg["rrf_k"] + 1) + 2.0 / (cfg["rrf_k"] // 2 + 1)
     for index, exp in enumerate(expected):
         if index >= len(results):
             failures.append(f"{label}: missing row {index} query_id={exp['query_id']}")

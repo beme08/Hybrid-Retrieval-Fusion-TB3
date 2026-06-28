@@ -10,14 +10,14 @@ fused rankings match verifier-owned references.
 Reward is **deterministic** — exact ranking comparison plus score recomputation,
 schema, range, and determinism checks. There is **no LLM judge**.
 
-## Relationship to Klavis / TB3
+## Relationship to Terminal-Bench 3
 
-This is a Klavis AI coding assignment, delivered as a **standalone GitHub
-repository** (not a Terminal-Bench upstream PR). The repo is laid out in TB3
-separate-verifier form under `tasks/hybrid-retrieval-fusion/` and documents its
-own check results, trial results, and failure analysis. The repository is kept
-**private** until the internet-enabled final agent trials are complete, so that
-internet-enabled evaluation agents cannot fetch the solution.
+This is a **Terminal-Bench 3 (TB3)** compatible task, delivered as a
+**standalone GitHub repository** (not a Terminal-Bench upstream PR). The repo is
+laid out in TB3 separate-verifier form under `tasks/hybrid-retrieval-fusion/`
+and documents its own check results, trial results, and failure analysis. The
+repository is kept **private** until the internet-enabled final agent trials are
+complete, so that internet-enabled evaluation agents cannot fetch the solution.
 
 ## Repository layout
 

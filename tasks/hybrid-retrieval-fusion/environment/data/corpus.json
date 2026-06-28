@@ -185,35 +185,11 @@
   },
   {
     "doc_id": "blog_931",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_932",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_933",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_934",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_935",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_936",
-    "text": "clnzonetie clnzonetie clnzonetie"
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   },
   {
     "doc_id": "blog_937",
-    "text": "clnzonetie clnzonetie clnzonetie"
-  },
-  {
-    "doc_id": "blog_938",
-    "text": "clnzonetie clnzonetie clnzonetie"
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   },
   {
     "doc_id": "faq_001",
@@ -400,6 +376,14 @@
     "text": "clnzonegamma clnzonegamma clnzonegamma"
   },
   {
+    "doc_id": "faq_932",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
+  },
+  {
+    "doc_id": "faq_938",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
+  },
+  {
     "doc_id": "guide_001",
     "text": "storm storm malware warning firewall storm rainfall hurricane forecast firewall hurricane forecast forecast rainfall hurricane update rainfall"
   },
@@ -582,6 +566,14 @@
   {
     "doc_id": "guide_929",
     "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "guide_933",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
+  },
+  {
+    "doc_id": "guide_939",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   },
   {
     "doc_id": "news_001",
@@ -768,8 +760,12 @@
     "text": "clnzonegamma clnzonegamma clnzonegamma"
   },
   {
-    "doc_id": "news_950",
-    "text": "clnzonetie clnzonetie clnzonetie"
+    "doc_id": "news_934",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
+  },
+  {
+    "doc_id": "news_940",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   },
   {
     "doc_id": "paper_001",
@@ -944,8 +940,8 @@
     "text": "clnzonegamma clnzonegamma clnzonegamma"
   },
   {
-    "doc_id": "paper_951",
-    "text": "overview notes summary details"
+    "doc_id": "paper_935",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   },
   {
     "doc_id": "wiki_001",
@@ -1118,5 +1114,9 @@
   {
     "doc_id": "wiki_926",
     "text": "clnzonegamma clnzonegamma clnzonegamma"
+  },
+  {
+    "doc_id": "wiki_936",
+    "text": "clnzonedelta clnzonedelta clnzonedelta"
   }
 ]
