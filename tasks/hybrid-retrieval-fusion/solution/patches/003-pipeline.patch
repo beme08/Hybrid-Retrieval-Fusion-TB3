@@ -1,0 +1,25 @@
+--- a/hybrid_search/pipeline.py
++++ b/hybrid_search/pipeline.py
+@@ -42,7 +42,7 @@
+ 
+     def search(self, query: Query) -> QueryResult:
+         """Run one query end to end and return its typed rankings."""
+-        depth = self.config.top_k
++        depth = self.config.candidate_depth
+         bm25_ranking = self._bm25.search(query, depth)
+         dense_ranking = self._dense.search(query, depth)
+         fusion_inputs = coalesce_candidate_identities([bm25_ranking, dense_ranking])
+@@ -58,12 +58,4 @@
+ 
+     def search_all(self, queries: Sequence[Query]) -> List[QueryResult]:
+         """Run every query, preserving input order."""
+-        cached: dict[str, QueryResult] = {}
+-        results: List[QueryResult] = []
+-        for query in sorted(queries, key=lambda item: item.query_id):
+-            result = cached.get(query.query_id)
+-            if result is None:
+-                result = self.search(query)
+-                cached[query.query_id] = result
+-            results.append(result)
+-        return results
++        return [self.search(query) for query in queries]

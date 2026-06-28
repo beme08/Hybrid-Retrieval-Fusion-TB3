@@ -23,8 +23,8 @@ def assign_source_ranks(entries: Iterable[RankingEntry], start: int = 1) -> None
         entry.source_rank = rank
 
 
-def _fused_order_key(entry: RankingEntry) -> Tuple[float, object]:
-    return (-entry.score, hash(entry.doc_id))
+def _fused_order_key(entry: RankingEntry) -> Tuple[float, str]:
+    return (-entry.score, entry.doc_id)
 
 
 def order_fused_entries(entries: List[RankingEntry]) -> None:

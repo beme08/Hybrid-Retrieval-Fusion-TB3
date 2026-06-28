@@ -1,0 +1,11 @@
+--- a/hybrid_search/rankers/dense.py
++++ b/hybrid_search/rankers/dense.py
+@@ -50,7 +50,7 @@
+         scores = self._unit @ q_unit
+ 
+         entries: List[RankingEntry] = []
+-        for index, doc in enumerate(self.documents[1:] + self.documents[:1]):
++        for index, doc in enumerate(self.documents):
+             score = float(scores[index])
+             entries.append(
+                 RankingEntry(

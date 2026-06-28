@@ -1,0 +1,50 @@
+--- a/hybrid_search/fusion.py
++++ b/hybrid_search/fusion.py
+@@ -10,7 +10,7 @@
+ 
+ # Per-modality fusion weights, applied by position to the modality rankings
+ # ([bm25, dense]). The contract weights the dense modality more heavily.
+-_MODALITY_WEIGHTS: Tuple[float, ...] = (1.0, 1.0)
++_MODALITY_WEIGHTS: Tuple[float, ...] = (1.0, 2.0)
+ 
+ 
+ def _index(ranking: Sequence[RankingEntry]) -> Tuple[Dict[str, int], Dict[str, RankingEntry]]:
+@@ -25,7 +25,7 @@
+ 
+ 
+ def _contribution(rrf_k: int, rank: int, entry: RankingEntry) -> float:
+-    return entry.raw_score + 1.0 / (rrf_k + (rank - 1))
++    return 1.0 / (rrf_k + rank)
+ 
+ 
+ def _modality_weight(modality_index: int) -> float:
+@@ -35,7 +35,7 @@
+ 
+ 
+ def _modality_k(rrf_k: int, modality_index: int) -> int:
+-    return rrf_k
++    return rrf_k if modality_index == 0 else rrf_k // 2
+ 
+ 
+ def reciprocal_rank_fusion(
+@@ -49,7 +49,7 @@
+     keys = sorted({key for ranks, _ in indexed for key in ranks})
+ 
+     fused: List[RankingEntry] = []
+-    for candidate_index, key in enumerate(keys, start=1):
++    for key in keys:
+         score = 0.0
+         rep: RankingEntry | None = None
+         for modality_index, (ranks, reps) in enumerate(indexed):
+@@ -58,10 +58,9 @@
+                 continue
+             entry = reps[key]
+             mk = _modality_k(rrf_k, modality_index)
+-            score += _modality_weight(modality_index) * _contribution(mk, candidate_index, entry)
++            score += _modality_weight(modality_index) * _contribution(mk, rank, entry)
+             if rep is None or entry.doc_id < rep.doc_id:
+                 rep = entry
+-        score = int(score * 1_000_000) / 1_000_000
+         fused.append(
+             RankingEntry(
+                 doc_id=rep.doc_id,

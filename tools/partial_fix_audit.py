@@ -74,12 +74,13 @@ BUGS = (
     Bug("RANK_BASE", "hybrid_search/fusion.py"),
     Bug("CANDIDATE_DEPTH", "hybrid_search/pipeline.py"),
     Bug("DOC_ID_COLLISION", "hybrid_search/candidate_utils.py"),
-    Bug("TIE_BREAK", "hybrid_search/ordering.py"),
     Bug("CANDIDATE_UNION_INDEXING", "hybrid_search/fusion.py"),
     Bug("SERIALIZATION_SCORE_RANK", "hybrid_search/serialization.py"),
     Bug("VECTOR_CORPUS_ALIGNMENT", "hybrid_search/rankers/dense.py"),
     Bug("QUERY_ORDER_IDENTITY", "hybrid_search/pipeline.py"),
     Bug("FUSED_SCORE_PRECISION", "hybrid_search/fusion.py"),
+    Bug("MODALITY_WEIGHT", "hybrid_search/fusion.py"),
+    Bug("PER_MODALITY_K", "hybrid_search/fusion.py"),
 )
 
 
@@ -128,8 +129,8 @@ def apply_fix(app_dir: Path, bug: str) -> None:
         )
         _replace(
             fusion,
-            "score += _contribution(rrf_k, candidate_index, entry)",
-            "score += _contribution(rrf_k, rank, entry)",
+            "score += _modality_weight(modality_index) * _contribution(mk, candidate_index, entry)",
+            "score += _modality_weight(modality_index) * _contribution(mk, rank, entry)",
         )
     elif bug == "SERIALIZATION_SCORE_RANK":
         text = serialization.read_text(encoding="utf-8")
@@ -188,6 +189,18 @@ def serialize_result(result: QueryResult) -> Dict[str, object]:
             fusion,
             "        score = int(score * 1_000_000) / 1_000_000\n",
             "",
+        )
+    elif bug == "MODALITY_WEIGHT":
+        _replace(
+            fusion,
+            "_MODALITY_WEIGHTS: Tuple[float, ...] = (1.0, 1.0)",
+            "_MODALITY_WEIGHTS: Tuple[float, ...] = (1.0, 2.0)",
+        )
+    elif bug == "PER_MODALITY_K":
+        _replace(
+            fusion,
+            "def _modality_k(rrf_k: int, modality_index: int) -> int:\n    return rrf_k\n",
+            "def _modality_k(rrf_k: int, modality_index: int) -> int:\n    return rrf_k if modality_index == 0 else rrf_k // 2\n",
         )
     else:
         raise ValueError(f"unknown bug: {bug}")
@@ -267,7 +280,7 @@ def classify_static(
     cfg = expected["config"]
     top_k = cfg["top_k"]
     rrf_k = cfg["rrf_k"]
-    max_fused = 2.0 / (rrf_k + 1)
+    max_fused = 1.0 / (rrf_k + 1) + 2.0 / (rrf_k // 2 + 1)
 
     reasons: dict[str, list[str]] = {}
     pass_count = 0

@@ -12,7 +12,7 @@ Banks / guards
 - Bank 1: emitted bm25 / dense / fused doc-id rankings == expected.
 - Bank 2: fused scores recomputed from the EMITTED bm25/dense sub-rankings via
   the reference RRF must match the EMITTED fused scores (tol 1e-12).
-- range: every emitted fused score in [0, 2 / (rrf_k + 1) + 1e-9].
+- range: every emitted fused score in [0, 1/(rrf_k+1) + 2/(rrf_k//2+1) + 1e-9].
 - determinism: emitted output identical under PYTHONHASHSEED=0 and =1.
 
 The two seed result files and the CTRF output path are passed via environment
@@ -45,7 +45,7 @@ CFG = EXPECTED["config"]
 TOP_K = CFG["top_k"]
 CAND_DEPTH = CFG["candidate_depth"]
 RRF_K = CFG["rrf_k"]
-MAX_FUSED = 2.0 / (RRF_K + 1)
+MAX_FUSED = 1.0 / (RRF_K + 1) + 2.0 / (RRF_K // 2 + 1)
 SCORE_TOL = 1e-12
 RANGE_EPS = 1e-9
 
@@ -255,7 +255,7 @@ def test_bank2_fused_scores_consistent(idx):
 
 @pytest.mark.parametrize("idx", range(len(QIDS)), ids=QIDS)
 def test_fused_score_range(idx):
-    """Range guard: 0 <= fused score <= 2 / (rrf_k + 1) + 1e-9."""
+    """Range guard: 0 <= fused score <= 1/(rrf_k+1) + 2/(rrf_k//2+1) + 1e-9."""
     qid = QIDS[idx]
     for e in RES0["results"][idx]["fused"]:
         assert 0.0 <= e["score"] <= MAX_FUSED + RANGE_EPS, (
