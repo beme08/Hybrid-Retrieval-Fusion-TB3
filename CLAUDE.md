@@ -27,7 +27,7 @@ The regression lives in the **fusion layer**. The agent must repair the fusion
 layer so hidden BM25, dense, and fused rankings match a verifier-owned
 reference.
 
-This is a Klavis AI coding assignment. Final delivery is a **standalone GitHub
+This is a coding assignment. Final delivery is a **standalone GitHub
 repo**, not a Terminal-Bench PR. The repo documents check results, trial
 results, and a brief failure analysis.
 
