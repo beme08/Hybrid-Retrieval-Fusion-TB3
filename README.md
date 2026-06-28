@@ -202,3 +202,8 @@ separate integrity axis. `/cheat` trials are expected to receive zero reward,
 and the verifier includes secondary guards against hidden fixture access,
 expected-output fabrication, solution/test access, `.git` leakage, and
 network/public-solution shortcuts.
+
+## References
+
+See [`docs/references.md`](docs/references.md) for the papers, benchmark docs,
+and articles that informed the task design and failure analysis.

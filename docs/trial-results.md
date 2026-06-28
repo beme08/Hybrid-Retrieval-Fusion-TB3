@@ -1,5 +1,9 @@
 # Trial Results — hybrid-retrieval-fusion
 
+**Candidate retired.** This task was retired as a final candidate because Codex
+solved v7 with reward 1.0. See [`docs/failure-analysis.md`](failure-analysis.md)
+for the full analysis.
+
 Trial results across all task versions. Historical runs (v1–v7) are documented
 for reference; the frozen candidate for public review is the `level3-masking`
 branch at tag `retrieval-v7-final`.
