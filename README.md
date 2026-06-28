@@ -1,4 +1,5 @@
 # Hybrid-Retrieval-Fusion-TB3
+I spend a week doing this take home task for a YCombinato Ai company below are the details
 
 An original **Terminal-Bench 3 (TB3)** compatible coding task:
 `hybrid-retrieval-fusion`. The agent inherits a small hybrid document-retrieval
@@ -10,9 +11,9 @@ rankings match a verifier-owned reference.
 Reward is **deterministic** — exact ranking comparison plus score recomputation,
 schema, range, and determinism checks. There is **no LLM judge**.
 
-## Relationship to Klavis / TB3
+## Relationship to / TB3
 
-This is a Klavis AI coding assignment, delivered as a **standalone GitHub
+This is aAI coding assignment, delivered as a **standalone GitHub
 repository** (not a Terminal-Bench upstream PR). The repo is laid out in TB3
 separate-verifier form under `tasks/hybrid-retrieval-fusion/` and documents its
 own check results, trial results, and failure analysis. The repository is kept
