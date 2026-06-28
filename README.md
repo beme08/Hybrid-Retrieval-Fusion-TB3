@@ -1,23 +1,22 @@
 # Hybrid-Retrieval-Fusion-TB3
 
-An original **Terminal-Bench 3 (TB3)** compatible coding task:
-`hybrid-retrieval-fusion`. The agent inherits a small hybrid document-retrieval
-service (BM25 + dense cosine, merged with Reciprocal Rank Fusion) whose lexical
-and dense rankers are correct but whose retrieval-to-fusion path contains
-regressions. The agent must repair the path so that hidden BM25, dense, and
-fused rankings match verifier-owned references.
+A **Terminal-Bench 3 (TB3)** compatible coding task built as a coding assignment
+for a **Y Combinator AI company**: `hybrid-retrieval-fusion`. The agent inherits
+a small hybrid document-retrieval service (BM25 + dense cosine, merged with
+Reciprocal Rank Fusion) whose lexical and dense rankers are correct but whose
+retrieval-to-fusion path contains regressions. The agent must repair the path so
+that hidden BM25, dense, and fused rankings match verifier-owned references.
 
 Reward is **deterministic** — exact ranking comparison plus score recomputation,
 schema, range, and determinism checks. There is **no LLM judge**.
 
 ## Relationship to Terminal-Bench 3
 
-This is a **Terminal-Bench 3 (TB3)** compatible task, delivered as a
-**standalone GitHub repository** (not a Terminal-Bench upstream PR). The repo is
-laid out in TB3 separate-verifier form under `tasks/hybrid-retrieval-fusion/`
-and documents its own check results, trial results, and failure analysis. The
-repository is kept **private** until the internet-enabled final agent trials are
-complete, so that internet-enabled evaluation agents cannot fetch the solution.
+This is a **Terminal-Bench 3 (TB3)** compatible task built as a coding
+assignment for a **Y Combinator AI company**. Delivered as a **standalone GitHub
+repository** (not a Terminal-Bench upstream PR). The repo is laid out in TB3
+separate-verifier form under `tasks/hybrid-retrieval-fusion/` and documents its
+own check results, trial results, and failure analysis.
 
 ## Repository layout
 
@@ -120,8 +119,8 @@ docker build -t hrf-test tasks/hybrid-retrieval-fusion/tests
 | 4 | Separate verifier (schema, Bank 1/2, generated banks, determinism, range, CTRF) | ✅ complete |
 | 5 | Oracle solution (ordered patches 001–010) | ✅ complete |
 | 6 | Strip dev toggles + anti-cheat hardening; stripped oracle | ✅ complete |
-| 7 | Docs, compliance checklist, packaging | ✅ this change |
-| 8 | Final agent trials (`/run`, `/cheat`, Harbor) | ⬜ **not run** |
+| 7 | Docs, compliance checklist, packaging | ✅ complete |
+| 8 | Final agent trials (`/run`, `/cheat`, Harbor) | 🔶 partial — see `docs/trial-results.md` |
 
 Local results recorded so far: oracle passes all verifier tests; nop/broken
 fails; verifier is deterministic across `PYTHONHASHSEED=0/1`. **No final agent
