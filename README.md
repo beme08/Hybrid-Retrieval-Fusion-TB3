@@ -123,8 +123,12 @@ docker build -t hrf-test tasks/hybrid-retrieval-fusion/tests
 | 8 | Final agent trials (`/run`, `/cheat`, Harbor) | 🔶 partial — see `docs/trial-results.md` |
 
 Local results recorded so far: oracle passes all verifier tests; nop/broken
-fails; verifier is deterministic across `PYTHONHASHSEED=0/1`. **No final agent
-trial results exist yet** — see `docs/failure-analysis.md`.
+fails; verifier is deterministic across `PYTHONHASHSEED=0/1`. See
+`docs/failure-analysis.md` for the retirement analysis.
+
+**Models tested:** OpenAI GPT-5.5 (extra-high reasoning) via Codex, and
+Anthropic Claude Opus 4.8 (high effort) via Claude Code. Across all versions
+(v1–v7), 11 of 13 valid agent trials scored reward 1.0; 2 scored 0.0.
 
 ## Evaluation design notes
 
